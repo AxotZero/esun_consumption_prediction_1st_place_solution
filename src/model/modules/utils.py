@@ -15,15 +15,18 @@ def parse_cols_config(path):
     config = read_yml(path)
     input_dim = len(config)
     cat_dims = []
-    cat_idxs = [] 
+    cat_idxs = []
     cat_emb_dim = []
-    
+    num_idxs = [] 
+
     for i, (k, v) in enumerate(config.items()):
-        if v.type == 'numerical': continue
-        cat_idxs.append(i)
-        cat_dims.append(len(v.ori_index))
-        cat_emb_dim.append(get_cat_emb_dim(len(v.ori_index)))
-    return input_dim, cat_dims, cat_idxs, cat_emb_dim
+        if v.type == 'numerical': 
+            num_idxs.append(i)
+        else:
+            cat_idxs.append(i)
+            cat_dims.append(len(v.ori_index))
+            cat_emb_dim.append(get_cat_emb_dim(len(v.ori_index)))
+    return input_dim, num_idxs, cat_dims, cat_idxs, cat_emb_dim
 
 
 

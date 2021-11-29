@@ -4,6 +4,23 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
+class Seq2SeqGruAggregator(nn.Module):
+    def __init__(self, input_size=128, hidden_size=128, num_layers=2, dropout=0.3):
+        super().__init__()
+        self.gru = nn.GRU(
+            input_size = input_size,
+            hidden_size = hidden_size,
+            num_layers = num_layers, 
+            dropout=dropout,
+            batch_first = True
+        )
+    def forward(self, x, mask):
+        x = x * ~(mask.unsqueeze(2))
+        x, _ = self.gru(x)
+        return x
+
+
+
 class TemporalGruAggregator(nn.Module):
     def __init__(self, input_size=128, hidden_size=128, num_layers=2, dropout=0.3):
         super().__init__()
@@ -47,4 +64,4 @@ class TemporalTransformerAggregator(nn.Module):
         x = x.permute(1, 0, 2)
         x = self.AttenLayer(x, src_key_padding_mask=month_mask)
         x = x.permute(1, 0, 2)
-        return x[:, 0]
+        return x

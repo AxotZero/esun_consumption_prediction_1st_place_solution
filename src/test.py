@@ -20,6 +20,8 @@ def main(config, output_type='top3_indices', output_dir='./submission.csv'):
     # setup data_loader instances
     config['data_loader']['args']['validation_split'] = False
     config['data_loader']['args']['training'] = False
+    config['data_loader']['args']['batch_size'] = 512
+    config['data_loader']['args']['num_workers'] = 2
 
     data_loader = getattr(module_data, config['data_loader']['type'])(
         **config['data_loader']['args'],
@@ -47,6 +49,9 @@ def main(config, output_type='top3_indices', output_dir='./submission.csv'):
     with torch.no_grad():
         for i, (data, chid) in enumerate(tqdm(data_loader)):
             output = model(to_device(data, device))
+            if len(output.size()) >= 3:
+                output = output[:, -1]
+
             output = output[:, target_indices]
             _, output_topk_indices = torch.topk(output, 3, dim=1)
 
@@ -60,10 +65,10 @@ def main(config, output_type='top3_indices', output_dir='./submission.csv'):
     # bp()
     pd.DataFrame(
         data=np.concatenate([chids, outputs_top3], axis=1),
-        columns=['chid', 'top1', 'top2', 'top3']).to_csv(f'{output_dir}/outputs_top3.csv', index=None)
+        columns=['chid', 'top1', 'top2', 'top3']).astype(str).to_csv(f'{output_dir}/outputs_top3.csv', index=None)
     pd.DataFrame(
         data=np.concatenate([chids, outputs_logits], axis=1),
-        columns=['chid']+list(range(16))).to_csv(f'{output_dir}/outputs_logits.csv', index=None)
+        columns=['chid']+list(range(16))).astype(str).to_csv(f'{output_dir}/outputs_logits.csv', index=None)
     
 
 

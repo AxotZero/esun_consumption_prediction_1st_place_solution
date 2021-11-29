@@ -1,8 +1,10 @@
+from pdb import set_trace
+
 import torch
 import numpy as np
 import torch.nn.functional as F
 
-from constant import target_indices
+from constant import target_indices, logs
 
 def rmse(output, target):
     with torch.no_grad():
@@ -32,7 +34,6 @@ def top_k_acc(output, target, k=3):
     return correct / len(target)
 
 
-logs = [np.log2(2), np.log2(3), np.log(4)]
 def NDCG(output, target):
     with torch.no_grad():
         _, output_topk_indices = torch.topk(output, 3, dim=1)
@@ -40,7 +41,7 @@ def NDCG(output, target):
         target_topk, _ = torch.topk(target, 3, dim=1)
 
         for i in range(3):
-            output_topk[:, i] = output_topk[:, i]/logs[i]
+            output_topk[:, i] = output_topk[:, i] / logs[i]
             target_topk[:, i] = target_topk[:, i] / logs[i]
         dcg = torch.sum(output_topk, dim=1)
         idcg = torch.sum(target_topk, dim=1)
@@ -49,9 +50,49 @@ def NDCG(output, target):
         ndcg = torch.mean(ndcg)
     return ndcg
 
-
 def NDCG16(output, target):
     return NDCG(output[:, target_indices], target[:, target_indices])
+
+
+# def rank_acc(output, target):
+#     with torch.no_grad():
+#         _, output_topk_indices = torch.topk(output, 3, dim=1)
+#         _, target_topk_indices = torch.topk(target, 3, dim=1)
+#         same = output_topk_indices == target_topk_indices
+#         return torch.mean(torch.sum(same, dim=1)/3)
+
+
+# def top3_acc(output, target):
+#     with torch.no_grad():
+#         _, output_topk_indices = torch.topk(output, 3, dim=1)
+#         _, target_topk_indices = torch.topk(target, 3, dim=1)
+
+
+
+def seq2seq_drop_zero(output, target):
+    with torch.no_grad():
+        output = output[:, :-1]
+        # set_trace()
+        output = output.contiguous().view(-1, int(output.size()[-1]))
+        target = target.contiguous().view(-1, int(target.size()[-1]))
+        # drop all zero target
+        indices = (target.sum(dim=1) != 0).type(torch.bool)
+        target = target[indices]
+        output = output[indices]
+        return output, target
+
+
+def seq2seq_NDCG(output, target):
+    with torch.no_grad():
+        output, target = seq2seq_drop_zero(output, target)
+
+        return NDCG(output, target)
+
+def seq2seq_NDCG16(output, target):
+    return seq2seq_NDCG(output[:, :, target_indices], target[:, :, target_indices])
+
+
+
 
 
 

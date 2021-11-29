@@ -12,7 +12,7 @@ from base import BaseDataLoader
 from constant import target_indices
 
 
-class Seq2SeqDataLoader(BaseDataLoader):
+class Seq2SeqWithDtDataLoader(BaseDataLoader):
     class InnerDataset(Dataset):
         def __init__(self, 
                      data_path, 
@@ -20,6 +20,7 @@ class Seq2SeqDataLoader(BaseDataLoader):
                      training=True):
             self.load_xs(data_path)
             self.num_classes = num_classes
+            self.n_month = 24
             self.nrows_per_month = 26
             self.training = training
             print(f'=== dataloader mode is {"training" if self.training else "testing"} ===')
@@ -43,8 +44,90 @@ class Seq2SeqDataLoader(BaseDataLoader):
 
             # generate data indices and mask
             values, counts = np.unique(x[:,0], return_counts=True)
-            indices = np.concatenate([list(range(count)) for count in counts] )
-            indices = (x[:, 0] * self.nrows_per_month + indices).astype(int)
+            counts_indices = np.concatenate([list(range(count)) for count in counts])
+            indices = (x[:, 0] * self.nrows_per_month + counts_indices).astype(int)
+            rows_per_month_mask = np.ones(self.n_month*self.nrows_per_month )
+            rows_per_month_mask[indices] = 0
+            month_mask = np.ones(self.n_month)
+            month_mask[values.astype(int)] = 0
+
+            # x mapping
+            ret = np.zeros((self.n_month*self.nrows_per_month, x.shape[-1]), dtype=float)
+            ret[indices] = x
+            ret[:, 0] = ret[:, 0] % 12 # modulo dt
+
+            # create y
+            y = torch.zeros(self.n_month*49, dtype=torch.float)
+            indices = (x[:, 0] * 49 + x[:, 1]).astype(int)
+            y[indices] = torch.tensor(x[:, -1], dtype=torch.float)
+            y = y.view(self.n_month, 49)
+            if self.num_classes == 16:
+                y = y[:, target_indices]
+
+            return (
+                (
+                    torch.tensor(ret.reshape(self.n_month, self.nrows_per_month, -1), dtype=torch.float),
+                    torch.tensor(rows_per_month_mask.reshape(self.n_month, self.nrows_per_month), dtype=torch.bool),
+                    torch.tensor(month_mask, dtype=torch.bool),
+                ),
+                y[1:]
+            )
+
+        def __getitem__(self, i):
+            chid = self.chids[i]
+            x, y = self.get_customer(chid)
+            if self.training:
+                return x, y
+            else:
+                return x, torch.tensor(chid)
+
+    def __init__(self, 
+                 data_path,
+                 num_classes=49, 
+                 batch_size=128, shuffle=True, validation_split=0.0, num_workers=1, training=True):
+        self.data_path = data_path
+        self.dataset = self.__class__.InnerDataset(
+            data_path,
+            num_classes=num_classes,
+            training=training)
+        super().__init__(self.dataset, batch_size, shuffle, validation_split, num_workers)
+
+
+
+class Seq2SeqDataLoader(BaseDataLoader):
+    class InnerDataset(Dataset):
+        def __init__(self, 
+                     data_path, 
+                     num_classes=49, 
+                     training=True):
+            self.load_xs(data_path)
+            self.num_classes = num_classes
+            self.n_month = 24
+            self.nrows_per_month = 26
+            self.training = training
+            print(f'=== dataloader mode is {"training" if self.training else "testing"} ===')
+            self.chids = list(self.xs.keys())
+
+        def load_xs(self, data_path):
+            """
+            xs is a map which key is chid and value is dataframe
+            """
+            print('start load_xs')
+            self.xs = pickle.load(open(data_path, 'rb'))
+            print('finish load_xs!')
+
+        def __len__(self):
+            return len(self.chids)
+
+        def get_customer(self, chid):
+            x = self.xs[chid]
+            # 0: dt, 1: shop_tag, 2: txn_cnt, 3: txn_amt
+            x[:,0] = x[:,0] - 1
+
+            # generate data indices and mask
+            values, counts = np.unique(x[:,0], return_counts=True)
+            counts_indices = np.concatenate([list(range(count)) for count in counts])
+            indices = (x[:, 0] * self.nrows_per_month + counts_indices).astype(int)
             rows_per_month_mask = np.ones(self.n_month*self.nrows_per_month )
             rows_per_month_mask[indices] = 0
             month_mask = np.ones(self.n_month)
@@ -53,13 +136,13 @@ class Seq2SeqDataLoader(BaseDataLoader):
             # x mapping
             ret = np.zeros((self.n_month*self.nrows_per_month, x.shape[-1]-1), dtype=float)
             ret[indices] = x[:, 1:]
-
             # create y
-            y = torch.zeros(49, dtype=torch.float)
-            y[x[:, 1]] = torch.tensor(
-                x[:, -1], dtype=torch.float) / sum(x[:, -1])
+            y = torch.zeros(self.n_month*49, dtype=torch.float)
+            indices = (x[:, 0] * 49 + x[:, 1]).astype(int)
+            y[indices] = torch.tensor(x[:, -1], dtype=torch.float)
+            y = y.view(self.n_month, 49)
             if self.num_classes == 16:
-                y = y[target_indices]
+                y = y[:, target_indices]
 
             return (
                 (
@@ -67,7 +150,7 @@ class Seq2SeqDataLoader(BaseDataLoader):
                     torch.tensor(rows_per_month_mask.reshape(self.n_month, self.nrows_per_month), dtype=torch.bool),
                     torch.tensor(month_mask, dtype=torch.bool),
                 ),
-                y
+                y[1:]
             )
 
         def __getitem__(self, i):

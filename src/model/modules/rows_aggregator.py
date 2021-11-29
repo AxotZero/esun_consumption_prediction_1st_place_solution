@@ -12,7 +12,7 @@ class RowsTransformerAggregator(nn.Module):
         self.nhead = nhead
         self.num_layers = num_layers
         self.special_token = nn.Parameter(
-            torch.randn(self.hidden_size), requires_grad=True)
+            torch.randn(self.hidden_size), requires_grad=False)
         self.AttenLayer = nn.TransformerEncoder(
             encoder_layer=nn.TransformerEncoderLayer(
                 d_model=self.hidden_size, dim_feedforward=4*self.hidden_size, nhead=nhead, dropout=dropout),
