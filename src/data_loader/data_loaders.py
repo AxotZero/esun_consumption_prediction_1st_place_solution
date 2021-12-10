@@ -12,6 +12,84 @@ from base import BaseDataLoader
 from constant import target_indices
 
 
+# def padding_mask_collate(batch):
+#     """
+#     return 
+#     """
+
+
+def batch_index_collate(data):
+    data = list(zip(*data))
+    y = torch.stack(data[1], 0)
+    
+    batch_indices = []
+    for i, d in enumerate(data[0]):
+        batch_indices += [i] * int(d.size()[0])
+        
+    return (
+        (torch.Tensor(batch_indices), torch.cat(data[0]).float()), 
+        y.float()
+    )
+
+
+class MultiIndexDataLoader(BaseDataLoader):
+    class InnerDataset(Dataset):
+        def __init__(self, 
+                     data_path, 
+                     training=True):
+            self.load_xs(data_path)
+            self.training = training
+            print(f'=== dataloader mode is {"training" if self.training else "testing"} ===')
+            self.chids = list(self.xs.keys())
+
+        def load_xs(self, data_path):
+            """
+            xs is a map which key is chid and value is dataframe
+            """
+            print('start load_xs')
+            self.xs = pickle.load(open(data_path, 'rb'))
+            print('finish load_xs!')
+
+        def __len__(self):
+            return len(self.chids)
+
+        def get_customer(self, chid):
+            x = self.xs[chid]
+            # 0: dt, 1: shop_tag, 2: txn_cnt, 3: txn_amt
+            x[:,0] = x[:,0] - 1
+
+            # generate data indices and mask
+            
+
+            # create y
+            y = torch.zeros(24*49, dtype=torch.float)
+            indices = (x[:, 0] * 49 + x[:, 1]).astype(int)
+            y[indices] = torch.tensor(x[:, -1], dtype=torch.float)
+            y = y.view(24, 49)
+
+            return (
+                torch.tensor(x),
+                y[1:]
+            )
+
+        def __getitem__(self, i):
+            chid = self.chids[i]
+            x, y = self.get_customer(chid)
+            if self.training:
+                return x, y
+            else:
+                return x, torch.tensor(chid)
+
+    def __init__(self, 
+                 data_path,
+                 batch_size=128, shuffle=True, validation_split=0.0, num_workers=1, training=True):
+        self.data_path = data_path
+        self.dataset = self.__class__.InnerDataset(
+            data_path,
+            training=training)
+        super().__init__(self.dataset, batch_size, shuffle, validation_split, num_workers, collate_fn=batch_index_collate)
+
+    
 class Seq2SeqWithDtDataLoader(BaseDataLoader):
     class InnerDataset(Dataset):
         def __init__(self, 
@@ -91,7 +169,6 @@ class Seq2SeqWithDtDataLoader(BaseDataLoader):
             num_classes=num_classes,
             training=training)
         super().__init__(self.dataset, batch_size, shuffle, validation_split, num_workers)
-
 
 
 class Seq2SeqDataLoader(BaseDataLoader):

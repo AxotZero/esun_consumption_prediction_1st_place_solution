@@ -50,6 +50,7 @@ def NDCG(output, target):
         ndcg = torch.mean(ndcg)
     return ndcg
 
+
 def NDCG16(output, target):
     return NDCG(output[:, target_indices], target[:, target_indices])
 

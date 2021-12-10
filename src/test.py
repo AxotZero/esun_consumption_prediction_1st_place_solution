@@ -20,7 +20,7 @@ def main(config, output_type='top3_indices', output_dir='./submission.csv'):
     # setup data_loader instances
     config['data_loader']['args']['validation_split'] = False
     config['data_loader']['args']['training'] = False
-    config['data_loader']['args']['batch_size'] = 512
+    # config['data_loader']['args']['batch_size'] = 512
     config['data_loader']['args']['num_workers'] = 2
 
     data_loader = getattr(module_data, config['data_loader']['type'])(

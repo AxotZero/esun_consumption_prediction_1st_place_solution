@@ -13,6 +13,50 @@ from .modules.temporal_aggregator import *
 from constant import target_indices
 
 
+class MultiIndexModelBase(BaseModel):
+    def __init__(self, 
+                 cols_config_path="", emb_feat_dim=32, mask_feat_ratio=0, dropout=0.3, hidden_size=128,
+                 temporal_aggregator_type="TemporalTransformerAggregator", temporal_aggregator_args={}, 
+                 ):
+        super().__init__()
+
+        input_dim, num_idxs, cat_dims, cat_idxs, _ = parse_cols_config(cols_config_path)
+        self.hidden_size = hidden_size
+        self.embedder = FixedEmbedder(input_dim, emb_feat_dim, num_idxs, cat_idxs, cat_dims, mask_feat_ratio)
+        self.row_encoder = nn.Sequential(
+            nn.Linear(self.embedder.post_embed_dim, hidden_size*4),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_size*4, hidden_size*2),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_size*2, hidden_size),
+        )
+        self.rows_aggregator = nn.Sequential(
+            nn.Linear(hidden_size*49, hidden_size*4),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_size*4, hidden_size*2),
+            nn.Dropout(dropout),
+            nn.Linear(hidden_size*2, hidden_size),
+        )
+        self.temporal_aggregator = eval(f"{temporal_aggregator_type}")(**temporal_aggregator_args)
+        self.classifier = nn.Sequential(
+            nn.Linear(temporal_aggregator_args["hidden_size"], 49),
+        )
+
+    def forward(self, x):
+        batch_indices, x = x
+        dts, shoptags, txn_amt = x[:, 0], x[:, 1], x[:, -1]
+        batch_size = int(torch.max(batch_indices) + 1)
+
+        x = self.embedder(x[:, 1:])
+        rows_emb = self.row_encoder(x) * txn_amt.view(-1, 1)
+        _x = torch.zeros((batch_size, 24, 49, self.hidden_size)).to(x.get_device())
+        _x[batch_indices.long(), dts.long(), shoptags.long()] = rows_emb
+        x = self.rows_aggregator(_x.view(batch_size, 24, -1))
+        x = self.temporal_aggregator(x)
+        x = self.classifier(x)
+        return x
+
+
 class BigArch(BaseModel):
     def __init__(self, 
                  row_encoder_type="EmbedderNN", row_encoder_args={}, 
@@ -33,12 +77,10 @@ class BigArch(BaseModel):
             x, rows_per_month_mask, month_mask = x
         else:
             rows_per_month_mask, month_mask = None, None
-        x = self.row_encoder(x)
+        x = self.row_encoder(x, rows_per_month_mask)
         x = self.rows_aggregator(x, rows_per_month_mask)
         x = self.temporal_aggregator(x, month_mask)
         x = self.classifier(x)
-        if self.num_classes == 16:
-            return x[:, target_indices]
         return x
 
 

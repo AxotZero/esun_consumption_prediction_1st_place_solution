@@ -5,17 +5,28 @@ import torch.nn.functional as F
 
 
 class Seq2SeqGruAggregator(nn.Module):
-    def __init__(self, input_size=128, hidden_size=128, num_layers=2, dropout=0.3):
+    def __init__(self, input_size=128, hidden_size=128, num_layers=2, dropout=0.3, add_time=False):
         super().__init__()
+        
+        self.add_time = add_time
+        if self.add_time:
+            self.time_emb = nn.Parameter(torch.randn(12,16), requires_grad=False)
+
         self.gru = nn.GRU(
-            input_size = input_size,
+            input_size = input_size + (16 if add_time else 0),
             hidden_size = hidden_size,
             num_layers = num_layers, 
             dropout=dropout,
             batch_first = True
         )
-    def forward(self, x, mask):
-        x = x * ~(mask.unsqueeze(2))
+
+    def forward(self, x, mask=None):
+        if mask is not None:
+            x = x * ~(mask.unsqueeze(2))
+        if self.add_time:
+            time_emb = torch.cat([self.time_emb, self.time_emb], dim=0)
+            time_emb = torch.cat([torch.unsqueeze(time_emb, dim=0)]*x.size()[0], dim=0)
+            x = torch.cat([time_emb, x], dim=-1)
         x, _ = self.gru(x)
         return x
 
