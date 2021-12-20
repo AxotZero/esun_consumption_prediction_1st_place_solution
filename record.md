@@ -38,3 +38,7 @@
 ### right ndcg
 1. nn3_larger_hidden: 0.7254, 0.7202
 2. resume_nn3_larger_hidden_ce16: 0.7271,0.7228 
+3. multi_index_model_larger_hidden: 0.7255, 0.7213
+4. mm_hidden128_deeper_leakyrelu: 0.7257, 0.7213
+5. mm_hidden256_deeper_leakyrelu: 0.7263, 0.7241
+6. mm_hidden256_deeper_leakyrelu_resume16: 0.7273, 0.7247

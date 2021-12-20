@@ -13,6 +13,206 @@ from .modules.temporal_aggregator import *
 from constant import target_indices
 
 
+class MultiIndexModelCnn(BaseModel):
+    def __init__(self, 
+                 cols_config_path="", emb_feat_dim=32, mask_feat_ratio=0, dropout=0.3, hidden_size=128, mask_row_ratio=0,
+                 temporal_aggregator_type="TemporalTransformerAggregator", temporal_aggregator_args={}, 
+                 ):
+        super().__init__()
+
+        input_dim, num_idxs, cat_dims, cat_idxs, _ = parse_cols_config(cols_config_path)
+        self.hidden_size = hidden_size
+        self.mask_row_ratio = mask_row_ratio
+        self.embedder = FixedEmbedder(input_dim, emb_feat_dim, num_idxs, cat_idxs, cat_dims, mask_feat_ratio)
+        self.row_encoder = CnnEncoder(
+            self.embedder.post_embed_dim, 
+            num_targets=self.hidden_size, 
+            hidden_size=self.hidden_size*6, 
+            dropout=dropout*0.75
+        )
+        self.rows_aggregator = nn.Sequential(
+            nn.Linear(hidden_size*49, hidden_size*6),
+            nn.LeakyReLU(),
+            nn.Dropout(dropout),
+            
+            nn.Linear(hidden_size*6, hidden_size*4),
+            nn.LeakyReLU(),
+            nn.Dropout(dropout*(2/3)),
+
+            nn.Linear(hidden_size*4, hidden_size*2),
+            nn.LeakyReLU(),
+            nn.Dropout(dropout*0.5),
+
+            nn.Linear(hidden_size*2, hidden_size*1),
+            nn.LeakyReLU(),
+        )
+        self.temporal_aggregator = eval(f"{temporal_aggregator_type}")(**temporal_aggregator_args)
+        self.classifier = nn.Sequential(
+            nn.Linear(temporal_aggregator_args["hidden_size"], 49),
+        )
+
+    def forward(self, x):
+        batch_indices, x = x
+        batch_size = int(torch.max(batch_indices) + 1)
+        if self.mask_row_ratio > 0 and self.training:
+            mask = torch.rand(len(x)) > self.mask_row_ratio
+            x = x[mask]
+            batch_indices = batch_indices[mask]
+        dts, shoptags, txn_amt = x[:, 0], x[:, 1], x[:, -1]
+        
+        x = self.embedder(x[:, 1:])
+        rows_emb = self.row_encoder(x) * txn_amt.view(-1, 1)
+        _x = torch.zeros((batch_size, 24, 49, self.hidden_size)).to(x.get_device())
+        _x[batch_indices.long(), dts.long(), shoptags.long()] = rows_emb
+        x = self.rows_aggregator(_x.view(batch_size, 24, -1))
+        x = self.temporal_aggregator(x)
+        x = self.classifier(x)
+        return x
+
+
+class MultiIndexModelLinearTransform(BaseModel):
+    def __init__(self, 
+                 cols_config_path="", emb_feat_dim=32, mask_feat_ratio=0, dropout=0.3, hidden_size=128,
+                 temporal_aggregator_type="TemporalTransformerAggregator", temporal_aggregator_args={}, 
+                 ):
+        super().__init__()
+
+        input_dim, num_idxs, cat_dims, cat_idxs, _ = parse_cols_config(cols_config_path)
+        self.hidden_size = hidden_size
+        self.embedder = FixedEmbedder(input_dim, emb_feat_dim, num_idxs, cat_idxs, cat_dims, mask_feat_ratio)
+        self.row_encoder = nn.Sequential(
+            nn.Linear(self.embedder.post_embed_dim, hidden_size*6),
+            nn.LeakyReLU(),
+            nn.Dropout(dropout),
+
+            nn.Linear(hidden_size*6, hidden_size*4),
+            nn.LeakyReLU(),
+            nn.Dropout(dropout*(2/3)),
+
+            nn.Linear(hidden_size*4, hidden_size*2),
+            nn.LeakyReLU(),
+            nn.Dropout(dropout*0.5),
+
+            nn.Linear(hidden_size*2, hidden_size*1),
+            nn.LeakyReLU(),
+        )
+
+        self.num_lt_layers = 3
+        self.rows_tf_mat_weights = nn.Parameter(
+            torch.randn(self.num_lt_layers, 49, hidden_size), requires_grad=True
+        )
+        self.rows_tf_mat_biass = nn.Parameter(
+            torch.randn(self.num_lt_layers, 49, hidden_size), requires_grad=True
+        )
+        self.rows_tf_mlp = nn.ModuleList(
+            [
+                nn.Sequential(
+                    nn.Linear(self.hidden_size, 2*self.hidden_size),
+                    nn.LeakyReLU(),
+                    nn.Dropout(0.3),
+                    nn.Linear(2*self.hidden_size, self.hidden_size)
+                )
+                for _ in range(self.num_lt_layers)
+            ]
+        )
+
+        self.emb_bag = nn.EmbeddingBag(49, hidden_size, mode="sum")
+
+        self.temporal_aggregator = eval(f"{temporal_aggregator_type}")(**temporal_aggregator_args)
+        self.classifier = nn.Sequential(
+            nn.Linear(temporal_aggregator_args["hidden_size"], 49),
+        )
+
+    def forward(self, x):
+        batch_indices, x = x
+        dts, shoptags, txn_amt = x[:, 0], x[:, 1], x[:, -1]
+        batch_size = int(torch.max(batch_indices) + 1)
+
+        x = self.embedder(x[:, 1:])
+        rows_emb = self.row_encoder(x) * txn_amt.view(-1, 1)
+
+        # rows aggregate
+        _x = torch.zeros((batch_size, 24, 49, self.hidden_size)).to(x.get_device())
+        _x[batch_indices.long(), dts.long(), shoptags.long()] = rows_emb
+
+        for i in range(self.num_lt_layers):
+            _x = _x*self.rows_tf_mat_weights[i] + self.rows_tf_mat_biass[i]
+            _x = self.rows_tf_mlp[i](_x)
+        x = torch.sum(_x, dim=2)
+
+        x = self.temporal_aggregator(x)
+        x = self.classifier(x)
+        return x
+
+
+class MultiIndexModel2(BaseModel):
+    def __init__(self, 
+                 cols_config_path="", emb_feat_dim=32, mask_feat_ratio=0, dropout=0.3, hidden_size=128, mask_row_ratio=0,
+                 temporal_aggregator_type="TemporalTransformerAggregator", temporal_aggregator_args={}, 
+                 ):
+        super().__init__()
+
+        input_dim, num_idxs, cat_dims, cat_idxs, _ = parse_cols_config(cols_config_path)
+        self.hidden_size = hidden_size
+        self.mask_row_ratio = mask_row_ratio
+        self.embedder = FixedEmbedder(input_dim, emb_feat_dim, num_idxs, cat_idxs, cat_dims, mask_feat_ratio)
+        self.row_encoder = nn.Sequential(
+            nn.Linear(self.embedder.post_embed_dim, hidden_size*6),
+            nn.LeakyReLU(),
+            nn.Dropout(dropout),
+
+            nn.Linear(hidden_size*6, hidden_size*4),
+            nn.LeakyReLU(),
+            nn.Dropout(dropout*(2/3)),
+
+            nn.Linear(hidden_size*4, hidden_size*2),
+            nn.LeakyReLU(),
+            nn.Dropout(dropout*0.5),
+
+            nn.Linear(hidden_size*2, hidden_size*1),
+            nn.LeakyReLU(),
+        )
+        self.rows_aggregator = nn.Sequential(
+            nn.Linear(hidden_size*49, hidden_size*6),
+            nn.LeakyReLU(),
+            nn.Dropout(dropout),
+            
+            nn.Linear(hidden_size*6, hidden_size*4),
+            nn.LeakyReLU(),
+            nn.Dropout(dropout*(2/3)),
+
+            nn.Linear(hidden_size*4, hidden_size*2),
+            nn.LeakyReLU(),
+            nn.Dropout(dropout*0.5),
+
+            nn.Linear(hidden_size*2, hidden_size*1),
+            nn.LeakyReLU(),
+        )
+        self.temporal_aggregator = eval(f"{temporal_aggregator_type}")(**temporal_aggregator_args)
+        self.classifier = nn.Sequential(
+            nn.Linear(temporal_aggregator_args["hidden_size"], 49),
+        )
+
+    def forward(self, x):
+        batch_indices, x = x
+        batch_size = int(torch.max(batch_indices) + 1)
+        if self.mask_row_ratio > 0 and self.training:
+            mask = torch.rand(len(x)) > self.mask_row_ratio
+            x = x[mask]
+            batch_indices = batch_indices[mask]
+        dts, shoptags, txn_amt = x[:, 0], x[:, 1], x[:, -1]
+        
+        x = self.embedder(x[:, 1:])
+        rows_emb = self.row_encoder(x) * txn_amt.view(-1, 1)
+        _x = torch.zeros((batch_size, 24, 49, self.hidden_size)).to(x.get_device())
+        _x[batch_indices.long(), dts.long(), shoptags.long()] = rows_emb
+        x = self.rows_aggregator(_x.view(batch_size, 24, -1))
+        x = self.temporal_aggregator(x)
+        x = self.classifier(x)
+        return x
+
+
+
 class MultiIndexModelBase(BaseModel):
     def __init__(self, 
                  cols_config_path="", emb_feat_dim=32, mask_feat_ratio=0, dropout=0.3, hidden_size=128,

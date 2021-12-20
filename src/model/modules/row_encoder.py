@@ -112,21 +112,21 @@ class CnnEncoder(nn.Module):
         self.dense1 = nn.utils.weight_norm(nn.Linear(num_features, hidden_size))
 
         self.batch_norm_c1 = nn.BatchNorm1d(cha_1)
-        self.dropout_c1 = nn.Dropout(dropout)
+        self.dropout_c1 = nn.Dropout(dropout*0.9)
         self.conv1 = nn.utils.weight_norm(nn.Conv1d(cha_1,cha_2, kernel_size = 5, stride = 1, padding=2,  bias=False),dim=None)
 
         self.ave_po_c1 = nn.AdaptiveAvgPool1d(output_size = cha_po_1)
 
         self.batch_norm_c2 = nn.BatchNorm1d(cha_2)
-        self.dropout_c2 = nn.Dropout(dropout)
+        self.dropout_c2 = nn.Dropout(dropout*0.8)
         self.conv2 = nn.utils.weight_norm(nn.Conv1d(cha_2,cha_2, kernel_size = 3, stride = 1, padding=1, bias=True),dim=None)
 
         self.batch_norm_c2_1 = nn.BatchNorm1d(cha_2)
-        self.dropout_c2_1 = nn.Dropout(dropout)
+        self.dropout_c2_1 = nn.Dropout(dropout*0.6)
         self.conv2_1 = nn.utils.weight_norm(nn.Conv1d(cha_2,cha_2, kernel_size = 3, stride = 1, padding=1, bias=True),dim=None)
 
         self.batch_norm_c2_2 = nn.BatchNorm1d(cha_2)
-        self.dropout_c2_2 = nn.Dropout(dropout)
+        self.dropout_c2_2 = nn.Dropout(dropout*0.5)
         self.conv2_2 = nn.utils.weight_norm(nn.Conv1d(cha_2,cha_3, kernel_size = 5, stride = 1, padding=2, bias=True),dim=None)
 
         self.max_po_c2 = nn.MaxPool1d(kernel_size=4, stride=2, padding=1)
@@ -376,9 +376,9 @@ class FixedEmbedder(torch.nn.Module):
                 cat_feat_counter += 1
 
             # mask features(exclueds shoptag, txn_cnt, txn_amt)
-            # if self.training and self.mask_feat_ratio > 0 and feat_init_idx>2:
-            #     mask = torch.rand(batch_size) < self.mask_feat_ratio
-            #     cols[-1][mask] = 0
+            if self.training and self.mask_feat_ratio > 0 and feat_init_idx>2:
+                mask = torch.rand(batch_size) < self.mask_feat_ratio
+                cols[-1][mask] = 0
         # concat
         # set_trace()
         post_embeddings = torch.cat(cols, dim=1)

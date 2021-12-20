@@ -73,3 +73,12 @@ def to_device(data, device):
     return data.to(device)
 
 
+# def modify_config(config, modify_str_list):
+#     """
+#     modify_str_list is a list of [f'{key1}.{key2}.{key3}:value']
+#     """
+#     for modify_str in modify_str_list:
+#         keys_str, value = modify_str.split(':')
+#         keys = keys_str.split('.')
+#         keys_expression = ''.join([f"[{key}]"] for key in keys)
+#         eval(f"config{keys_expression}") = value

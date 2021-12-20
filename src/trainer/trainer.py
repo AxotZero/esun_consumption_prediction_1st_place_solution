@@ -44,22 +44,30 @@ class Trainer(BaseTrainer):
         self.train_metrics.reset()
         with tqdm(total=self.len_epoch) as pbar:
             for batch_idx, (data, target) in enumerate(self.data_loader):
-                data, target = to_device(data, self.device), to_device(target, self.device)
+                try: 
+                    data, target = to_device(data, self.device), to_device(target, self.device)
 
-                self.optimizer.zero_grad()
-                output = self.model(data)
-                loss = self.criterion(output, target)
-                loss.backward()
-                self.optimizer.step()
+                    self.optimizer.zero_grad()
+                    output = self.model(data)
+                    loss = self.criterion(output, target)
+                    loss.backward()
+                    self.optimizer.step()
 
-                self.writer.set_step((epoch - 1) * self.len_epoch + batch_idx)
-                self.train_metrics.update('loss', loss.item())
-                for met in self.metric_ftns:
-                    self.train_metrics.update(met.__name__, met(output, target))
+                    self.writer.set_step((epoch - 1) * self.len_epoch + batch_idx)
+                    self.train_metrics.update('loss', loss.item())
+                    for met in self.metric_ftns:
+                        self.train_metrics.update(met.__name__, met(output, target))
+                        
+                    pbar.set_description(
+                        f"Train Epoch: {epoch} Loss: {loss.item():.6f}"
+                    )
 
-                pbar.set_description(
-                    f"Train Epoch: {epoch} Loss: {loss.item():.6f}"
-                )
+                except RuntimeError:
+                    print('CUDA out of memory at batch: ', batch_idx)
+                    torch.cuda.empty_cache()
+                    self.optimizer.zero_grad()
+
+                
                 pbar.update()
                 
                 # if batch_idx % self.log_step == 0:

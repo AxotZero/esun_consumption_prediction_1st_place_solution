@@ -59,9 +59,9 @@ def main(config, output_type='top3_indices', output_dir='./submission.csv'):
             outputs_logits.append(output.cpu().detach().numpy())
             outputs_top3.append(target_indices[output_topk_indices.cpu().detach().numpy().astype(int)]+1)
 
-    chids = np.concatenate(chids, axis=0).reshape(-1, 1)
-    outputs_logits = np.concatenate(outputs_logits, axis=0)
-    outputs_top3 = np.concatenate(outputs_top3, axis=0)
+    chids = np.concatenate(chids, axis=0).reshape(-1, 1).astype(int)
+    outputs_logits = np.concatenate(outputs_logits, axis=0).astype(float)
+    outputs_top3 = np.concatenate(outputs_top3, axis=0).astype(int)
     # bp()
     pd.DataFrame(
         data=np.concatenate([chids, outputs_top3], axis=1),
@@ -84,8 +84,10 @@ if __name__ == '__main__':
     args.add_argument('-o', '--output_dir', default='./submission.csv', type=str,
                       help='output_dir')
 
+
     config = ConfigParser.from_args(args, test=True)
     args = args.parse_args()
+
     output_type = args.output_type
     output_dir = args.output_dir
     main(config, output_type, output_dir)

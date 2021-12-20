@@ -58,9 +58,6 @@ class MultiIndexDataLoader(BaseDataLoader):
             # 0: dt, 1: shop_tag, 2: txn_cnt, 3: txn_amt
             x[:,0] = x[:,0] - 1
 
-            # generate data indices and mask
-            
-
             # create y
             y = torch.zeros(24*49, dtype=torch.float)
             indices = (x[:, 0] * 49 + x[:, 1]).astype(int)
@@ -82,12 +79,12 @@ class MultiIndexDataLoader(BaseDataLoader):
 
     def __init__(self, 
                  data_path,
-                 batch_size=128, shuffle=True, validation_split=0.0, num_workers=1, training=True):
+                 batch_size=128, shuffle=True, fold_idx=-1, validation_split=0.0, num_workers=1, training=True):
         self.data_path = data_path
         self.dataset = self.__class__.InnerDataset(
             data_path,
             training=training)
-        super().__init__(self.dataset, batch_size, shuffle, validation_split, num_workers, collate_fn=batch_index_collate)
+        super().__init__(self.dataset, batch_size, shuffle, fold_idx, validation_split, num_workers, collate_fn=batch_index_collate)
 
     
 class Seq2SeqWithDtDataLoader(BaseDataLoader):

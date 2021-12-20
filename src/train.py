@@ -78,7 +78,10 @@ if __name__ == '__main__':
     CustomArgs = collections.namedtuple('CustomArgs', 'flags type target')
     options = [
         CustomArgs(['--lr', '--learning_rate'], type=float, target='optimizer;args;lr'),
-        CustomArgs(['--bs', '--batch_size'], type=int, target='data_loader;args;batch_size')
+        CustomArgs(['--bs', '--batch_size'], type=int, target='data_loader;args;batch_size'),
+        CustomArgs(['--fid', '--fold_idx'], type=int, target='data_loader;args;fold_idx'),
+        CustomArgs(['--loss', '--loss_func'], type=str, target='loss'),
+        CustomArgs(['--save', '--save_dir'], type=str, target='trainer;save_dir'),
     ]
     config = ConfigParser.from_args(args, options=options)
     # os.system(f"cp {args.parse_args().config} {config['trainer']['save_dir']}")

@@ -8,13 +8,13 @@ class BaseDataLoader(DataLoader):
     """
     Base class for all data loaders
     """
-    def __init__(self, dataset, batch_size, shuffle, validation_split, num_workers, collate_fn=default_collate):
+    def __init__(self, dataset, batch_size, shuffle, fold_idx=-1, validation_split=0.2, num_workers=0, collate_fn=default_collate):
         self.validation_split = validation_split
         self.shuffle = shuffle
 
         self.batch_idx = 0
         self.n_samples = len(dataset)
-
+        self.fold_idx = fold_idx
         self.sampler, self.valid_sampler = self._split_sampler(self.validation_split)
 
         self.init_kwargs = {
@@ -42,8 +42,13 @@ class BaseDataLoader(DataLoader):
         else:
             len_valid = int(self.n_samples * split)
 
-        valid_idx = idx_full[0:len_valid]
-        train_idx = np.delete(idx_full, np.arange(0, len_valid))
+        if self.fold_idx == -1:
+            s, e = 0, len_valid
+            valid_idx = idx_full[0:len_valid]
+        else:
+            s, e = len_valid*(self.fold_idx), len_valid*(self.fold_idx+1)
+        valid_idx = idx_full[s: e]
+        train_idx = np.delete(idx_full, np.arange(s, e))
 
         train_sampler = SubsetRandomSampler(train_idx)
         valid_sampler = SubsetRandomSampler(valid_idx)
