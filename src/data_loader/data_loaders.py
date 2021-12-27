@@ -238,13 +238,13 @@ class Seq2SeqDataLoader(BaseDataLoader):
     def __init__(self, 
                  data_path,
                  num_classes=49, 
-                 batch_size=128, shuffle=True, validation_split=0.0, num_workers=1, training=True):
+                 batch_size=128, shuffle=True, fold_idx=-1, validation_split=0.0, num_workers=1, training=True):
         self.data_path = data_path
         self.dataset = self.__class__.InnerDataset(
             data_path,
             num_classes=num_classes,
             training=training)
-        super().__init__(self.dataset, batch_size, shuffle, validation_split, num_workers)
+        super().__init__(self.dataset, batch_size, shuffle, fold_idx, validation_split, num_workers)
 
 
 class BigArchMaskDataLoader(BaseDataLoader):

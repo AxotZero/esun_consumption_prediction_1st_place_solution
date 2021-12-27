@@ -7,6 +7,18 @@ import einops
 from einops import rearrange
 
 
+class BatchNormLastDim(nn.Module):
+    def __init__(self, hidden_size=128):
+        super().__init__()
+        self.bn = nn.BatchNorm1d(hidden_size)
+    
+    def forward(self, x):
+        x = x.transpose(1, 2)
+        x = self.bn(x)
+        x = x.transpose(1, 2)
+        return x
+
+
 class RowsTransformerAggregator(nn.Module):
     def __init__(self, hidden_size=128, nhead=8, num_layers=2, dropout=0.3):
         super().__init__()

@@ -62,8 +62,8 @@ class Trainer(BaseTrainer):
                         f"Train Epoch: {epoch} Loss: {loss.item():.6f}"
                     )
 
-                except RuntimeError:
-                    print('CUDA out of memory at batch: ', batch_idx)
+                except RuntimeError as e:
+                    print(e, f'at batch {batch_idx}')
                     torch.cuda.empty_cache()
                     self.optimizer.zero_grad()
 

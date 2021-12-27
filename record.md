@@ -41,4 +41,17 @@
 3. multi_index_model_larger_hidden: 0.7255, 0.7213
 4. mm_hidden128_deeper_leakyrelu: 0.7257, 0.7213
 5. mm_hidden256_deeper_leakyrelu: 0.7263, 0.7241
-6. mm_hidden256_deeper_leakyrelu_resume16: 0.7273, 0.7247
+6. mm_hidden256_deeper_leakyrelu_resume16: 0.7273, 0.7249
+
+### 5 fold + ensemble
+1. mm_nn_hidden256: valid: [0.7273, 0.7262, 0.7270, 0.7267, 0.7255], mean: 0.72654, std: 6.34e-4, test: 0.72700
+2. mm_cnn_hidden256: [0.7275, 0.7263, 0.7271, 0.7265, 0.7254], mean: 0.72656, std: 7.2e-4, 0.72782
+3. nn3_attn_5fold: [0.7267, 0.7258, 0.7267, 0.7261, 0.7249], 0.72652
+4. mm_CnnAggBn_hidden256: [0.7273, 0.7262, 0.7267, 0.7264], 0.72669
+
+### ensemble
+1. mm_cnn * 0.7 + mm_nn * 0.3: 0.728010
+2. mm_cnn * 0.6 + mm_nn * 0.4: 0.727958
+3. mm_cnn * 0.75 + mm_nn * 0.2 + nn3_attn * 0.05: 0.728112
+
+[0.72700, 0.72782, 0.72652, 0.72669]

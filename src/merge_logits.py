@@ -3,6 +3,7 @@ from pdb import set_trace as bp
 from functools import reduce
 
 import numpy as np
+import math
 import pandas as pd
 
 from constant import target_indices
@@ -21,6 +22,18 @@ def divide_by_softmax(df):
     return df.apply(softmax, axis=1)
 
 
+def get_weights_by_normal_distribution(pbs):
+    pbs = np.array(pbs)
+    _mean = np.mean(pbs)
+    _std = np.std(pbs)
+    n_std = (pbs - _mean) / _std
+    pvalues = np.array([ .5 * (math.erf(n / 2 ** .5) + 1) for n in n_std])
+    weights = pvalues / np.sum(pvalues)
+    # weights = softmax(pvalues)
+    return weights
+
+
+
 def merge_logits(df_paths, weights=None, normalize_fn=divide_by_softmax):
     if weights is None:
         weights = [1] * len(df_paths)
@@ -35,7 +48,6 @@ def merge_logits(df_paths, weights=None, normalize_fn=divide_by_softmax):
         df = normalize_fn(df) * weights[i]
         dfs.append(df)
 
-    # bp()
     # sum weighted logits
     df = reduce(lambda x, y: x.add(y, fill_value=0), dfs)
 
@@ -54,19 +66,47 @@ def merge_logits(df_paths, weights=None, normalize_fn=divide_by_softmax):
 
 
 if __name__ == "__main__":
-    # save_5fold_dir = '../save_dir/mm_hidden256_5fold_test/fine'
-    save_5fold_dir = '../save_dir/mm_cnn_hidden256_5fold/fine'
-    # df_paths = [f"{save_5fold_dir}/fold{i}/outputs_logits.csv" for i in range(5)]
+    ensemble_dir = '../save_dir/ensemble_result'
+    ## for kfold ensemble
+    # dir_name = 'mm_CnnAggBn_hidden256_5fold'
+    # kfold_dir = f'../save_dir/{dir_name}/fine'
+    # df_paths = [f"{kfold_dir}/fold{i}/outputs_logits.csv" for i in range(5)]
+    # weights = None
+    # save_dir = f'{ensemble_dir}/{dir_name}'
+
+    ## for different model ensembles 
     df_paths = [
-        '../save_dir/mm_cnn_hidden256_5fold/fine/kfold_logits.csv',
-        '../cc/save_dir/mm_hidden256_5fold_test/fine/kfold_top3_2.csv'
+        f'{ensemble_dir}/mm_cnn_hidden256_5fold/logits.csv',
+        f'{ensemble_dir}/mm_hidden256_5fold_test/logits.csv',
+        f'{ensemble_dir}/nn3_attn_5fold/logits.csv',
+        f'{ensemble_dir}/mm_CnnAggBn_hidden256_5fold/logits.csv'
     ]
+    weights = [0.8, 0.1, 0.06, 0.04]
+    # weights = get_weights_by_normal_distribution([0.72700, 0.72782, 0.72652, 0.72669])
+    dir_name = 'cnn0.8_nn0.1_nn0.06.attn_CnnAggBn0.04'
+    save_dir = f'../save_dir/ensemble_result/{dir_name}'
+
+    for path in df_paths:
+        if not os.path.exists(path):
+            print(f'not exist {path}')
+            exit()
+
+
+    # create dir
+    if not os.path.isdir(save_dir):
+        os.mkdir(save_dir)
+
+    # save path and validate path
+    top3_path = f"{save_dir}/top3.csv"
+    logits_path = f"{save_dir}/logits.csv"
+    assert not os.path.exists(top3_path)
+    assert not os.path.exists(logits_path)
 
     # merge
-    df_top3, df_logits = merge_logits(df_paths, weights=[0.7, 0.3])
+    df_top3, df_logits = merge_logits(df_paths, weights=weights)
     
-    # save
-    df_top3.to_csv(f"{save_5fold_dir}/en_mlp_kfold_top3.csv", index=None)
-    df_logits.to_csv(f"{save_5fold_dir}/en_mlp_kfold_logits.csv", index=None)
+    
+    df_top3.to_csv(top3_path, index=None)
+    df_logits.to_csv(logits_path, index=None)
 
 

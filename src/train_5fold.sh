@@ -1,9 +1,9 @@
-device=1
+device=2
 base_config=config.json
-save_dir='../save_dir/mm_cnn_hidden256_5fold'
+save_dir='../save_dir/mm_CnnAggBn_hidden256_5fold/'
 
 # train 5fold
-for fold_idx in {1..2}
+for fold_idx in {0..4}
 do  
     echo === fold $fold_idx ===
     base_output_dir=$save_dir/base/fold$fold_idx
@@ -39,4 +39,4 @@ do
         --output_dir=$fine_output_dir 
 done
 
-. ./merge_logits.py
+python3 ./merge_logits.py
