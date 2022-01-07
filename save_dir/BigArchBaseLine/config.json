@@ -1,0 +1,52 @@
+{
+    "name": "PetPoc",
+    "n_gpu": 1,
+    "arch": {
+        "type": "BigArchBaseLine",
+        "args": {
+            "cols_config_path": "../data/preprocessed/v1/column_config_wo_dt.yml"
+        }
+    },
+    "data_loader": {
+        "type": "BigArchDataLoader",
+        "args": {
+            "data_path": "../md01_data/customers.pkl",
+            "target_pkl_path": "../md01_data/target_last_month_list.pkl",
+            "dt_len": 23,
+            "month_row_num": 10,
+            "batch_size": 512,
+            "shuffle": true,
+            "validation_split": 0.2,
+            "num_workers": 8
+        }
+    },
+    "optimizer": {
+        "type": "Adam",
+        "args": {
+            "lr": 0.001,
+            "weight_decay": 1e-07,
+            "amsgrad": true
+        }
+    },
+    "loss": "soft_cross_entropy_loss",
+    "metrics": [
+        "NDCG",
+        "NDCG16"
+    ],
+    "lr_scheduler": {
+        "type": "StepLR",
+        "args": {
+            "step_size": 5,
+            "gamma": 0.8
+        }
+    },
+    "trainer": {
+        "epochs": 100,
+        "save_dir": "../save_dir/BigArchBaseLine",
+        "save_period": 1,
+        "verbosity": 2,
+        "monitor": "min val_loss",
+        "early_stop": 10,
+        "tensorboard": false
+    }
+}

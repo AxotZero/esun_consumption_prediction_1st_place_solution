@@ -1,0 +1,1201 @@
+2021-12-28 09:28:50,818 - train - INFO - MultiIndexModelCnn(
+  (embedder): FixedEmbedder(
+    (embeddings): ModuleList(
+      (0): Embedding(49, 32)
+      (1): Embedding(4, 32)
+      (2): Embedding(7, 32)
+      (3): Embedding(30, 32)
+      (4): Embedding(3, 32)
+      (5): Embedding(12, 32)
+      (6): Embedding(35, 32)
+      (7): Embedding(3, 32)
+      (8): Embedding(10, 32)
+      (9): Embedding(2, 32)
+    )
+    (nns): ModuleList(
+      (0): Linear(in_features=1, out_features=32, bias=True)
+      (1): Linear(in_features=1, out_features=32, bias=True)
+      (2): Linear(in_features=1, out_features=32, bias=True)
+      (3): Linear(in_features=1, out_features=32, bias=True)
+      (4): Linear(in_features=1, out_features=32, bias=True)
+      (5): Linear(in_features=1, out_features=32, bias=True)
+      (6): Linear(in_features=1, out_features=32, bias=True)
+      (7): Linear(in_features=1, out_features=32, bias=True)
+      (8): Linear(in_features=1, out_features=32, bias=True)
+      (9): Linear(in_features=1, out_features=32, bias=True)
+      (10): Linear(in_features=1, out_features=32, bias=True)
+      (11): Linear(in_features=1, out_features=32, bias=True)
+      (12): Linear(in_features=1, out_features=32, bias=True)
+      (13): Linear(in_features=1, out_features=32, bias=True)
+      (14): Linear(in_features=1, out_features=32, bias=True)
+      (15): Linear(in_features=1, out_features=32, bias=True)
+      (16): Linear(in_features=1, out_features=32, bias=True)
+      (17): Linear(in_features=1, out_features=32, bias=True)
+      (18): Linear(in_features=1, out_features=32, bias=True)
+      (19): Linear(in_features=1, out_features=32, bias=True)
+      (20): Linear(in_features=1, out_features=32, bias=True)
+      (21): Linear(in_features=1, out_features=32, bias=True)
+      (22): Linear(in_features=1, out_features=32, bias=True)
+      (23): Linear(in_features=1, out_features=32, bias=True)
+      (24): Linear(in_features=1, out_features=32, bias=True)
+      (25): Linear(in_features=1, out_features=32, bias=True)
+      (26): Linear(in_features=1, out_features=32, bias=True)
+      (27): Linear(in_features=1, out_features=32, bias=True)
+      (28): Linear(in_features=1, out_features=32, bias=True)
+      (29): Linear(in_features=1, out_features=32, bias=True)
+      (30): Linear(in_features=1, out_features=32, bias=True)
+      (31): Linear(in_features=1, out_features=32, bias=True)
+      (32): Linear(in_features=1, out_features=32, bias=True)
+      (33): Linear(in_features=1, out_features=32, bias=True)
+      (34): Linear(in_features=1, out_features=32, bias=True)
+      (35): Linear(in_features=1, out_features=32, bias=True)
+      (36): Linear(in_features=1, out_features=32, bias=True)
+      (37): Linear(in_features=1, out_features=32, bias=True)
+      (38): Linear(in_features=1, out_features=32, bias=True)
+      (39): Linear(in_features=1, out_features=32, bias=True)
+      (40): Linear(in_features=1, out_features=32, bias=True)
+      (41): Linear(in_features=1, out_features=32, bias=True)
+    )
+  )
+  (row_encoder): CnnEncoder(
+    (batch_norm1): BatchNorm1d(1664, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout1): Dropout(p=0.44999999999999996, inplace=False)
+    (dense1): Linear(in_features=1664, out_features=1536, bias=True)
+    (batch_norm_c1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c1): Dropout(p=0.40499999999999997, inplace=False)
+    (conv1): Conv1d(64, 128, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (ave_po_c1): AdaptiveAvgPool1d(output_size=12)
+    (batch_norm_c2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2): Dropout(p=0.36, inplace=False)
+    (conv2): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_1): Dropout(p=0.26999999999999996, inplace=False)
+    (conv2_1): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_2): Dropout(p=0.22499999999999998, inplace=False)
+    (conv2_2): Conv1d(128, 128, kernel_size=(5,), stride=(1,), padding=(2,))
+    (max_po_c2): MaxPool1d(kernel_size=4, stride=2, padding=1, dilation=1, ceil_mode=False)
+    (flt): Flatten(start_dim=1, end_dim=-1)
+    (batch_norm3): BatchNorm1d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout3): Dropout(p=0.44999999999999996, inplace=False)
+    (dense3): Linear(in_features=768, out_features=256, bias=True)
+  )
+  (rows_aggregator): Sequential(
+    (0): Linear(in_features=12544, out_features=1536, bias=True)
+    (1): LeakyReLU(negative_slope=0.01)
+    (2): Dropout(p=0.6, inplace=False)
+    (3): Linear(in_features=1536, out_features=1024, bias=True)
+    (4): LeakyReLU(negative_slope=0.01)
+    (5): Dropout(p=0.39999999999999997, inplace=False)
+    (6): Linear(in_features=1024, out_features=512, bias=True)
+    (7): LeakyReLU(negative_slope=0.01)
+    (8): Dropout(p=0.3, inplace=False)
+    (9): Linear(in_features=512, out_features=256, bias=True)
+    (10): LeakyReLU(negative_slope=0.01)
+  )
+  (temporal_aggregator): Seq2SeqGruAggregator(
+    (gru): GRU(256, 512, num_layers=3, batch_first=True, dropout=0.4)
+  )
+  (classifier): Sequential(
+    (0): Linear(in_features=512, out_features=49, bias=True)
+  )
+)
+Trainable parameters: 28849941.0
+2021-12-28 09:29:18,806 - train - INFO - MultiIndexModelCnn(
+  (embedder): FixedEmbedder(
+    (embeddings): ModuleList(
+      (0): Embedding(49, 32)
+      (1): Embedding(4, 32)
+      (2): Embedding(7, 32)
+      (3): Embedding(30, 32)
+      (4): Embedding(3, 32)
+      (5): Embedding(12, 32)
+      (6): Embedding(35, 32)
+      (7): Embedding(3, 32)
+      (8): Embedding(10, 32)
+      (9): Embedding(2, 32)
+    )
+    (nns): ModuleList(
+      (0): Linear(in_features=1, out_features=32, bias=True)
+      (1): Linear(in_features=1, out_features=32, bias=True)
+      (2): Linear(in_features=1, out_features=32, bias=True)
+      (3): Linear(in_features=1, out_features=32, bias=True)
+      (4): Linear(in_features=1, out_features=32, bias=True)
+      (5): Linear(in_features=1, out_features=32, bias=True)
+      (6): Linear(in_features=1, out_features=32, bias=True)
+      (7): Linear(in_features=1, out_features=32, bias=True)
+      (8): Linear(in_features=1, out_features=32, bias=True)
+      (9): Linear(in_features=1, out_features=32, bias=True)
+      (10): Linear(in_features=1, out_features=32, bias=True)
+      (11): Linear(in_features=1, out_features=32, bias=True)
+      (12): Linear(in_features=1, out_features=32, bias=True)
+      (13): Linear(in_features=1, out_features=32, bias=True)
+      (14): Linear(in_features=1, out_features=32, bias=True)
+      (15): Linear(in_features=1, out_features=32, bias=True)
+      (16): Linear(in_features=1, out_features=32, bias=True)
+      (17): Linear(in_features=1, out_features=32, bias=True)
+      (18): Linear(in_features=1, out_features=32, bias=True)
+      (19): Linear(in_features=1, out_features=32, bias=True)
+      (20): Linear(in_features=1, out_features=32, bias=True)
+      (21): Linear(in_features=1, out_features=32, bias=True)
+      (22): Linear(in_features=1, out_features=32, bias=True)
+      (23): Linear(in_features=1, out_features=32, bias=True)
+      (24): Linear(in_features=1, out_features=32, bias=True)
+      (25): Linear(in_features=1, out_features=32, bias=True)
+      (26): Linear(in_features=1, out_features=32, bias=True)
+      (27): Linear(in_features=1, out_features=32, bias=True)
+      (28): Linear(in_features=1, out_features=32, bias=True)
+      (29): Linear(in_features=1, out_features=32, bias=True)
+      (30): Linear(in_features=1, out_features=32, bias=True)
+      (31): Linear(in_features=1, out_features=32, bias=True)
+      (32): Linear(in_features=1, out_features=32, bias=True)
+      (33): Linear(in_features=1, out_features=32, bias=True)
+      (34): Linear(in_features=1, out_features=32, bias=True)
+      (35): Linear(in_features=1, out_features=32, bias=True)
+      (36): Linear(in_features=1, out_features=32, bias=True)
+      (37): Linear(in_features=1, out_features=32, bias=True)
+      (38): Linear(in_features=1, out_features=32, bias=True)
+      (39): Linear(in_features=1, out_features=32, bias=True)
+      (40): Linear(in_features=1, out_features=32, bias=True)
+      (41): Linear(in_features=1, out_features=32, bias=True)
+    )
+  )
+  (row_encoder): CnnEncoder(
+    (batch_norm1): BatchNorm1d(1664, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout1): Dropout(p=0.44999999999999996, inplace=False)
+    (dense1): Linear(in_features=1664, out_features=1536, bias=True)
+    (batch_norm_c1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c1): Dropout(p=0.40499999999999997, inplace=False)
+    (conv1): Conv1d(64, 128, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (ave_po_c1): AdaptiveAvgPool1d(output_size=12)
+    (batch_norm_c2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2): Dropout(p=0.36, inplace=False)
+    (conv2): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_1): Dropout(p=0.26999999999999996, inplace=False)
+    (conv2_1): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_2): Dropout(p=0.22499999999999998, inplace=False)
+    (conv2_2): Conv1d(128, 128, kernel_size=(5,), stride=(1,), padding=(2,))
+    (max_po_c2): MaxPool1d(kernel_size=4, stride=2, padding=1, dilation=1, ceil_mode=False)
+    (flt): Flatten(start_dim=1, end_dim=-1)
+    (batch_norm3): BatchNorm1d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout3): Dropout(p=0.44999999999999996, inplace=False)
+    (dense3): Linear(in_features=768, out_features=256, bias=True)
+  )
+  (rows_aggregator): Sequential(
+    (0): Linear(in_features=12544, out_features=1536, bias=True)
+    (1): LeakyReLU(negative_slope=0.01)
+    (2): Dropout(p=0.6, inplace=False)
+    (3): Linear(in_features=1536, out_features=1024, bias=True)
+    (4): LeakyReLU(negative_slope=0.01)
+    (5): Dropout(p=0.39999999999999997, inplace=False)
+    (6): Linear(in_features=1024, out_features=512, bias=True)
+    (7): LeakyReLU(negative_slope=0.01)
+    (8): Dropout(p=0.3, inplace=False)
+    (9): Linear(in_features=512, out_features=256, bias=True)
+    (10): LeakyReLU(negative_slope=0.01)
+  )
+  (temporal_aggregator): Seq2SeqGruAggregator(
+    (gru): GRU(256, 512, num_layers=3, batch_first=True, dropout=0.4)
+  )
+  (classifier): Sequential(
+    (0): Linear(in_features=512, out_features=49, bias=True)
+  )
+)
+Trainable parameters: 28849941.0
+2021-12-28 09:30:29,764 - train - INFO - MultiIndexModelCnn(
+  (embedder): FixedEmbedder(
+    (embeddings): ModuleList(
+      (0): Embedding(49, 32)
+      (1): Embedding(4, 32)
+      (2): Embedding(7, 32)
+      (3): Embedding(30, 32)
+      (4): Embedding(3, 32)
+      (5): Embedding(12, 32)
+      (6): Embedding(35, 32)
+      (7): Embedding(3, 32)
+      (8): Embedding(10, 32)
+      (9): Embedding(2, 32)
+    )
+    (nns): ModuleList(
+      (0): Linear(in_features=1, out_features=32, bias=True)
+      (1): Linear(in_features=1, out_features=32, bias=True)
+      (2): Linear(in_features=1, out_features=32, bias=True)
+      (3): Linear(in_features=1, out_features=32, bias=True)
+      (4): Linear(in_features=1, out_features=32, bias=True)
+      (5): Linear(in_features=1, out_features=32, bias=True)
+      (6): Linear(in_features=1, out_features=32, bias=True)
+      (7): Linear(in_features=1, out_features=32, bias=True)
+      (8): Linear(in_features=1, out_features=32, bias=True)
+      (9): Linear(in_features=1, out_features=32, bias=True)
+      (10): Linear(in_features=1, out_features=32, bias=True)
+      (11): Linear(in_features=1, out_features=32, bias=True)
+      (12): Linear(in_features=1, out_features=32, bias=True)
+      (13): Linear(in_features=1, out_features=32, bias=True)
+      (14): Linear(in_features=1, out_features=32, bias=True)
+      (15): Linear(in_features=1, out_features=32, bias=True)
+      (16): Linear(in_features=1, out_features=32, bias=True)
+      (17): Linear(in_features=1, out_features=32, bias=True)
+      (18): Linear(in_features=1, out_features=32, bias=True)
+      (19): Linear(in_features=1, out_features=32, bias=True)
+      (20): Linear(in_features=1, out_features=32, bias=True)
+      (21): Linear(in_features=1, out_features=32, bias=True)
+      (22): Linear(in_features=1, out_features=32, bias=True)
+      (23): Linear(in_features=1, out_features=32, bias=True)
+      (24): Linear(in_features=1, out_features=32, bias=True)
+      (25): Linear(in_features=1, out_features=32, bias=True)
+      (26): Linear(in_features=1, out_features=32, bias=True)
+      (27): Linear(in_features=1, out_features=32, bias=True)
+      (28): Linear(in_features=1, out_features=32, bias=True)
+      (29): Linear(in_features=1, out_features=32, bias=True)
+      (30): Linear(in_features=1, out_features=32, bias=True)
+      (31): Linear(in_features=1, out_features=32, bias=True)
+      (32): Linear(in_features=1, out_features=32, bias=True)
+      (33): Linear(in_features=1, out_features=32, bias=True)
+      (34): Linear(in_features=1, out_features=32, bias=True)
+      (35): Linear(in_features=1, out_features=32, bias=True)
+      (36): Linear(in_features=1, out_features=32, bias=True)
+      (37): Linear(in_features=1, out_features=32, bias=True)
+      (38): Linear(in_features=1, out_features=32, bias=True)
+      (39): Linear(in_features=1, out_features=32, bias=True)
+      (40): Linear(in_features=1, out_features=32, bias=True)
+      (41): Linear(in_features=1, out_features=32, bias=True)
+    )
+  )
+  (row_encoder): CnnEncoder(
+    (batch_norm1): BatchNorm1d(1664, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout1): Dropout(p=0.44999999999999996, inplace=False)
+    (dense1): Linear(in_features=1664, out_features=1536, bias=True)
+    (batch_norm_c1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c1): Dropout(p=0.40499999999999997, inplace=False)
+    (conv1): Conv1d(64, 128, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (ave_po_c1): AdaptiveAvgPool1d(output_size=12)
+    (batch_norm_c2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2): Dropout(p=0.36, inplace=False)
+    (conv2): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_1): Dropout(p=0.26999999999999996, inplace=False)
+    (conv2_1): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_2): Dropout(p=0.22499999999999998, inplace=False)
+    (conv2_2): Conv1d(128, 128, kernel_size=(5,), stride=(1,), padding=(2,))
+    (max_po_c2): MaxPool1d(kernel_size=4, stride=2, padding=1, dilation=1, ceil_mode=False)
+    (flt): Flatten(start_dim=1, end_dim=-1)
+    (batch_norm3): BatchNorm1d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout3): Dropout(p=0.44999999999999996, inplace=False)
+    (dense3): Linear(in_features=768, out_features=256, bias=True)
+  )
+  (rows_aggregator): Sequential(
+    (0): Linear(in_features=12544, out_features=1536, bias=True)
+    (1): LeakyReLU(negative_slope=0.01)
+    (2): Dropout(p=0.6, inplace=False)
+    (3): Linear(in_features=1536, out_features=1024, bias=True)
+    (4): LeakyReLU(negative_slope=0.01)
+    (5): Dropout(p=0.39999999999999997, inplace=False)
+    (6): Linear(in_features=1024, out_features=512, bias=True)
+    (7): LeakyReLU(negative_slope=0.01)
+    (8): Dropout(p=0.3, inplace=False)
+    (9): Linear(in_features=512, out_features=256, bias=True)
+    (10): LeakyReLU(negative_slope=0.01)
+  )
+  (temporal_aggregator): Seq2SeqGruAggregator(
+    (gru): GRU(256, 512, num_layers=3, batch_first=True, dropout=0.4)
+  )
+  (classifier): Sequential(
+    (0): Linear(in_features=512, out_features=49, bias=True)
+  )
+)
+Trainable parameters: 28849941.0
+2021-12-28 09:31:22,393 - train - INFO - MultiIndexModelCnn(
+  (embedder): FixedEmbedder(
+    (embeddings): ModuleList(
+      (0): Embedding(49, 32)
+      (1): Embedding(4, 32)
+      (2): Embedding(7, 32)
+      (3): Embedding(30, 32)
+      (4): Embedding(3, 32)
+      (5): Embedding(12, 32)
+      (6): Embedding(35, 32)
+      (7): Embedding(3, 32)
+      (8): Embedding(10, 32)
+      (9): Embedding(2, 32)
+    )
+    (nns): ModuleList(
+      (0): Linear(in_features=1, out_features=32, bias=True)
+      (1): Linear(in_features=1, out_features=32, bias=True)
+      (2): Linear(in_features=1, out_features=32, bias=True)
+      (3): Linear(in_features=1, out_features=32, bias=True)
+      (4): Linear(in_features=1, out_features=32, bias=True)
+      (5): Linear(in_features=1, out_features=32, bias=True)
+      (6): Linear(in_features=1, out_features=32, bias=True)
+      (7): Linear(in_features=1, out_features=32, bias=True)
+      (8): Linear(in_features=1, out_features=32, bias=True)
+      (9): Linear(in_features=1, out_features=32, bias=True)
+      (10): Linear(in_features=1, out_features=32, bias=True)
+      (11): Linear(in_features=1, out_features=32, bias=True)
+      (12): Linear(in_features=1, out_features=32, bias=True)
+      (13): Linear(in_features=1, out_features=32, bias=True)
+      (14): Linear(in_features=1, out_features=32, bias=True)
+      (15): Linear(in_features=1, out_features=32, bias=True)
+      (16): Linear(in_features=1, out_features=32, bias=True)
+      (17): Linear(in_features=1, out_features=32, bias=True)
+      (18): Linear(in_features=1, out_features=32, bias=True)
+      (19): Linear(in_features=1, out_features=32, bias=True)
+      (20): Linear(in_features=1, out_features=32, bias=True)
+      (21): Linear(in_features=1, out_features=32, bias=True)
+      (22): Linear(in_features=1, out_features=32, bias=True)
+      (23): Linear(in_features=1, out_features=32, bias=True)
+      (24): Linear(in_features=1, out_features=32, bias=True)
+      (25): Linear(in_features=1, out_features=32, bias=True)
+      (26): Linear(in_features=1, out_features=32, bias=True)
+      (27): Linear(in_features=1, out_features=32, bias=True)
+      (28): Linear(in_features=1, out_features=32, bias=True)
+      (29): Linear(in_features=1, out_features=32, bias=True)
+      (30): Linear(in_features=1, out_features=32, bias=True)
+      (31): Linear(in_features=1, out_features=32, bias=True)
+      (32): Linear(in_features=1, out_features=32, bias=True)
+      (33): Linear(in_features=1, out_features=32, bias=True)
+      (34): Linear(in_features=1, out_features=32, bias=True)
+      (35): Linear(in_features=1, out_features=32, bias=True)
+      (36): Linear(in_features=1, out_features=32, bias=True)
+      (37): Linear(in_features=1, out_features=32, bias=True)
+      (38): Linear(in_features=1, out_features=32, bias=True)
+      (39): Linear(in_features=1, out_features=32, bias=True)
+      (40): Linear(in_features=1, out_features=32, bias=True)
+      (41): Linear(in_features=1, out_features=32, bias=True)
+    )
+  )
+  (row_encoder): CnnEncoder(
+    (batch_norm1): BatchNorm1d(1664, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout1): Dropout(p=0.44999999999999996, inplace=False)
+    (dense1): Linear(in_features=1664, out_features=1536, bias=True)
+    (batch_norm_c1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c1): Dropout(p=0.40499999999999997, inplace=False)
+    (conv1): Conv1d(64, 128, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (ave_po_c1): AdaptiveAvgPool1d(output_size=12)
+    (batch_norm_c2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2): Dropout(p=0.36, inplace=False)
+    (conv2): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_1): Dropout(p=0.26999999999999996, inplace=False)
+    (conv2_1): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_2): Dropout(p=0.22499999999999998, inplace=False)
+    (conv2_2): Conv1d(128, 128, kernel_size=(5,), stride=(1,), padding=(2,))
+    (max_po_c2): MaxPool1d(kernel_size=4, stride=2, padding=1, dilation=1, ceil_mode=False)
+    (flt): Flatten(start_dim=1, end_dim=-1)
+    (batch_norm3): BatchNorm1d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout3): Dropout(p=0.44999999999999996, inplace=False)
+    (dense3): Linear(in_features=768, out_features=256, bias=True)
+  )
+  (rows_aggregator): Sequential(
+    (0): Linear(in_features=12544, out_features=1536, bias=True)
+    (1): LeakyReLU(negative_slope=0.01)
+    (2): Dropout(p=0.6, inplace=False)
+    (3): Linear(in_features=1536, out_features=1024, bias=True)
+    (4): LeakyReLU(negative_slope=0.01)
+    (5): Dropout(p=0.39999999999999997, inplace=False)
+    (6): Linear(in_features=1024, out_features=512, bias=True)
+    (7): LeakyReLU(negative_slope=0.01)
+    (8): Dropout(p=0.3, inplace=False)
+    (9): Linear(in_features=512, out_features=256, bias=True)
+    (10): LeakyReLU(negative_slope=0.01)
+  )
+  (temporal_aggregator): Seq2SeqGruAggregator(
+    (gru): GRU(256, 512, num_layers=3, batch_first=True, dropout=0.4)
+  )
+  (classifier): Sequential(
+    (0): Linear(in_features=512, out_features=49, bias=True)
+  )
+)
+Trainable parameters: 28849941.0
+2021-12-28 09:32:33,399 - train - INFO - MultiIndexModelCnn(
+  (embedder): FixedEmbedder(
+    (embeddings): ModuleList(
+      (0): Embedding(49, 32)
+      (1): Embedding(4, 32)
+      (2): Embedding(7, 32)
+      (3): Embedding(30, 32)
+      (4): Embedding(3, 32)
+      (5): Embedding(12, 32)
+      (6): Embedding(35, 32)
+      (7): Embedding(3, 32)
+      (8): Embedding(10, 32)
+      (9): Embedding(2, 32)
+    )
+    (nns): ModuleList(
+      (0): Linear(in_features=1, out_features=32, bias=True)
+      (1): Linear(in_features=1, out_features=32, bias=True)
+      (2): Linear(in_features=1, out_features=32, bias=True)
+      (3): Linear(in_features=1, out_features=32, bias=True)
+      (4): Linear(in_features=1, out_features=32, bias=True)
+      (5): Linear(in_features=1, out_features=32, bias=True)
+      (6): Linear(in_features=1, out_features=32, bias=True)
+      (7): Linear(in_features=1, out_features=32, bias=True)
+      (8): Linear(in_features=1, out_features=32, bias=True)
+      (9): Linear(in_features=1, out_features=32, bias=True)
+      (10): Linear(in_features=1, out_features=32, bias=True)
+      (11): Linear(in_features=1, out_features=32, bias=True)
+      (12): Linear(in_features=1, out_features=32, bias=True)
+      (13): Linear(in_features=1, out_features=32, bias=True)
+      (14): Linear(in_features=1, out_features=32, bias=True)
+      (15): Linear(in_features=1, out_features=32, bias=True)
+      (16): Linear(in_features=1, out_features=32, bias=True)
+      (17): Linear(in_features=1, out_features=32, bias=True)
+      (18): Linear(in_features=1, out_features=32, bias=True)
+      (19): Linear(in_features=1, out_features=32, bias=True)
+      (20): Linear(in_features=1, out_features=32, bias=True)
+      (21): Linear(in_features=1, out_features=32, bias=True)
+      (22): Linear(in_features=1, out_features=32, bias=True)
+      (23): Linear(in_features=1, out_features=32, bias=True)
+      (24): Linear(in_features=1, out_features=32, bias=True)
+      (25): Linear(in_features=1, out_features=32, bias=True)
+      (26): Linear(in_features=1, out_features=32, bias=True)
+      (27): Linear(in_features=1, out_features=32, bias=True)
+      (28): Linear(in_features=1, out_features=32, bias=True)
+      (29): Linear(in_features=1, out_features=32, bias=True)
+      (30): Linear(in_features=1, out_features=32, bias=True)
+      (31): Linear(in_features=1, out_features=32, bias=True)
+      (32): Linear(in_features=1, out_features=32, bias=True)
+      (33): Linear(in_features=1, out_features=32, bias=True)
+      (34): Linear(in_features=1, out_features=32, bias=True)
+      (35): Linear(in_features=1, out_features=32, bias=True)
+      (36): Linear(in_features=1, out_features=32, bias=True)
+      (37): Linear(in_features=1, out_features=32, bias=True)
+      (38): Linear(in_features=1, out_features=32, bias=True)
+      (39): Linear(in_features=1, out_features=32, bias=True)
+      (40): Linear(in_features=1, out_features=32, bias=True)
+      (41): Linear(in_features=1, out_features=32, bias=True)
+    )
+  )
+  (row_encoder): CnnEncoder(
+    (batch_norm1): BatchNorm1d(1664, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout1): Dropout(p=0.44999999999999996, inplace=False)
+    (dense1): Linear(in_features=1664, out_features=1536, bias=True)
+    (batch_norm_c1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c1): Dropout(p=0.40499999999999997, inplace=False)
+    (conv1): Conv1d(64, 128, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (ave_po_c1): AdaptiveAvgPool1d(output_size=12)
+    (batch_norm_c2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2): Dropout(p=0.36, inplace=False)
+    (conv2): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_1): Dropout(p=0.26999999999999996, inplace=False)
+    (conv2_1): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_2): Dropout(p=0.22499999999999998, inplace=False)
+    (conv2_2): Conv1d(128, 128, kernel_size=(5,), stride=(1,), padding=(2,))
+    (max_po_c2): MaxPool1d(kernel_size=4, stride=2, padding=1, dilation=1, ceil_mode=False)
+    (flt): Flatten(start_dim=1, end_dim=-1)
+    (batch_norm3): BatchNorm1d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout3): Dropout(p=0.44999999999999996, inplace=False)
+    (dense3): Linear(in_features=768, out_features=256, bias=True)
+  )
+  (rows_aggregator): Sequential(
+    (0): Linear(in_features=12544, out_features=1536, bias=True)
+    (1): LeakyReLU(negative_slope=0.01)
+    (2): Dropout(p=0.6, inplace=False)
+    (3): Linear(in_features=1536, out_features=1024, bias=True)
+    (4): LeakyReLU(negative_slope=0.01)
+    (5): Dropout(p=0.39999999999999997, inplace=False)
+    (6): Linear(in_features=1024, out_features=512, bias=True)
+    (7): LeakyReLU(negative_slope=0.01)
+    (8): Dropout(p=0.3, inplace=False)
+    (9): Linear(in_features=512, out_features=256, bias=True)
+    (10): LeakyReLU(negative_slope=0.01)
+  )
+  (temporal_aggregator): Seq2SeqGruAggregator(
+    (gru): GRU(256, 512, num_layers=3, batch_first=True, dropout=0.4)
+  )
+  (classifier): Sequential(
+    (0): Linear(in_features=512, out_features=49, bias=True)
+  )
+)
+Trainable parameters: 28849941.0
+2021-12-28 09:33:15,046 - train - INFO - MultiIndexModelCnn(
+  (embedder): FixedEmbedder(
+    (embeddings): ModuleList(
+      (0): Embedding(49, 32)
+      (1): Embedding(4, 32)
+      (2): Embedding(7, 32)
+      (3): Embedding(30, 32)
+      (4): Embedding(3, 32)
+      (5): Embedding(12, 32)
+      (6): Embedding(35, 32)
+      (7): Embedding(3, 32)
+      (8): Embedding(10, 32)
+      (9): Embedding(2, 32)
+    )
+    (nns): ModuleList(
+      (0): Linear(in_features=1, out_features=32, bias=True)
+      (1): Linear(in_features=1, out_features=32, bias=True)
+      (2): Linear(in_features=1, out_features=32, bias=True)
+      (3): Linear(in_features=1, out_features=32, bias=True)
+      (4): Linear(in_features=1, out_features=32, bias=True)
+      (5): Linear(in_features=1, out_features=32, bias=True)
+      (6): Linear(in_features=1, out_features=32, bias=True)
+      (7): Linear(in_features=1, out_features=32, bias=True)
+      (8): Linear(in_features=1, out_features=32, bias=True)
+      (9): Linear(in_features=1, out_features=32, bias=True)
+      (10): Linear(in_features=1, out_features=32, bias=True)
+      (11): Linear(in_features=1, out_features=32, bias=True)
+      (12): Linear(in_features=1, out_features=32, bias=True)
+      (13): Linear(in_features=1, out_features=32, bias=True)
+      (14): Linear(in_features=1, out_features=32, bias=True)
+      (15): Linear(in_features=1, out_features=32, bias=True)
+      (16): Linear(in_features=1, out_features=32, bias=True)
+      (17): Linear(in_features=1, out_features=32, bias=True)
+      (18): Linear(in_features=1, out_features=32, bias=True)
+      (19): Linear(in_features=1, out_features=32, bias=True)
+      (20): Linear(in_features=1, out_features=32, bias=True)
+      (21): Linear(in_features=1, out_features=32, bias=True)
+      (22): Linear(in_features=1, out_features=32, bias=True)
+      (23): Linear(in_features=1, out_features=32, bias=True)
+      (24): Linear(in_features=1, out_features=32, bias=True)
+      (25): Linear(in_features=1, out_features=32, bias=True)
+      (26): Linear(in_features=1, out_features=32, bias=True)
+      (27): Linear(in_features=1, out_features=32, bias=True)
+      (28): Linear(in_features=1, out_features=32, bias=True)
+      (29): Linear(in_features=1, out_features=32, bias=True)
+      (30): Linear(in_features=1, out_features=32, bias=True)
+      (31): Linear(in_features=1, out_features=32, bias=True)
+      (32): Linear(in_features=1, out_features=32, bias=True)
+      (33): Linear(in_features=1, out_features=32, bias=True)
+      (34): Linear(in_features=1, out_features=32, bias=True)
+      (35): Linear(in_features=1, out_features=32, bias=True)
+      (36): Linear(in_features=1, out_features=32, bias=True)
+      (37): Linear(in_features=1, out_features=32, bias=True)
+      (38): Linear(in_features=1, out_features=32, bias=True)
+      (39): Linear(in_features=1, out_features=32, bias=True)
+      (40): Linear(in_features=1, out_features=32, bias=True)
+      (41): Linear(in_features=1, out_features=32, bias=True)
+    )
+  )
+  (row_encoder): CnnEncoder(
+    (batch_norm1): BatchNorm1d(1664, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout1): Dropout(p=0.44999999999999996, inplace=False)
+    (dense1): Linear(in_features=1664, out_features=1536, bias=True)
+    (batch_norm_c1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c1): Dropout(p=0.40499999999999997, inplace=False)
+    (conv1): Conv1d(64, 128, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (ave_po_c1): AdaptiveAvgPool1d(output_size=12)
+    (batch_norm_c2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2): Dropout(p=0.36, inplace=False)
+    (conv2): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_1): Dropout(p=0.26999999999999996, inplace=False)
+    (conv2_1): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_2): Dropout(p=0.22499999999999998, inplace=False)
+    (conv2_2): Conv1d(128, 128, kernel_size=(5,), stride=(1,), padding=(2,))
+    (max_po_c2): MaxPool1d(kernel_size=4, stride=2, padding=1, dilation=1, ceil_mode=False)
+    (flt): Flatten(start_dim=1, end_dim=-1)
+    (batch_norm3): BatchNorm1d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout3): Dropout(p=0.44999999999999996, inplace=False)
+    (dense3): Linear(in_features=768, out_features=256, bias=True)
+  )
+  (rows_aggregator): Sequential(
+    (0): Linear(in_features=12544, out_features=1536, bias=True)
+    (1): LeakyReLU(negative_slope=0.01)
+    (2): Dropout(p=0.6, inplace=False)
+    (3): Linear(in_features=1536, out_features=1024, bias=True)
+    (4): LeakyReLU(negative_slope=0.01)
+    (5): Dropout(p=0.39999999999999997, inplace=False)
+    (6): Linear(in_features=1024, out_features=512, bias=True)
+    (7): LeakyReLU(negative_slope=0.01)
+    (8): Dropout(p=0.3, inplace=False)
+    (9): Linear(in_features=512, out_features=256, bias=True)
+    (10): LeakyReLU(negative_slope=0.01)
+  )
+  (temporal_aggregator): Seq2SeqGruAggregator(
+    (gru): GRU(256, 512, num_layers=3, batch_first=True, dropout=0.4)
+  )
+  (classifier): Sequential(
+    (0): Linear(in_features=512, out_features=49, bias=True)
+  )
+)
+Trainable parameters: 28849941.0
+2021-12-28 09:33:49,476 - train - INFO - MultiIndexModelCnn(
+  (embedder): FixedEmbedder(
+    (embeddings): ModuleList(
+      (0): Embedding(49, 32)
+      (1): Embedding(4, 32)
+      (2): Embedding(7, 32)
+      (3): Embedding(30, 32)
+      (4): Embedding(3, 32)
+      (5): Embedding(12, 32)
+      (6): Embedding(35, 32)
+      (7): Embedding(3, 32)
+      (8): Embedding(10, 32)
+      (9): Embedding(2, 32)
+    )
+    (nns): ModuleList(
+      (0): Linear(in_features=1, out_features=32, bias=True)
+      (1): Linear(in_features=1, out_features=32, bias=True)
+      (2): Linear(in_features=1, out_features=32, bias=True)
+      (3): Linear(in_features=1, out_features=32, bias=True)
+      (4): Linear(in_features=1, out_features=32, bias=True)
+      (5): Linear(in_features=1, out_features=32, bias=True)
+      (6): Linear(in_features=1, out_features=32, bias=True)
+      (7): Linear(in_features=1, out_features=32, bias=True)
+      (8): Linear(in_features=1, out_features=32, bias=True)
+      (9): Linear(in_features=1, out_features=32, bias=True)
+      (10): Linear(in_features=1, out_features=32, bias=True)
+      (11): Linear(in_features=1, out_features=32, bias=True)
+      (12): Linear(in_features=1, out_features=32, bias=True)
+      (13): Linear(in_features=1, out_features=32, bias=True)
+      (14): Linear(in_features=1, out_features=32, bias=True)
+      (15): Linear(in_features=1, out_features=32, bias=True)
+      (16): Linear(in_features=1, out_features=32, bias=True)
+      (17): Linear(in_features=1, out_features=32, bias=True)
+      (18): Linear(in_features=1, out_features=32, bias=True)
+      (19): Linear(in_features=1, out_features=32, bias=True)
+      (20): Linear(in_features=1, out_features=32, bias=True)
+      (21): Linear(in_features=1, out_features=32, bias=True)
+      (22): Linear(in_features=1, out_features=32, bias=True)
+      (23): Linear(in_features=1, out_features=32, bias=True)
+      (24): Linear(in_features=1, out_features=32, bias=True)
+      (25): Linear(in_features=1, out_features=32, bias=True)
+      (26): Linear(in_features=1, out_features=32, bias=True)
+      (27): Linear(in_features=1, out_features=32, bias=True)
+      (28): Linear(in_features=1, out_features=32, bias=True)
+      (29): Linear(in_features=1, out_features=32, bias=True)
+      (30): Linear(in_features=1, out_features=32, bias=True)
+      (31): Linear(in_features=1, out_features=32, bias=True)
+      (32): Linear(in_features=1, out_features=32, bias=True)
+      (33): Linear(in_features=1, out_features=32, bias=True)
+      (34): Linear(in_features=1, out_features=32, bias=True)
+      (35): Linear(in_features=1, out_features=32, bias=True)
+      (36): Linear(in_features=1, out_features=32, bias=True)
+      (37): Linear(in_features=1, out_features=32, bias=True)
+      (38): Linear(in_features=1, out_features=32, bias=True)
+      (39): Linear(in_features=1, out_features=32, bias=True)
+      (40): Linear(in_features=1, out_features=32, bias=True)
+      (41): Linear(in_features=1, out_features=32, bias=True)
+    )
+  )
+  (row_encoder): CnnEncoder(
+    (batch_norm1): BatchNorm1d(1664, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout1): Dropout(p=0.44999999999999996, inplace=False)
+    (dense1): Linear(in_features=1664, out_features=1536, bias=True)
+    (batch_norm_c1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c1): Dropout(p=0.40499999999999997, inplace=False)
+    (conv1): Conv1d(64, 128, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (ave_po_c1): AdaptiveAvgPool1d(output_size=12)
+    (batch_norm_c2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2): Dropout(p=0.36, inplace=False)
+    (conv2): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_1): Dropout(p=0.26999999999999996, inplace=False)
+    (conv2_1): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_2): Dropout(p=0.22499999999999998, inplace=False)
+    (conv2_2): Conv1d(128, 128, kernel_size=(5,), stride=(1,), padding=(2,))
+    (max_po_c2): MaxPool1d(kernel_size=4, stride=2, padding=1, dilation=1, ceil_mode=False)
+    (flt): Flatten(start_dim=1, end_dim=-1)
+    (batch_norm3): BatchNorm1d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout3): Dropout(p=0.44999999999999996, inplace=False)
+    (dense3): Linear(in_features=768, out_features=256, bias=True)
+  )
+  (rows_aggregator): Sequential(
+    (0): Linear(in_features=12544, out_features=1536, bias=True)
+    (1): LeakyReLU(negative_slope=0.01)
+    (2): Dropout(p=0.6, inplace=False)
+    (3): Linear(in_features=1536, out_features=1024, bias=True)
+    (4): LeakyReLU(negative_slope=0.01)
+    (5): Dropout(p=0.39999999999999997, inplace=False)
+    (6): Linear(in_features=1024, out_features=512, bias=True)
+    (7): LeakyReLU(negative_slope=0.01)
+    (8): Dropout(p=0.3, inplace=False)
+    (9): Linear(in_features=512, out_features=256, bias=True)
+    (10): LeakyReLU(negative_slope=0.01)
+  )
+  (temporal_aggregator): Seq2SeqGruAggregator(
+    (gru): GRU(256, 512, num_layers=3, batch_first=True, dropout=0.4)
+  )
+  (classifier): Sequential(
+    (0): Linear(in_features=512, out_features=49, bias=True)
+  )
+)
+Trainable parameters: 28849941.0
+2021-12-28 09:34:32,882 - train - INFO - MultiIndexModelCnn(
+  (embedder): FixedEmbedder(
+    (embeddings): ModuleList(
+      (0): Embedding(49, 32)
+      (1): Embedding(4, 32)
+      (2): Embedding(7, 32)
+      (3): Embedding(30, 32)
+      (4): Embedding(3, 32)
+      (5): Embedding(12, 32)
+      (6): Embedding(35, 32)
+      (7): Embedding(3, 32)
+      (8): Embedding(10, 32)
+      (9): Embedding(2, 32)
+    )
+    (nns): ModuleList(
+      (0): Linear(in_features=1, out_features=32, bias=True)
+      (1): Linear(in_features=1, out_features=32, bias=True)
+      (2): Linear(in_features=1, out_features=32, bias=True)
+      (3): Linear(in_features=1, out_features=32, bias=True)
+      (4): Linear(in_features=1, out_features=32, bias=True)
+      (5): Linear(in_features=1, out_features=32, bias=True)
+      (6): Linear(in_features=1, out_features=32, bias=True)
+      (7): Linear(in_features=1, out_features=32, bias=True)
+      (8): Linear(in_features=1, out_features=32, bias=True)
+      (9): Linear(in_features=1, out_features=32, bias=True)
+      (10): Linear(in_features=1, out_features=32, bias=True)
+      (11): Linear(in_features=1, out_features=32, bias=True)
+      (12): Linear(in_features=1, out_features=32, bias=True)
+      (13): Linear(in_features=1, out_features=32, bias=True)
+      (14): Linear(in_features=1, out_features=32, bias=True)
+      (15): Linear(in_features=1, out_features=32, bias=True)
+      (16): Linear(in_features=1, out_features=32, bias=True)
+      (17): Linear(in_features=1, out_features=32, bias=True)
+      (18): Linear(in_features=1, out_features=32, bias=True)
+      (19): Linear(in_features=1, out_features=32, bias=True)
+      (20): Linear(in_features=1, out_features=32, bias=True)
+      (21): Linear(in_features=1, out_features=32, bias=True)
+      (22): Linear(in_features=1, out_features=32, bias=True)
+      (23): Linear(in_features=1, out_features=32, bias=True)
+      (24): Linear(in_features=1, out_features=32, bias=True)
+      (25): Linear(in_features=1, out_features=32, bias=True)
+      (26): Linear(in_features=1, out_features=32, bias=True)
+      (27): Linear(in_features=1, out_features=32, bias=True)
+      (28): Linear(in_features=1, out_features=32, bias=True)
+      (29): Linear(in_features=1, out_features=32, bias=True)
+      (30): Linear(in_features=1, out_features=32, bias=True)
+      (31): Linear(in_features=1, out_features=32, bias=True)
+      (32): Linear(in_features=1, out_features=32, bias=True)
+      (33): Linear(in_features=1, out_features=32, bias=True)
+      (34): Linear(in_features=1, out_features=32, bias=True)
+      (35): Linear(in_features=1, out_features=32, bias=True)
+      (36): Linear(in_features=1, out_features=32, bias=True)
+      (37): Linear(in_features=1, out_features=32, bias=True)
+      (38): Linear(in_features=1, out_features=32, bias=True)
+      (39): Linear(in_features=1, out_features=32, bias=True)
+      (40): Linear(in_features=1, out_features=32, bias=True)
+      (41): Linear(in_features=1, out_features=32, bias=True)
+    )
+  )
+  (row_encoder): CnnEncoder(
+    (batch_norm1): BatchNorm1d(1664, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout1): Dropout(p=0.44999999999999996, inplace=False)
+    (dense1): Linear(in_features=1664, out_features=1536, bias=True)
+    (batch_norm_c1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c1): Dropout(p=0.40499999999999997, inplace=False)
+    (conv1): Conv1d(64, 128, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (ave_po_c1): AdaptiveAvgPool1d(output_size=12)
+    (batch_norm_c2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2): Dropout(p=0.36, inplace=False)
+    (conv2): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_1): Dropout(p=0.26999999999999996, inplace=False)
+    (conv2_1): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_2): Dropout(p=0.22499999999999998, inplace=False)
+    (conv2_2): Conv1d(128, 128, kernel_size=(5,), stride=(1,), padding=(2,))
+    (max_po_c2): MaxPool1d(kernel_size=4, stride=2, padding=1, dilation=1, ceil_mode=False)
+    (flt): Flatten(start_dim=1, end_dim=-1)
+    (batch_norm3): BatchNorm1d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout3): Dropout(p=0.44999999999999996, inplace=False)
+    (dense3): Linear(in_features=768, out_features=256, bias=True)
+  )
+  (rows_aggregator): Sequential(
+    (0): Linear(in_features=12544, out_features=1536, bias=True)
+    (1): LeakyReLU(negative_slope=0.01)
+    (2): Dropout(p=0.6, inplace=False)
+    (3): Linear(in_features=1536, out_features=1024, bias=True)
+    (4): LeakyReLU(negative_slope=0.01)
+    (5): Dropout(p=0.39999999999999997, inplace=False)
+    (6): Linear(in_features=1024, out_features=512, bias=True)
+    (7): LeakyReLU(negative_slope=0.01)
+    (8): Dropout(p=0.3, inplace=False)
+    (9): Linear(in_features=512, out_features=256, bias=True)
+    (10): LeakyReLU(negative_slope=0.01)
+  )
+  (temporal_aggregator): Seq2SeqGruAggregator(
+    (gru): GRU(256, 512, num_layers=3, batch_first=True, dropout=0.4)
+  )
+  (classifier): Sequential(
+    (0): Linear(in_features=512, out_features=49, bias=True)
+  )
+)
+Trainable parameters: 28849941.0
+2021-12-28 09:54:05,795 - trainer - INFO -     epoch          : 1
+2021-12-28 09:54:05,938 - trainer - INFO -     loss           : 2.067977552218815
+2021-12-28 09:54:05,939 - trainer - INFO -     seq2seq_NDCG   : 0.45149555802345276
+2021-12-28 09:54:05,939 - trainer - INFO -     seq2seq_NDCG16 : 0.5898991823196411
+2021-12-28 09:54:05,939 - trainer - INFO -     val_loss       : 1.757878879503328
+2021-12-28 09:54:05,939 - trainer - INFO -     val_seq2seq_NDCG: 0.545296847820282
+2021-12-28 09:54:05,939 - trainer - INFO -     val_seq2seq_NDCG16: 0.7087875008583069
+2021-12-28 09:54:06,992 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-28 10:13:06,028 - trainer - INFO -     epoch          : 2
+2021-12-28 10:13:06,150 - trainer - INFO -     loss           : 1.7477234702585909
+2021-12-28 10:13:06,150 - trainer - INFO -     seq2seq_NDCG   : 0.5439523458480835
+2021-12-28 10:13:06,150 - trainer - INFO -     seq2seq_NDCG16 : 0.7111976146697998
+2021-12-28 10:13:06,151 - trainer - INFO -     val_loss       : 1.7206987683870354
+2021-12-28 10:13:06,151 - trainer - INFO -     val_seq2seq_NDCG: 0.5510029196739197
+2021-12-28 10:13:06,151 - trainer - INFO -     val_seq2seq_NDCG16: 0.7188622355461121
+2021-12-28 10:13:26,911 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-28 10:32:22,034 - trainer - INFO -     epoch          : 3
+2021-12-28 10:32:22,127 - trainer - INFO -     loss           : 1.7273376338622148
+2021-12-28 10:32:22,127 - trainer - INFO -     seq2seq_NDCG   : 0.5464110374450684
+2021-12-28 10:32:22,127 - trainer - INFO -     seq2seq_NDCG16 : 0.7163055539131165
+2021-12-28 10:32:22,127 - trainer - INFO -     val_loss       : 1.7101679991702645
+2021-12-28 10:32:22,128 - trainer - INFO -     val_seq2seq_NDCG: 0.5533785820007324
+2021-12-28 10:32:22,128 - trainer - INFO -     val_seq2seq_NDCG16: 0.7220820188522339
+2021-12-28 10:32:41,960 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-28 10:51:35,086 - trainer - INFO -     epoch          : 4
+2021-12-28 10:51:35,147 - trainer - INFO -     loss           : 1.719963211537627
+2021-12-28 10:51:35,147 - trainer - INFO -     seq2seq_NDCG   : 0.5478257536888123
+2021-12-28 10:51:35,147 - trainer - INFO -     seq2seq_NDCG16 : 0.71821129322052
+2021-12-28 10:51:35,147 - trainer - INFO -     val_loss       : 1.7067519183061561
+2021-12-28 10:51:35,147 - trainer - INFO -     val_seq2seq_NDCG: 0.5521401762962341
+2021-12-28 10:51:35,147 - trainer - INFO -     val_seq2seq_NDCG16: 0.7223556637763977
+2021-12-28 10:51:49,417 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-28 11:10:41,340 - trainer - INFO -     epoch          : 5
+2021-12-28 11:10:41,399 - trainer - INFO -     loss           : 1.7154687550061805
+2021-12-28 11:10:41,399 - trainer - INFO -     seq2seq_NDCG   : 0.5485042333602905
+2021-12-28 11:10:41,399 - trainer - INFO -     seq2seq_NDCG16 : 0.7194440364837646
+2021-12-28 11:10:41,399 - trainer - INFO -     val_loss       : 1.7069844475814275
+2021-12-28 11:10:41,399 - trainer - INFO -     val_seq2seq_NDCG: 0.5526271462440491
+2021-12-28 11:10:41,400 - trainer - INFO -     val_seq2seq_NDCG16: 0.722601592540741
+2021-12-28 11:10:41,402 - trainer - INFO - Performance is lower than epoch: 4
+2021-12-28 11:29:37,283 - trainer - INFO -     epoch          : 6
+2021-12-28 11:29:37,356 - trainer - INFO -     loss           : 1.712158249924555
+2021-12-28 11:29:37,356 - trainer - INFO -     seq2seq_NDCG   : 0.5497044324874878
+2021-12-28 11:29:37,356 - trainer - INFO -     seq2seq_NDCG16 : 0.7203757762908936
+2021-12-28 11:29:37,356 - trainer - INFO -     val_loss       : 1.7006538194053027
+2021-12-28 11:29:37,356 - trainer - INFO -     val_seq2seq_NDCG: 0.5547585487365723
+2021-12-28 11:29:37,356 - trainer - INFO -     val_seq2seq_NDCG16: 0.724376916885376
+2021-12-28 11:29:50,709 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-28 11:48:45,144 - trainer - INFO -     epoch          : 7
+2021-12-28 11:48:45,214 - trainer - INFO -     loss           : 1.709483571217188
+2021-12-28 11:48:45,215 - trainer - INFO -     seq2seq_NDCG   : 0.5507017374038696
+2021-12-28 11:48:45,215 - trainer - INFO -     seq2seq_NDCG16 : 0.7210537195205688
+2021-12-28 11:48:45,215 - trainer - INFO -     val_loss       : 1.700289437965471
+2021-12-28 11:48:45,215 - trainer - INFO -     val_seq2seq_NDCG: 0.5551036596298218
+2021-12-28 11:48:45,215 - trainer - INFO -     val_seq2seq_NDCG16: 0.7243927717208862
+2021-12-28 11:48:59,962 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-28 12:08:12,177 - trainer - INFO -     epoch          : 8
+2021-12-28 12:08:12,232 - trainer - INFO -     loss           : 1.7076480493826025
+2021-12-28 12:08:12,232 - trainer - INFO -     seq2seq_NDCG   : 0.5513363480567932
+2021-12-28 12:08:12,233 - trainer - INFO -     seq2seq_NDCG16 : 0.7214897274971008
+2021-12-28 12:08:12,233 - trainer - INFO -     val_loss       : 1.6990333929353831
+2021-12-28 12:08:12,233 - trainer - INFO -     val_seq2seq_NDCG: 0.5559671521186829
+2021-12-28 12:08:12,233 - trainer - INFO -     val_seq2seq_NDCG16: 0.7244489192962646
+2021-12-28 12:08:25,779 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-28 12:28:57,605 - trainer - INFO -     epoch          : 9
+2021-12-28 12:28:57,645 - trainer - INFO -     loss           : 1.7056881887528597
+2021-12-28 12:28:57,645 - trainer - INFO -     seq2seq_NDCG   : 0.5520458221435547
+2021-12-28 12:28:57,645 - trainer - INFO -     seq2seq_NDCG16 : 0.7220572233200073
+2021-12-28 12:28:57,645 - trainer - INFO -     val_loss       : 1.6970748846628227
+2021-12-28 12:28:57,646 - trainer - INFO -     val_seq2seq_NDCG: 0.5567610263824463
+2021-12-28 12:28:57,646 - trainer - INFO -     val_seq2seq_NDCG16: 0.7255964875221252
+2021-12-28 12:29:15,554 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-28 12:49:42,146 - trainer - INFO -     epoch          : 10
+2021-12-28 12:49:42,186 - trainer - INFO -     loss           : 1.703995282540236
+2021-12-28 12:49:42,187 - trainer - INFO -     seq2seq_NDCG   : 0.5521344542503357
+2021-12-28 12:49:42,187 - trainer - INFO -     seq2seq_NDCG16 : 0.7225207686424255
+2021-12-28 12:49:42,187 - trainer - INFO -     val_loss       : 1.6970838448222803
+2021-12-28 12:49:42,187 - trainer - INFO -     val_seq2seq_NDCG: 0.5562986135482788
+2021-12-28 12:49:42,187 - trainer - INFO -     val_seq2seq_NDCG16: 0.7252822518348694
+2021-12-28 12:49:42,188 - trainer - INFO - Performance is lower than epoch: 9
+2021-12-28 13:10:09,178 - trainer - INFO -     epoch          : 11
+2021-12-28 13:10:09,233 - trainer - INFO -     loss           : 1.7028054718471244
+2021-12-28 13:10:09,233 - trainer - INFO -     seq2seq_NDCG   : 0.5523315072059631
+2021-12-28 13:10:09,233 - trainer - INFO -     seq2seq_NDCG16 : 0.7229352593421936
+2021-12-28 13:10:09,233 - trainer - INFO -     val_loss       : 1.696416790996279
+2021-12-28 13:10:09,233 - trainer - INFO -     val_seq2seq_NDCG: 0.5563936233520508
+2021-12-28 13:10:09,233 - trainer - INFO -     val_seq2seq_NDCG16: 0.7254884243011475
+2021-12-28 13:10:24,417 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-28 13:30:47,420 - trainer - INFO -     epoch          : 12
+2021-12-28 13:30:47,478 - trainer - INFO -     loss           : 1.7016613998681382
+2021-12-28 13:30:47,478 - trainer - INFO -     seq2seq_NDCG   : 0.5524225831031799
+2021-12-28 13:30:47,478 - trainer - INFO -     seq2seq_NDCG16 : 0.7231588363647461
+2021-12-28 13:30:47,479 - trainer - INFO -     val_loss       : 1.6949756200216255
+2021-12-28 13:30:47,479 - trainer - INFO -     val_seq2seq_NDCG: 0.5568398237228394
+2021-12-28 13:30:47,479 - trainer - INFO -     val_seq2seq_NDCG16: 0.7259171009063721
+2021-12-28 13:31:00,269 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-28 13:51:17,547 - trainer - INFO -     epoch          : 13
+2021-12-28 13:51:17,600 - trainer - INFO -     loss           : 1.7004781917232992
+2021-12-28 13:51:17,601 - trainer - INFO -     seq2seq_NDCG   : 0.552524983882904
+2021-12-28 13:51:17,601 - trainer - INFO -     seq2seq_NDCG16 : 0.7235644459724426
+2021-12-28 13:51:17,601 - trainer - INFO -     val_loss       : 1.6959626327972024
+2021-12-28 13:51:17,602 - trainer - INFO -     val_seq2seq_NDCG: 0.555239737033844
+2021-12-28 13:51:17,602 - trainer - INFO -     val_seq2seq_NDCG16: 0.725725531578064
+2021-12-28 13:51:17,605 - trainer - INFO - Performance is lower than epoch: 12
+2021-12-28 14:11:51,643 - trainer - INFO -     epoch          : 14
+2021-12-28 14:11:51,892 - trainer - INFO -     loss           : 1.699430954425841
+2021-12-28 14:11:51,892 - trainer - INFO -     seq2seq_NDCG   : 0.5523914098739624
+2021-12-28 14:11:51,892 - trainer - INFO -     seq2seq_NDCG16 : 0.723801851272583
+2021-12-28 14:11:51,892 - trainer - INFO -     val_loss       : 1.6955167699833305
+2021-12-28 14:11:51,892 - trainer - INFO -     val_seq2seq_NDCG: 0.5568284392356873
+2021-12-28 14:11:51,893 - trainer - INFO -     val_seq2seq_NDCG16: 0.7258406281471252
+2021-12-28 14:11:51,895 - trainer - INFO - Performance is lower than epoch: 12
+2021-12-28 14:32:07,911 - trainer - INFO -     epoch          : 15
+2021-12-28 14:32:07,966 - trainer - INFO -     loss           : 1.6986934224053112
+2021-12-28 14:32:07,967 - trainer - INFO -     seq2seq_NDCG   : 0.5525063276290894
+2021-12-28 14:32:07,967 - trainer - INFO -     seq2seq_NDCG16 : 0.7240228056907654
+2021-12-28 14:32:07,967 - trainer - INFO -     val_loss       : 1.6935726890758591
+2021-12-28 14:32:07,967 - trainer - INFO -     val_seq2seq_NDCG: 0.5555518865585327
+2021-12-28 14:32:07,967 - trainer - INFO -     val_seq2seq_NDCG16: 0.7263178825378418
+2021-12-28 14:32:23,896 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-28 14:52:52,500 - trainer - INFO -     epoch          : 16
+2021-12-28 14:52:52,598 - trainer - INFO -     loss           : 1.6977258955731112
+2021-12-28 14:52:52,598 - trainer - INFO -     seq2seq_NDCG   : 0.5523759722709656
+2021-12-28 14:52:52,598 - trainer - INFO -     seq2seq_NDCG16 : 0.7242414355278015
+2021-12-28 14:52:52,599 - trainer - INFO -     val_loss       : 1.6944621491188905
+2021-12-28 14:52:52,599 - trainer - INFO -     val_seq2seq_NDCG: 0.5565513968467712
+2021-12-28 14:52:52,599 - trainer - INFO -     val_seq2seq_NDCG16: 0.7261704802513123
+2021-12-28 14:52:52,600 - trainer - INFO - Performance is lower than epoch: 15
+2021-12-28 15:13:35,297 - trainer - INFO -     epoch          : 17
+2021-12-28 15:13:35,545 - trainer - INFO -     loss           : 1.6969826931843672
+2021-12-28 15:13:35,546 - trainer - INFO -     seq2seq_NDCG   : 0.5525584816932678
+2021-12-28 15:13:35,546 - trainer - INFO -     seq2seq_NDCG16 : 0.7245029211044312
+2021-12-28 15:13:35,546 - trainer - INFO -     val_loss       : 1.6942690361519248
+2021-12-28 15:13:35,546 - trainer - INFO -     val_seq2seq_NDCG: 0.5559795498847961
+2021-12-28 15:13:35,546 - trainer - INFO -     val_seq2seq_NDCG16: 0.726087212562561
+2021-12-28 15:13:35,547 - trainer - INFO - Performance is lower than epoch: 15
+2021-12-28 15:33:52,085 - trainer - INFO -     epoch          : 18
+2021-12-28 15:33:52,524 - trainer - INFO -     loss           : 1.6960652546809458
+2021-12-28 15:33:52,525 - trainer - INFO -     seq2seq_NDCG   : 0.5528330206871033
+2021-12-28 15:33:52,525 - trainer - INFO -     seq2seq_NDCG16 : 0.7247645854949951
+2021-12-28 15:33:52,525 - trainer - INFO -     val_loss       : 1.6933103568699894
+2021-12-28 15:33:52,525 - trainer - INFO -     val_seq2seq_NDCG: 0.5560518503189087
+2021-12-28 15:33:52,525 - trainer - INFO -     val_seq2seq_NDCG16: 0.7264190316200256
+2021-12-28 15:35:09,035 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-28 15:55:27,002 - trainer - INFO -     epoch          : 19
+2021-12-28 15:55:27,085 - trainer - INFO -     loss           : 1.6952566167582637
+2021-12-28 15:55:27,086 - trainer - INFO -     seq2seq_NDCG   : 0.5526504516601562
+2021-12-28 15:55:27,086 - trainer - INFO -     seq2seq_NDCG16 : 0.7249289155006409
+2021-12-28 15:55:27,086 - trainer - INFO -     val_loss       : 1.6946366033991989
+2021-12-28 15:55:27,086 - trainer - INFO -     val_seq2seq_NDCG: 0.5566840171813965
+2021-12-28 15:55:27,086 - trainer - INFO -     val_seq2seq_NDCG16: 0.7259440422058105
+2021-12-28 15:55:27,088 - trainer - INFO - Performance is lower than epoch: 18
+2021-12-28 16:16:51,296 - trainer - INFO -     epoch          : 20
+2021-12-28 16:16:51,488 - trainer - INFO -     loss           : 1.6946823782933034
+2021-12-28 16:16:51,488 - trainer - INFO -     seq2seq_NDCG   : 0.552850604057312
+2021-12-28 16:16:51,488 - trainer - INFO -     seq2seq_NDCG16 : 0.7251213788986206
+2021-12-28 16:16:51,488 - trainer - INFO -     val_loss       : 1.6939526036077617
+2021-12-28 16:16:51,488 - trainer - INFO -     val_seq2seq_NDCG: 0.5558480024337769
+2021-12-28 16:16:51,488 - trainer - INFO -     val_seq2seq_NDCG16: 0.7260534167289734
+2021-12-28 16:16:51,490 - trainer - INFO - Performance is lower than epoch: 18
+2021-12-28 16:38:45,128 - trainer - INFO -     epoch          : 21
+2021-12-28 16:38:45,366 - trainer - INFO -     loss           : 1.6939300521255454
+2021-12-28 16:38:45,367 - trainer - INFO -     seq2seq_NDCG   : 0.5529069304466248
+2021-12-28 16:38:45,367 - trainer - INFO -     seq2seq_NDCG16 : 0.7253511548042297
+2021-12-28 16:38:45,367 - trainer - INFO -     val_loss       : 1.692191746770119
+2021-12-28 16:38:45,367 - trainer - INFO -     val_seq2seq_NDCG: 0.5564181208610535
+2021-12-28 16:38:45,367 - trainer - INFO -     val_seq2seq_NDCG16: 0.7267008423805237
+2021-12-28 16:39:36,440 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-28 17:01:20,769 - trainer - INFO -     epoch          : 22
+2021-12-28 17:01:21,008 - trainer - INFO -     loss           : 1.6932444467264063
+2021-12-28 17:01:21,963 - trainer - INFO -     seq2seq_NDCG   : 0.5528950691223145
+2021-12-28 17:01:21,964 - trainer - INFO -     seq2seq_NDCG16 : 0.7254947423934937
+2021-12-28 17:01:21,964 - trainer - INFO -     val_loss       : 1.6936273599157528
+2021-12-28 17:01:21,964 - trainer - INFO -     val_seq2seq_NDCG: 0.5558443069458008
+2021-12-28 17:01:21,964 - trainer - INFO -     val_seq2seq_NDCG16: 0.7265246510505676
+2021-12-28 17:01:21,966 - trainer - INFO - Performance is lower than epoch: 21
+2021-12-28 17:23:01,496 - trainer - INFO -     epoch          : 23
+2021-12-28 17:23:01,856 - trainer - INFO -     loss           : 1.6926525512619701
+2021-12-28 17:23:01,857 - trainer - INFO -     seq2seq_NDCG   : 0.5527676343917847
+2021-12-28 17:23:01,857 - trainer - INFO -     seq2seq_NDCG16 : 0.7256239652633667
+2021-12-28 17:23:01,857 - trainer - INFO -     val_loss       : 1.6930870188742269
+2021-12-28 17:23:01,857 - trainer - INFO -     val_seq2seq_NDCG: 0.5551273226737976
+2021-12-28 17:23:01,857 - trainer - INFO -     val_seq2seq_NDCG16: 0.7263954281806946
+2021-12-28 17:23:01,859 - trainer - INFO - Performance is lower than epoch: 21
+2021-12-28 17:44:00,108 - trainer - INFO -     epoch          : 24
+2021-12-28 17:44:00,659 - trainer - INFO -     loss           : 1.691849082327255
+2021-12-28 17:44:00,659 - trainer - INFO -     seq2seq_NDCG   : 0.5527662038803101
+2021-12-28 17:44:00,660 - trainer - INFO -     seq2seq_NDCG16 : 0.7258819937705994
+2021-12-28 17:44:00,660 - trainer - INFO -     val_loss       : 1.69303709329391
+2021-12-28 17:44:00,660 - trainer - INFO -     val_seq2seq_NDCG: 0.5561182498931885
+2021-12-28 17:44:00,660 - trainer - INFO -     val_seq2seq_NDCG16: 0.7265554070472717
+2021-12-28 17:44:00,663 - trainer - INFO - Performance is lower than epoch: 21
+2021-12-28 18:04:46,201 - trainer - INFO -     epoch          : 25
+2021-12-28 18:04:49,004 - trainer - INFO -     loss           : 1.691336857540833
+2021-12-28 18:04:49,005 - trainer - INFO -     seq2seq_NDCG   : 0.5532007813453674
+2021-12-28 18:04:49,005 - trainer - INFO -     seq2seq_NDCG16 : 0.7260383367538452
+2021-12-28 18:04:49,005 - trainer - INFO -     val_loss       : 1.6939050038250125
+2021-12-28 18:04:49,005 - trainer - INFO -     val_seq2seq_NDCG: 0.5553557276725769
+2021-12-28 18:04:49,006 - trainer - INFO -     val_seq2seq_NDCG16: 0.7259341478347778
+2021-12-28 18:04:49,008 - trainer - INFO - Performance is lower than epoch: 21
+2021-12-28 18:25:29,428 - trainer - INFO -     epoch          : 26
+2021-12-28 18:25:29,914 - trainer - INFO -     loss           : 1.6907393900329803
+2021-12-28 18:25:29,914 - trainer - INFO -     seq2seq_NDCG   : 0.5527722239494324
+2021-12-28 18:25:29,914 - trainer - INFO -     seq2seq_NDCG16 : 0.7261809706687927
+2021-12-28 18:25:29,914 - trainer - INFO -     val_loss       : 1.6933934974427125
+2021-12-28 18:25:29,915 - trainer - INFO -     val_seq2seq_NDCG: 0.5558016300201416
+2021-12-28 18:25:29,915 - trainer - INFO -     val_seq2seq_NDCG16: 0.7263847589492798
+2021-12-28 18:25:29,915 - trainer - INFO - Validation performance didn't improve for 4 epochs. Training stops.
+2021-12-28 22:42:21,813 - train - INFO - MultiIndexModelCnn(
+  (embedder): FixedEmbedder(
+    (embeddings): ModuleList(
+      (0): Embedding(49, 32)
+      (1): Embedding(4, 32)
+      (2): Embedding(7, 32)
+      (3): Embedding(30, 32)
+      (4): Embedding(3, 32)
+      (5): Embedding(12, 32)
+      (6): Embedding(35, 32)
+      (7): Embedding(3, 32)
+      (8): Embedding(10, 32)
+      (9): Embedding(2, 32)
+    )
+    (nns): ModuleList(
+      (0): Linear(in_features=1, out_features=32, bias=True)
+      (1): Linear(in_features=1, out_features=32, bias=True)
+      (2): Linear(in_features=1, out_features=32, bias=True)
+      (3): Linear(in_features=1, out_features=32, bias=True)
+      (4): Linear(in_features=1, out_features=32, bias=True)
+      (5): Linear(in_features=1, out_features=32, bias=True)
+      (6): Linear(in_features=1, out_features=32, bias=True)
+      (7): Linear(in_features=1, out_features=32, bias=True)
+      (8): Linear(in_features=1, out_features=32, bias=True)
+      (9): Linear(in_features=1, out_features=32, bias=True)
+      (10): Linear(in_features=1, out_features=32, bias=True)
+      (11): Linear(in_features=1, out_features=32, bias=True)
+      (12): Linear(in_features=1, out_features=32, bias=True)
+      (13): Linear(in_features=1, out_features=32, bias=True)
+      (14): Linear(in_features=1, out_features=32, bias=True)
+      (15): Linear(in_features=1, out_features=32, bias=True)
+      (16): Linear(in_features=1, out_features=32, bias=True)
+      (17): Linear(in_features=1, out_features=32, bias=True)
+      (18): Linear(in_features=1, out_features=32, bias=True)
+      (19): Linear(in_features=1, out_features=32, bias=True)
+      (20): Linear(in_features=1, out_features=32, bias=True)
+      (21): Linear(in_features=1, out_features=32, bias=True)
+      (22): Linear(in_features=1, out_features=32, bias=True)
+      (23): Linear(in_features=1, out_features=32, bias=True)
+      (24): Linear(in_features=1, out_features=32, bias=True)
+      (25): Linear(in_features=1, out_features=32, bias=True)
+      (26): Linear(in_features=1, out_features=32, bias=True)
+      (27): Linear(in_features=1, out_features=32, bias=True)
+      (28): Linear(in_features=1, out_features=32, bias=True)
+      (29): Linear(in_features=1, out_features=32, bias=True)
+      (30): Linear(in_features=1, out_features=32, bias=True)
+      (31): Linear(in_features=1, out_features=32, bias=True)
+      (32): Linear(in_features=1, out_features=32, bias=True)
+      (33): Linear(in_features=1, out_features=32, bias=True)
+      (34): Linear(in_features=1, out_features=32, bias=True)
+      (35): Linear(in_features=1, out_features=32, bias=True)
+      (36): Linear(in_features=1, out_features=32, bias=True)
+      (37): Linear(in_features=1, out_features=32, bias=True)
+      (38): Linear(in_features=1, out_features=32, bias=True)
+      (39): Linear(in_features=1, out_features=32, bias=True)
+      (40): Linear(in_features=1, out_features=32, bias=True)
+      (41): Linear(in_features=1, out_features=32, bias=True)
+    )
+  )
+  (row_encoder): CnnEncoder(
+    (batch_norm1): BatchNorm1d(1664, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout1): Dropout(p=0.44999999999999996, inplace=False)
+    (dense1): Linear(in_features=1664, out_features=1536, bias=True)
+    (batch_norm_c1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c1): Dropout(p=0.40499999999999997, inplace=False)
+    (conv1): Conv1d(64, 128, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (ave_po_c1): AdaptiveAvgPool1d(output_size=12)
+    (batch_norm_c2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2): Dropout(p=0.36, inplace=False)
+    (conv2): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_1): Dropout(p=0.26999999999999996, inplace=False)
+    (conv2_1): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_2): Dropout(p=0.22499999999999998, inplace=False)
+    (conv2_2): Conv1d(128, 128, kernel_size=(5,), stride=(1,), padding=(2,))
+    (max_po_c2): MaxPool1d(kernel_size=4, stride=2, padding=1, dilation=1, ceil_mode=False)
+    (flt): Flatten(start_dim=1, end_dim=-1)
+    (batch_norm3): BatchNorm1d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout3): Dropout(p=0.44999999999999996, inplace=False)
+    (dense3): Linear(in_features=768, out_features=256, bias=True)
+  )
+  (rows_aggregator): Sequential(
+    (0): Linear(in_features=12544, out_features=1536, bias=True)
+    (1): LeakyReLU(negative_slope=0.01)
+    (2): Dropout(p=0.6, inplace=False)
+    (3): Linear(in_features=1536, out_features=1024, bias=True)
+    (4): LeakyReLU(negative_slope=0.01)
+    (5): Dropout(p=0.39999999999999997, inplace=False)
+    (6): Linear(in_features=1024, out_features=512, bias=True)
+    (7): LeakyReLU(negative_slope=0.01)
+    (8): Dropout(p=0.3, inplace=False)
+    (9): Linear(in_features=512, out_features=256, bias=True)
+    (10): LeakyReLU(negative_slope=0.01)
+  )
+  (temporal_aggregator): Seq2SeqGruAggregator(
+    (gru): GRU(256, 512, num_layers=3, batch_first=True, dropout=0.4)
+  )
+  (classifier): Sequential(
+    (0): Linear(in_features=512, out_features=49, bias=True)
+  )
+)
+Trainable parameters: 28849941.0
+2021-12-28 22:43:12,387 - trainer - INFO - Loading checkpoint: ../save_dir/mm_cnn_hidden256_5fold/fine/fold0/model_best.pth ...
+2021-12-28 22:44:19,627 - trainer - INFO - Checkpoint loaded. Resume training from epoch 49
+2021-12-28 23:03:49,004 - trainer - INFO -     epoch          : 49
+2021-12-28 23:03:49,102 - trainer - INFO -     loss           : 1.6824616050476309
+2021-12-28 23:03:49,103 - trainer - INFO -     seq2seq_NDCG   : 0.6555463075637817
+2021-12-28 23:03:49,103 - trainer - INFO -     seq2seq_NDCG16 : 0.7284911870956421
+2021-12-28 23:03:49,103 - trainer - INFO -     val_loss       : 1.6923148121152605
+2021-12-28 23:03:49,103 - trainer - INFO -     val_seq2seq_NDCG: 0.6551650762557983
+2021-12-28 23:03:49,103 - trainer - INFO -     val_seq2seq_NDCG16: 0.7267918586730957
+2021-12-28 23:04:23,309 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-28 23:23:35,267 - trainer - INFO -     epoch          : 50
+2021-12-28 23:23:35,316 - trainer - INFO -     loss           : 1.6812193521758174
+2021-12-28 23:23:35,316 - trainer - INFO -     seq2seq_NDCG   : 0.6551453471183777
+2021-12-28 23:23:35,316 - trainer - INFO -     seq2seq_NDCG16 : 0.7287267446517944
+2021-12-28 23:23:35,317 - trainer - INFO -     val_loss       : 1.6928248241239665
+2021-12-28 23:23:35,317 - trainer - INFO -     val_seq2seq_NDCG: 0.6550544500350952
+2021-12-28 23:23:35,317 - trainer - INFO -     val_seq2seq_NDCG16: 0.7259053587913513
+2021-12-28 23:23:35,319 - trainer - INFO - Performance is lower than epoch: 49
+2021-12-28 23:42:57,927 - trainer - INFO -     epoch          : 51
+2021-12-28 23:42:58,035 - trainer - INFO -     loss           : 1.6805157951076928
+2021-12-28 23:42:58,035 - trainer - INFO -     seq2seq_NDCG   : 0.6538893580436707
+2021-12-28 23:42:58,036 - trainer - INFO -     seq2seq_NDCG16 : 0.7289007306098938
+2021-12-28 23:42:58,036 - trainer - INFO -     val_loss       : 1.6921569090716693
+2021-12-28 23:42:58,036 - trainer - INFO -     val_seq2seq_NDCG: 0.6540782451629639
+2021-12-28 23:42:58,036 - trainer - INFO -     val_seq2seq_NDCG16: 0.7263247966766357
+2021-12-28 23:43:32,930 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-29 00:02:56,557 - trainer - INFO -     epoch          : 52
+2021-12-29 00:02:56,608 - trainer - INFO -     loss           : 1.679376041340401
+2021-12-29 00:02:56,608 - trainer - INFO -     seq2seq_NDCG   : 0.6538444757461548
+2021-12-29 00:02:56,608 - trainer - INFO -     seq2seq_NDCG16 : 0.7291767597198486
+2021-12-29 00:02:56,608 - trainer - INFO -     val_loss       : 1.6924744072009106
+2021-12-29 00:02:56,609 - trainer - INFO -     val_seq2seq_NDCG: 0.6543071269989014
+2021-12-29 00:02:56,609 - trainer - INFO -     val_seq2seq_NDCG16: 0.7263041734695435
+2021-12-29 00:02:56,610 - trainer - INFO - Performance is lower than epoch: 51
+2021-12-29 00:22:14,458 - trainer - INFO -     epoch          : 53
+2021-12-29 00:22:14,519 - trainer - INFO -     loss           : 1.6788033189066232
+2021-12-29 00:22:14,519 - trainer - INFO -     seq2seq_NDCG   : 0.6533364057540894
+2021-12-29 00:22:14,519 - trainer - INFO -     seq2seq_NDCG16 : 0.729272723197937
+2021-12-29 00:22:14,519 - trainer - INFO -     val_loss       : 1.6934763637124275
+2021-12-29 00:22:14,520 - trainer - INFO -     val_seq2seq_NDCG: 0.6525081396102905
+2021-12-29 00:22:14,520 - trainer - INFO -     val_seq2seq_NDCG16: 0.7257271409034729
+2021-12-29 00:22:14,521 - trainer - INFO - Performance is lower than epoch: 51
+2021-12-29 00:41:35,253 - trainer - INFO -     epoch          : 54
+2021-12-29 00:41:35,354 - trainer - INFO -     loss           : 1.678475327656397
+2021-12-29 00:41:35,355 - trainer - INFO -     seq2seq_NDCG   : 0.6523065567016602
+2021-12-29 00:41:35,355 - trainer - INFO -     seq2seq_NDCG16 : 0.729350745677948
+2021-12-29 00:41:35,355 - trainer - INFO -     val_loss       : 1.693142788142574
+2021-12-29 00:41:35,355 - trainer - INFO -     val_seq2seq_NDCG: 0.6501244902610779
+2021-12-29 00:41:35,355 - trainer - INFO -     val_seq2seq_NDCG16: 0.725944995880127
+2021-12-29 00:41:35,356 - trainer - INFO - Performance is lower than epoch: 51
+2021-12-29 01:00:42,038 - trainer - INFO -     epoch          : 55
+2021-12-29 01:00:42,090 - trainer - INFO -     loss           : 1.6778834925588135
+2021-12-29 01:00:42,090 - trainer - INFO -     seq2seq_NDCG   : 0.652482807636261
+2021-12-29 01:00:42,090 - trainer - INFO -     seq2seq_NDCG16 : 0.7294545769691467
+2021-12-29 01:00:42,090 - trainer - INFO -     val_loss       : 1.6932886315851796
+2021-12-29 01:00:42,090 - trainer - INFO -     val_seq2seq_NDCG: 0.6523741483688354
+2021-12-29 01:00:42,090 - trainer - INFO -     val_seq2seq_NDCG16: 0.7262064218521118
+2021-12-29 01:00:42,092 - trainer - INFO - Performance is lower than epoch: 51
+2021-12-29 01:20:02,694 - trainer - INFO -     epoch          : 56
+2021-12-29 01:20:02,799 - trainer - INFO -     loss           : 1.6772116242772173
+2021-12-29 01:20:02,800 - trainer - INFO -     seq2seq_NDCG   : 0.651954174041748
+2021-12-29 01:20:02,800 - trainer - INFO -     seq2seq_NDCG16 : 0.7296448349952698
+2021-12-29 01:20:02,800 - trainer - INFO -     val_loss       : 1.6938945462509079
+2021-12-29 01:20:02,800 - trainer - INFO -     val_seq2seq_NDCG: 0.6514766216278076
+2021-12-29 01:20:02,800 - trainer - INFO -     val_seq2seq_NDCG16: 0.7258022427558899
+2021-12-29 01:20:02,800 - trainer - INFO - Validation performance didn't improve for 4 epochs. Training stops.

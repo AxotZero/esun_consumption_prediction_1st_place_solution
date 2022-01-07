@@ -45,6 +45,8 @@ class MultiIndexDataLoader(BaseDataLoader):
         def load_xs(self, data_path):
             """
             xs is a map which key is chid and value is dataframe
+            key: chid
+            value: np_array
             """
             print('start load_xs')
             self.xs = pickle.load(open(data_path, 'rb'))
@@ -55,8 +57,9 @@ class MultiIndexDataLoader(BaseDataLoader):
 
         def get_customer(self, chid):
             x = self.xs[chid]
-            # 0: dt, 1: shop_tag, 2: txn_cnt, 3: txn_amt
+            # 0: dt, 1: shop_tag, 2: txn_cnt, 3: txn_amt, -1: txn_amt_pct
             x[:,0] = x[:,0] - 1
+            
 
             # create y
             y = torch.zeros(24*49, dtype=torch.float)

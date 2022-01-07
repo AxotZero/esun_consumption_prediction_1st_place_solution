@@ -1,0 +1,54 @@
+{
+    "name": "PetPoc",
+    "n_gpu": 1,
+    "arch": {
+        "type": "MultiIndexModelNNBn",
+        "args": {
+            "cols_config_path": "../data/preprocessed/v2_pct/column_config.yml",
+            "emb_feat_dim": 32,
+            "mask_row_ratio": 0,
+            "mask_feat_ratio": 0,
+            "dropout": 0.4,
+            "hidden_size": 192,
+            "temporal_aggregator_type": "Seq2SeqGruAggregator",
+            "temporal_aggregator_args": {
+                "input_size": 192,
+                "hidden_size": 384,
+                "num_layers": 3,
+                "dropout": 0.35
+            }
+        }
+    },
+    "data_loader": {
+        "type": "MultiIndexDataLoader",
+        "args": {
+            "data_path": "../md01_data/customers_pct.pkl",
+            "batch_size": 1024,
+            "shuffle": true,
+            "validation_split": 0.2,
+            "num_workers": 1,
+            "fold_idx": 1
+        }
+    },
+    "optimizer": {
+        "type": "Ranger",
+        "args": {
+            "lr": 0.001,
+            "weight_decay": 1e-05
+        }
+    },
+    "loss": "seq2seq_soft_ce",
+    "metrics": [
+        "seq2seq_NDCG",
+        "seq2seq_NDCG16"
+    ],
+    "trainer": {
+        "epochs": 100,
+        "save_dir": "../save_dir/mm_nnbn_h192//base/fold1",
+        "save_period": 1,
+        "verbosity": 2,
+        "monitor": "min val_loss",
+        "early_stop": 4,
+        "tensorboard": false
+    }
+}

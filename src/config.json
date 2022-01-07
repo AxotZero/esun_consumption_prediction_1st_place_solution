@@ -2,20 +2,20 @@
     "name": "PetPoc",
     "n_gpu": 1,
     "arch": {
-        "type": "MultiIndexModelCnnAggBn",
+        "type": "MultiIndexModelNNBn",
         "args": {
             "cols_config_path": "../data/preprocessed/v2_pct/column_config.yml",
             "emb_feat_dim": 32,
             "mask_row_ratio": 0,
             "mask_feat_ratio": 0,
-            "dropout": 0.6,
-            "hidden_size": 256,
+            "dropout": 0.4,
+            "hidden_size": 192,
             "temporal_aggregator_type": "Seq2SeqGruAggregator",
             "temporal_aggregator_args": {
-                "input_size": 256,
-                "hidden_size": 512,
+                "input_size": 192,
+                "hidden_size": 384,
                 "num_layers": 3,
-                "dropout": 0.4
+                "dropout": 0.35
             }
         }
     },
@@ -23,7 +23,7 @@
         "type": "MultiIndexDataLoader",
         "args": {
             "data_path": "../md01_data/customers_pct.pkl",
-            "batch_size": 512,
+            "batch_size": 1024,
             "shuffle": true,
             "validation_split": 0.2,
             "num_workers": 1,
@@ -44,7 +44,7 @@
     ],
     "trainer": {
         "epochs": 100,
-        "save_dir": "../save_dir/mm_CnnAggBn_hidden256_5fold/",
+        "save_dir": "../save_dir/mm_nnbn_h256_test",
         "save_period": 1,
         "verbosity": 2,
         "monitor": "min val_loss",

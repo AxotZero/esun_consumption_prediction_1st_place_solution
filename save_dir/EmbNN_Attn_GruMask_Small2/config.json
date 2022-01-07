@@ -1,0 +1,78 @@
+{
+    "name": "PetPoc",
+    "n_gpu": 1,
+    "arch": {
+        "type": "BigArch",
+        "args": {
+            "row_encoder_type": "EmbedderNN",
+            "row_encoder_args": {
+                "cols_config_path": "../data/preprocessed/v1/column_config_wo_dt.yml",
+                "hidden_size": 64,
+                "dropout": 0.3
+            },
+            "rows_aggregator_type": "RowsTransformerAggregator",
+            "rows_aggregator_args": {
+                "hidden_size": 64,
+                "num_layers": 1,
+                "dropout": 0.3
+            },
+            "temporal_aggregator_type": "TemporalGruAggregator",
+            "temporal_aggregator_args": {
+                "input_size": 64,
+                "hidden_size": 128,
+                "num_layers": 1,
+                "dropout": 0.3
+            },
+            "hidden_size": 128,
+            "num_classes": 49
+        }
+    },
+    "data_loader": {
+        "type": "BigArchMaskDataLoader",
+        "args": {
+            "data_path": "../md01_data/customers.pkl",
+            "target_pkl_path": "../md01_data/target_last_month_list.pkl",
+            "train_month_range": [
+                1,
+                23
+            ],
+            "test_month_range": [
+                1,
+                24
+            ],
+            "num_classes": 49,
+            "batch_size": 1536,
+            "shuffle": true,
+            "validation_split": 0.2,
+            "num_workers": 2
+        }
+    },
+    "optimizer": {
+        "type": "Ranger",
+        "args": {
+            "lr": 0.001,
+            "weight_decay": 1e-05
+        }
+    },
+    "loss": "soft_cross_entropy_loss",
+    "metrics": [
+        "NDCG",
+        "NDCG16"
+    ],
+    "lr_scheduler": {
+        "type": "StepLR",
+        "args": {
+            "step_size": 5,
+            "gamma": 0.8
+        }
+    },
+    "trainer": {
+        "epochs": 100,
+        "save_dir": "../save_dir/EmbNN_Attn_GruMask_Small2",
+        "save_period": 1,
+        "verbosity": 2,
+        "monitor": "min val_loss",
+        "early_stop": 3,
+        "tensorboard": false
+    }
+}

@@ -1,0 +1,254 @@
+2021-11-30 06:47:22,594 - train - INFO - BigArch(
+  (row_encoder): FixedEmbedderNN(
+    (embedder): FixedEmbedder(
+      (embeddings): ModuleList(
+        (0): Embedding(49, 32)
+        (1): Embedding(4, 32)
+        (2): Embedding(7, 32)
+        (3): Embedding(30, 32)
+        (4): Embedding(3, 32)
+        (5): Embedding(12, 32)
+        (6): Embedding(35, 32)
+        (7): Embedding(3, 32)
+        (8): Embedding(10, 32)
+        (9): Embedding(2, 32)
+      )
+      (nns): ModuleList(
+        (0): Linear(in_features=1, out_features=32, bias=True)
+        (1): Linear(in_features=1, out_features=32, bias=True)
+        (2): Linear(in_features=1, out_features=32, bias=True)
+        (3): Linear(in_features=1, out_features=32, bias=True)
+        (4): Linear(in_features=1, out_features=32, bias=True)
+        (5): Linear(in_features=1, out_features=32, bias=True)
+        (6): Linear(in_features=1, out_features=32, bias=True)
+        (7): Linear(in_features=1, out_features=32, bias=True)
+        (8): Linear(in_features=1, out_features=32, bias=True)
+        (9): Linear(in_features=1, out_features=32, bias=True)
+        (10): Linear(in_features=1, out_features=32, bias=True)
+        (11): Linear(in_features=1, out_features=32, bias=True)
+        (12): Linear(in_features=1, out_features=32, bias=True)
+        (13): Linear(in_features=1, out_features=32, bias=True)
+        (14): Linear(in_features=1, out_features=32, bias=True)
+        (15): Linear(in_features=1, out_features=32, bias=True)
+        (16): Linear(in_features=1, out_features=32, bias=True)
+        (17): Linear(in_features=1, out_features=32, bias=True)
+        (18): Linear(in_features=1, out_features=32, bias=True)
+        (19): Linear(in_features=1, out_features=32, bias=True)
+        (20): Linear(in_features=1, out_features=32, bias=True)
+        (21): Linear(in_features=1, out_features=32, bias=True)
+        (22): Linear(in_features=1, out_features=32, bias=True)
+        (23): Linear(in_features=1, out_features=32, bias=True)
+        (24): Linear(in_features=1, out_features=32, bias=True)
+        (25): Linear(in_features=1, out_features=32, bias=True)
+        (26): Linear(in_features=1, out_features=32, bias=True)
+        (27): Linear(in_features=1, out_features=32, bias=True)
+        (28): Linear(in_features=1, out_features=32, bias=True)
+        (29): Linear(in_features=1, out_features=32, bias=True)
+        (30): Linear(in_features=1, out_features=32, bias=True)
+        (31): Linear(in_features=1, out_features=32, bias=True)
+        (32): Linear(in_features=1, out_features=32, bias=True)
+        (33): Linear(in_features=1, out_features=32, bias=True)
+        (34): Linear(in_features=1, out_features=32, bias=True)
+        (35): Linear(in_features=1, out_features=32, bias=True)
+        (36): Linear(in_features=1, out_features=32, bias=True)
+        (37): Linear(in_features=1, out_features=32, bias=True)
+        (38): Linear(in_features=1, out_features=32, bias=True)
+        (39): Linear(in_features=1, out_features=32, bias=True)
+        (40): Linear(in_features=1, out_features=32, bias=True)
+        (41): Linear(in_features=1, out_features=32, bias=True)
+      )
+    )
+    (input_layer): Linear(in_features=1664, out_features=128, bias=True)
+    (nn_layers): Sequential(
+      (0): Sequential(
+        (0): Linear(in_features=128, out_features=256, bias=True)
+        (1): Dropout(p=0.3, inplace=False)
+        (2): Linear(in_features=256, out_features=128, bias=True)
+        (3): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+      )
+      (1): Sequential(
+        (0): Linear(in_features=128, out_features=256, bias=True)
+        (1): Dropout(p=0.3, inplace=False)
+        (2): Linear(in_features=256, out_features=128, bias=True)
+        (3): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+      )
+      (2): Sequential(
+        (0): Linear(in_features=128, out_features=256, bias=True)
+        (1): Dropout(p=0.3, inplace=False)
+        (2): Linear(in_features=256, out_features=128, bias=True)
+        (3): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+  )
+  (rows_aggregator): RowsFastformerAggregator(
+    (AttenLayer): ModuleList(
+      (0): Fastformer(
+        (weight_q): Linear(in_features=128, out_features=128, bias=False)
+        (weight_k): Linear(in_features=128, out_features=128, bias=False)
+        (weight_v): Linear(in_features=128, out_features=128, bias=False)
+        (weight_r): Linear(in_features=128, out_features=128, bias=False)
+      )
+      (1): Fastformer(
+        (weight_q): Linear(in_features=128, out_features=128, bias=False)
+        (weight_k): Linear(in_features=128, out_features=128, bias=False)
+        (weight_v): Linear(in_features=128, out_features=128, bias=False)
+        (weight_r): Linear(in_features=128, out_features=128, bias=False)
+      )
+    )
+  )
+  (temporal_aggregator): Seq2SeqGruAggregator(
+    (gru): GRU(128, 256, num_layers=2, batch_first=True, dropout=0.3)
+  )
+  (classifier): Sequential(
+    (0): Linear(in_features=256, out_features=49, bias=True)
+  )
+)
+Trainable parameters: 1254673
+2021-11-30 06:49:18,695 - train - INFO - BigArch(
+  (row_encoder): FixedEmbedderNN(
+    (embedder): FixedEmbedder(
+      (embeddings): ModuleList(
+        (0): Embedding(49, 32)
+        (1): Embedding(4, 32)
+        (2): Embedding(7, 32)
+        (3): Embedding(30, 32)
+        (4): Embedding(3, 32)
+        (5): Embedding(12, 32)
+        (6): Embedding(35, 32)
+        (7): Embedding(3, 32)
+        (8): Embedding(10, 32)
+        (9): Embedding(2, 32)
+      )
+      (nns): ModuleList(
+        (0): Linear(in_features=1, out_features=32, bias=True)
+        (1): Linear(in_features=1, out_features=32, bias=True)
+        (2): Linear(in_features=1, out_features=32, bias=True)
+        (3): Linear(in_features=1, out_features=32, bias=True)
+        (4): Linear(in_features=1, out_features=32, bias=True)
+        (5): Linear(in_features=1, out_features=32, bias=True)
+        (6): Linear(in_features=1, out_features=32, bias=True)
+        (7): Linear(in_features=1, out_features=32, bias=True)
+        (8): Linear(in_features=1, out_features=32, bias=True)
+        (9): Linear(in_features=1, out_features=32, bias=True)
+        (10): Linear(in_features=1, out_features=32, bias=True)
+        (11): Linear(in_features=1, out_features=32, bias=True)
+        (12): Linear(in_features=1, out_features=32, bias=True)
+        (13): Linear(in_features=1, out_features=32, bias=True)
+        (14): Linear(in_features=1, out_features=32, bias=True)
+        (15): Linear(in_features=1, out_features=32, bias=True)
+        (16): Linear(in_features=1, out_features=32, bias=True)
+        (17): Linear(in_features=1, out_features=32, bias=True)
+        (18): Linear(in_features=1, out_features=32, bias=True)
+        (19): Linear(in_features=1, out_features=32, bias=True)
+        (20): Linear(in_features=1, out_features=32, bias=True)
+        (21): Linear(in_features=1, out_features=32, bias=True)
+        (22): Linear(in_features=1, out_features=32, bias=True)
+        (23): Linear(in_features=1, out_features=32, bias=True)
+        (24): Linear(in_features=1, out_features=32, bias=True)
+        (25): Linear(in_features=1, out_features=32, bias=True)
+        (26): Linear(in_features=1, out_features=32, bias=True)
+        (27): Linear(in_features=1, out_features=32, bias=True)
+        (28): Linear(in_features=1, out_features=32, bias=True)
+        (29): Linear(in_features=1, out_features=32, bias=True)
+        (30): Linear(in_features=1, out_features=32, bias=True)
+        (31): Linear(in_features=1, out_features=32, bias=True)
+        (32): Linear(in_features=1, out_features=32, bias=True)
+        (33): Linear(in_features=1, out_features=32, bias=True)
+        (34): Linear(in_features=1, out_features=32, bias=True)
+        (35): Linear(in_features=1, out_features=32, bias=True)
+        (36): Linear(in_features=1, out_features=32, bias=True)
+        (37): Linear(in_features=1, out_features=32, bias=True)
+        (38): Linear(in_features=1, out_features=32, bias=True)
+        (39): Linear(in_features=1, out_features=32, bias=True)
+        (40): Linear(in_features=1, out_features=32, bias=True)
+        (41): Linear(in_features=1, out_features=32, bias=True)
+      )
+    )
+    (input_layer): Linear(in_features=1664, out_features=128, bias=True)
+    (nn_layers): Sequential(
+      (0): Sequential(
+        (0): Linear(in_features=128, out_features=256, bias=True)
+        (1): Dropout(p=0.3, inplace=False)
+        (2): Linear(in_features=256, out_features=128, bias=True)
+        (3): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+      )
+      (1): Sequential(
+        (0): Linear(in_features=128, out_features=256, bias=True)
+        (1): Dropout(p=0.3, inplace=False)
+        (2): Linear(in_features=256, out_features=128, bias=True)
+        (3): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+      )
+      (2): Sequential(
+        (0): Linear(in_features=128, out_features=256, bias=True)
+        (1): Dropout(p=0.3, inplace=False)
+        (2): Linear(in_features=256, out_features=128, bias=True)
+        (3): LayerNorm((128,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+  )
+  (rows_aggregator): RowsFastformerAggregator(
+    (AttenLayer): ModuleList(
+      (0): Fastformer(
+        (weight_q): Linear(in_features=128, out_features=128, bias=False)
+        (weight_k): Linear(in_features=128, out_features=128, bias=False)
+        (weight_v): Linear(in_features=128, out_features=128, bias=False)
+        (weight_r): Linear(in_features=128, out_features=128, bias=False)
+      )
+      (1): Fastformer(
+        (weight_q): Linear(in_features=128, out_features=128, bias=False)
+        (weight_k): Linear(in_features=128, out_features=128, bias=False)
+        (weight_v): Linear(in_features=128, out_features=128, bias=False)
+        (weight_r): Linear(in_features=128, out_features=128, bias=False)
+      )
+    )
+  )
+  (temporal_aggregator): Seq2SeqGruAggregator(
+    (gru): GRU(128, 256, num_layers=2, batch_first=True, dropout=0.3)
+  )
+  (classifier): Sequential(
+    (0): Linear(in_features=256, out_features=49, bias=True)
+  )
+)
+Trainable parameters: 1254673
+2021-11-30 07:00:05,706 - trainer - INFO -     epoch          : 1
+2021-11-30 07:00:05,753 - trainer - INFO -     loss           : 2.9587682732103904
+2021-11-30 07:00:05,753 - trainer - INFO -     seq2seq_NDCG16 : 0.5053988099098206
+2021-11-30 07:00:05,754 - trainer - INFO -     val_loss       : 2.7662211166237887
+2021-11-30 07:00:05,754 - trainer - INFO -     val_seq2seq_NDCG16: 0.5700821280479431
+2021-11-30 07:00:05,926 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-11-30 07:10:07,705 - trainer - INFO -     epoch          : 2
+2021-11-30 07:10:07,739 - trainer - INFO -     loss           : 2.666587301646909
+2021-11-30 07:10:07,739 - trainer - INFO -     seq2seq_NDCG16 : 0.6085136532783508
+2021-11-30 07:10:07,739 - trainer - INFO -     val_loss       : 2.568049546907533
+2021-11-30 07:10:07,739 - trainer - INFO -     val_seq2seq_NDCG16: 0.6430699229240417
+2021-11-30 07:10:07,912 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-11-30 07:20:08,814 - trainer - INFO -     epoch          : 3
+2021-11-30 07:20:08,837 - trainer - INFO -     loss           : 2.54077457863841
+2021-11-30 07:20:08,838 - trainer - INFO -     seq2seq_NDCG16 : 0.6467752456665039
+2021-11-30 07:20:08,838 - trainer - INFO -     val_loss       : 2.490577875893071
+2021-11-30 07:20:08,838 - trainer - INFO -     val_seq2seq_NDCG16: 0.6629170179367065
+2021-11-30 07:20:09,007 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-11-30 07:30:11,511 - trainer - INFO -     epoch          : 4
+2021-11-30 07:30:11,647 - trainer - INFO -     loss           : 2.4898828129592765
+2021-11-30 07:30:11,647 - trainer - INFO -     seq2seq_NDCG16 : 0.6610880494117737
+2021-11-30 07:30:11,647 - trainer - INFO -     val_loss       : 2.460452170641917
+2021-11-30 07:30:11,648 - trainer - INFO -     val_seq2seq_NDCG16: 0.6710359454154968
+2021-11-30 07:30:12,007 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-11-30 07:40:10,581 - trainer - INFO -     epoch          : 5
+2021-11-30 07:40:10,628 - trainer - INFO -     loss           : 2.465023566688199
+2021-11-30 07:40:10,629 - trainer - INFO -     seq2seq_NDCG16 : 0.6673729419708252
+2021-11-30 07:40:10,629 - trainer - INFO -     val_loss       : 2.435087870651821
+2021-11-30 07:40:10,629 - trainer - INFO -     val_seq2seq_NDCG16: 0.6757836937904358
+2021-11-30 07:40:10,830 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-11-30 07:50:14,167 - trainer - INFO -     epoch          : 6
+2021-11-30 07:50:14,209 - trainer - INFO -     loss           : 2.449955062893227
+2021-11-30 07:50:14,209 - trainer - INFO -     seq2seq_NDCG16 : 0.669356107711792
+2021-11-30 07:50:14,209 - trainer - INFO -     val_loss       : 2.4181693751856965
+2021-11-30 07:50:14,209 - trainer - INFO -     val_seq2seq_NDCG16: 0.6790360808372498
+2021-11-30 07:50:14,385 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-11-30 08:00:17,683 - trainer - INFO -     epoch          : 7
+2021-11-30 08:00:17,736 - trainer - INFO -     loss           : 2.440591390905119
+2021-11-30 08:00:17,736 - trainer - INFO -     seq2seq_NDCG16 : 0.671843945980072
+2021-11-30 08:00:17,736 - trainer - INFO -     val_loss       : 2.4087643578367413
+2021-11-30 08:00:17,736 - trainer - INFO -     val_seq2seq_NDCG16: 0.6813156604766846
+2021-11-30 08:00:17,881 - trainer - INFO - Improved! Saving current best: model_best.pth ...

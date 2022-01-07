@@ -1,0 +1,558 @@
+2021-12-19 08:24:52,408 - train - INFO - MultiIndexModelCnn(
+  (embedder): FixedEmbedder(
+    (embeddings): ModuleList(
+      (0): Embedding(49, 32)
+      (1): Embedding(4, 32)
+      (2): Embedding(7, 32)
+      (3): Embedding(30, 32)
+      (4): Embedding(3, 32)
+      (5): Embedding(12, 32)
+      (6): Embedding(35, 32)
+      (7): Embedding(3, 32)
+      (8): Embedding(10, 32)
+      (9): Embedding(2, 32)
+    )
+    (nns): ModuleList(
+      (0): Linear(in_features=1, out_features=32, bias=True)
+      (1): Linear(in_features=1, out_features=32, bias=True)
+      (2): Linear(in_features=1, out_features=32, bias=True)
+      (3): Linear(in_features=1, out_features=32, bias=True)
+      (4): Linear(in_features=1, out_features=32, bias=True)
+      (5): Linear(in_features=1, out_features=32, bias=True)
+      (6): Linear(in_features=1, out_features=32, bias=True)
+      (7): Linear(in_features=1, out_features=32, bias=True)
+      (8): Linear(in_features=1, out_features=32, bias=True)
+      (9): Linear(in_features=1, out_features=32, bias=True)
+      (10): Linear(in_features=1, out_features=32, bias=True)
+      (11): Linear(in_features=1, out_features=32, bias=True)
+      (12): Linear(in_features=1, out_features=32, bias=True)
+      (13): Linear(in_features=1, out_features=32, bias=True)
+      (14): Linear(in_features=1, out_features=32, bias=True)
+      (15): Linear(in_features=1, out_features=32, bias=True)
+      (16): Linear(in_features=1, out_features=32, bias=True)
+      (17): Linear(in_features=1, out_features=32, bias=True)
+      (18): Linear(in_features=1, out_features=32, bias=True)
+      (19): Linear(in_features=1, out_features=32, bias=True)
+      (20): Linear(in_features=1, out_features=32, bias=True)
+      (21): Linear(in_features=1, out_features=32, bias=True)
+      (22): Linear(in_features=1, out_features=32, bias=True)
+      (23): Linear(in_features=1, out_features=32, bias=True)
+      (24): Linear(in_features=1, out_features=32, bias=True)
+      (25): Linear(in_features=1, out_features=32, bias=True)
+      (26): Linear(in_features=1, out_features=32, bias=True)
+      (27): Linear(in_features=1, out_features=32, bias=True)
+      (28): Linear(in_features=1, out_features=32, bias=True)
+      (29): Linear(in_features=1, out_features=32, bias=True)
+      (30): Linear(in_features=1, out_features=32, bias=True)
+      (31): Linear(in_features=1, out_features=32, bias=True)
+      (32): Linear(in_features=1, out_features=32, bias=True)
+      (33): Linear(in_features=1, out_features=32, bias=True)
+      (34): Linear(in_features=1, out_features=32, bias=True)
+      (35): Linear(in_features=1, out_features=32, bias=True)
+      (36): Linear(in_features=1, out_features=32, bias=True)
+      (37): Linear(in_features=1, out_features=32, bias=True)
+      (38): Linear(in_features=1, out_features=32, bias=True)
+      (39): Linear(in_features=1, out_features=32, bias=True)
+      (40): Linear(in_features=1, out_features=32, bias=True)
+      (41): Linear(in_features=1, out_features=32, bias=True)
+    )
+  )
+  (row_encoder): CnnEncoder(
+    (batch_norm1): BatchNorm1d(1664, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout1): Dropout(p=0.44999999999999996, inplace=False)
+    (dense1): Linear(in_features=1664, out_features=1536, bias=True)
+    (batch_norm_c1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c1): Dropout(p=0.40499999999999997, inplace=False)
+    (conv1): Conv1d(64, 128, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (ave_po_c1): AdaptiveAvgPool1d(output_size=12)
+    (batch_norm_c2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2): Dropout(p=0.36, inplace=False)
+    (conv2): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_1): Dropout(p=0.26999999999999996, inplace=False)
+    (conv2_1): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_2): Dropout(p=0.22499999999999998, inplace=False)
+    (conv2_2): Conv1d(128, 128, kernel_size=(5,), stride=(1,), padding=(2,))
+    (max_po_c2): MaxPool1d(kernel_size=4, stride=2, padding=1, dilation=1, ceil_mode=False)
+    (flt): Flatten(start_dim=1, end_dim=-1)
+    (batch_norm3): BatchNorm1d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout3): Dropout(p=0.44999999999999996, inplace=False)
+    (dense3): Linear(in_features=768, out_features=256, bias=True)
+  )
+  (rows_aggregator): Sequential(
+    (0): Linear(in_features=12544, out_features=1536, bias=True)
+    (1): LeakyReLU(negative_slope=0.01)
+    (2): Dropout(p=0.6, inplace=False)
+    (3): Linear(in_features=1536, out_features=1024, bias=True)
+    (4): LeakyReLU(negative_slope=0.01)
+    (5): Dropout(p=0.39999999999999997, inplace=False)
+    (6): Linear(in_features=1024, out_features=512, bias=True)
+    (7): LeakyReLU(negative_slope=0.01)
+    (8): Dropout(p=0.3, inplace=False)
+    (9): Linear(in_features=512, out_features=256, bias=True)
+    (10): LeakyReLU(negative_slope=0.01)
+  )
+  (temporal_aggregator): Seq2SeqGruAggregator(
+    (gru): GRU(256, 512, num_layers=3, batch_first=True, dropout=0.4)
+  )
+  (classifier): Sequential(
+    (0): Linear(in_features=512, out_features=49, bias=True)
+  )
+)
+Trainable parameters: 28849941.0
+2021-12-19 08:34:12,045 - train - INFO - MultiIndexModelCnn(
+  (embedder): FixedEmbedder(
+    (embeddings): ModuleList(
+      (0): Embedding(49, 32)
+      (1): Embedding(4, 32)
+      (2): Embedding(7, 32)
+      (3): Embedding(30, 32)
+      (4): Embedding(3, 32)
+      (5): Embedding(12, 32)
+      (6): Embedding(35, 32)
+      (7): Embedding(3, 32)
+      (8): Embedding(10, 32)
+      (9): Embedding(2, 32)
+    )
+    (nns): ModuleList(
+      (0): Linear(in_features=1, out_features=32, bias=True)
+      (1): Linear(in_features=1, out_features=32, bias=True)
+      (2): Linear(in_features=1, out_features=32, bias=True)
+      (3): Linear(in_features=1, out_features=32, bias=True)
+      (4): Linear(in_features=1, out_features=32, bias=True)
+      (5): Linear(in_features=1, out_features=32, bias=True)
+      (6): Linear(in_features=1, out_features=32, bias=True)
+      (7): Linear(in_features=1, out_features=32, bias=True)
+      (8): Linear(in_features=1, out_features=32, bias=True)
+      (9): Linear(in_features=1, out_features=32, bias=True)
+      (10): Linear(in_features=1, out_features=32, bias=True)
+      (11): Linear(in_features=1, out_features=32, bias=True)
+      (12): Linear(in_features=1, out_features=32, bias=True)
+      (13): Linear(in_features=1, out_features=32, bias=True)
+      (14): Linear(in_features=1, out_features=32, bias=True)
+      (15): Linear(in_features=1, out_features=32, bias=True)
+      (16): Linear(in_features=1, out_features=32, bias=True)
+      (17): Linear(in_features=1, out_features=32, bias=True)
+      (18): Linear(in_features=1, out_features=32, bias=True)
+      (19): Linear(in_features=1, out_features=32, bias=True)
+      (20): Linear(in_features=1, out_features=32, bias=True)
+      (21): Linear(in_features=1, out_features=32, bias=True)
+      (22): Linear(in_features=1, out_features=32, bias=True)
+      (23): Linear(in_features=1, out_features=32, bias=True)
+      (24): Linear(in_features=1, out_features=32, bias=True)
+      (25): Linear(in_features=1, out_features=32, bias=True)
+      (26): Linear(in_features=1, out_features=32, bias=True)
+      (27): Linear(in_features=1, out_features=32, bias=True)
+      (28): Linear(in_features=1, out_features=32, bias=True)
+      (29): Linear(in_features=1, out_features=32, bias=True)
+      (30): Linear(in_features=1, out_features=32, bias=True)
+      (31): Linear(in_features=1, out_features=32, bias=True)
+      (32): Linear(in_features=1, out_features=32, bias=True)
+      (33): Linear(in_features=1, out_features=32, bias=True)
+      (34): Linear(in_features=1, out_features=32, bias=True)
+      (35): Linear(in_features=1, out_features=32, bias=True)
+      (36): Linear(in_features=1, out_features=32, bias=True)
+      (37): Linear(in_features=1, out_features=32, bias=True)
+      (38): Linear(in_features=1, out_features=32, bias=True)
+      (39): Linear(in_features=1, out_features=32, bias=True)
+      (40): Linear(in_features=1, out_features=32, bias=True)
+      (41): Linear(in_features=1, out_features=32, bias=True)
+    )
+  )
+  (row_encoder): CnnEncoder(
+    (batch_norm1): BatchNorm1d(1664, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout1): Dropout(p=0.44999999999999996, inplace=False)
+    (dense1): Linear(in_features=1664, out_features=1536, bias=True)
+    (batch_norm_c1): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c1): Dropout(p=0.40499999999999997, inplace=False)
+    (conv1): Conv1d(64, 128, kernel_size=(5,), stride=(1,), padding=(2,), bias=False)
+    (ave_po_c1): AdaptiveAvgPool1d(output_size=12)
+    (batch_norm_c2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2): Dropout(p=0.36, inplace=False)
+    (conv2): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_1): Dropout(p=0.26999999999999996, inplace=False)
+    (conv2_1): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (batch_norm_c2_2): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout_c2_2): Dropout(p=0.22499999999999998, inplace=False)
+    (conv2_2): Conv1d(128, 128, kernel_size=(5,), stride=(1,), padding=(2,))
+    (max_po_c2): MaxPool1d(kernel_size=4, stride=2, padding=1, dilation=1, ceil_mode=False)
+    (flt): Flatten(start_dim=1, end_dim=-1)
+    (batch_norm3): BatchNorm1d(768, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (dropout3): Dropout(p=0.44999999999999996, inplace=False)
+    (dense3): Linear(in_features=768, out_features=256, bias=True)
+  )
+  (rows_aggregator): Sequential(
+    (0): Linear(in_features=12544, out_features=1536, bias=True)
+    (1): LeakyReLU(negative_slope=0.01)
+    (2): Dropout(p=0.6, inplace=False)
+    (3): Linear(in_features=1536, out_features=1024, bias=True)
+    (4): LeakyReLU(negative_slope=0.01)
+    (5): Dropout(p=0.39999999999999997, inplace=False)
+    (6): Linear(in_features=1024, out_features=512, bias=True)
+    (7): LeakyReLU(negative_slope=0.01)
+    (8): Dropout(p=0.3, inplace=False)
+    (9): Linear(in_features=512, out_features=256, bias=True)
+    (10): LeakyReLU(negative_slope=0.01)
+  )
+  (temporal_aggregator): Seq2SeqGruAggregator(
+    (gru): GRU(256, 512, num_layers=3, batch_first=True, dropout=0.4)
+  )
+  (classifier): Sequential(
+    (0): Linear(in_features=512, out_features=49, bias=True)
+  )
+)
+Trainable parameters: 28849941.0
+2021-12-19 08:49:32,391 - trainer - INFO -     epoch          : 1
+2021-12-19 08:49:32,513 - trainer - INFO -     loss           : 2.856241565531172
+2021-12-19 08:49:32,513 - trainer - INFO -     seq2seq_NDCG   : 0.4623256027698517
+2021-12-19 08:49:32,514 - trainer - INFO -     seq2seq_NDCG16 : 0.5298700928688049
+2021-12-19 08:49:32,514 - trainer - INFO -     val_loss       : 2.4842116309671987
+2021-12-19 08:49:32,514 - trainer - INFO -     val_seq2seq_NDCG: 0.599381148815155
+2021-12-19 08:49:32,514 - trainer - INFO -     val_seq2seq_NDCG16: 0.6534833312034607
+2021-12-19 08:49:33,570 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 09:04:04,516 - trainer - INFO -     epoch          : 2
+2021-12-19 09:04:04,701 - trainer - INFO -     loss           : 2.392706483526303
+2021-12-19 09:04:04,702 - trainer - INFO -     seq2seq_NDCG   : 0.6255978345870972
+2021-12-19 09:04:04,702 - trainer - INFO -     seq2seq_NDCG16 : 0.6807355284690857
+2021-12-19 09:04:04,702 - trainer - INFO -     val_loss       : 2.3172410142665005
+2021-12-19 09:04:04,702 - trainer - INFO -     val_seq2seq_NDCG: 0.6456177830696106
+2021-12-19 09:04:04,702 - trainer - INFO -     val_seq2seq_NDCG16: 0.7018073797225952
+2021-12-19 09:04:41,957 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 09:19:09,824 - trainer - INFO -     epoch          : 3
+2021-12-19 09:19:09,950 - trainer - INFO -     loss           : 2.309839019080257
+2021-12-19 09:19:09,950 - trainer - INFO -     seq2seq_NDCG   : 0.6460241675376892
+2021-12-19 09:19:09,950 - trainer - INFO -     seq2seq_NDCG16 : 0.7018672227859497
+2021-12-19 09:19:09,950 - trainer - INFO -     val_loss       : 2.272821933639293
+2021-12-19 09:19:09,950 - trainer - INFO -     val_seq2seq_NDCG: 0.6552587747573853
+2021-12-19 09:19:09,950 - trainer - INFO -     val_seq2seq_NDCG16: 0.7122669219970703
+2021-12-19 09:19:43,724 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 09:34:12,982 - trainer - INFO -     epoch          : 4
+2021-12-19 09:34:13,076 - trainer - INFO -     loss           : 2.277137130117782
+2021-12-19 09:34:13,076 - trainer - INFO -     seq2seq_NDCG   : 0.6531968712806702
+2021-12-19 09:34:13,076 - trainer - INFO -     seq2seq_NDCG16 : 0.7097379565238953
+2021-12-19 09:34:13,076 - trainer - INFO -     val_loss       : 2.251759397740267
+2021-12-19 09:34:13,076 - trainer - INFO -     val_seq2seq_NDCG: 0.659050703048706
+2021-12-19 09:34:13,076 - trainer - INFO -     val_seq2seq_NDCG16: 0.7167491316795349
+2021-12-19 09:34:47,928 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 09:49:16,437 - trainer - INFO -     epoch          : 5
+2021-12-19 09:49:16,616 - trainer - INFO -     loss           : 2.2611264350164273
+2021-12-19 09:49:16,616 - trainer - INFO -     seq2seq_NDCG   : 0.6568204760551453
+2021-12-19 09:49:16,616 - trainer - INFO -     seq2seq_NDCG16 : 0.7134603261947632
+2021-12-19 09:49:16,617 - trainer - INFO -     val_loss       : 2.241977803561152
+2021-12-19 09:49:16,617 - trainer - INFO -     val_seq2seq_NDCG: 0.6621092557907104
+2021-12-19 09:49:16,617 - trainer - INFO -     val_seq2seq_NDCG16: 0.7189990282058716
+2021-12-19 09:49:53,737 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 10:04:17,427 - trainer - INFO -     epoch          : 6
+2021-12-19 10:04:17,563 - trainer - INFO -     loss           : 2.2512379613373894
+2021-12-19 10:04:17,563 - trainer - INFO -     seq2seq_NDCG   : 0.659153401851654
+2021-12-19 10:04:17,563 - trainer - INFO -     seq2seq_NDCG16 : 0.7153975367546082
+2021-12-19 10:04:17,564 - trainer - INFO -     val_loss       : 2.2329533258262946
+2021-12-19 10:04:17,564 - trainer - INFO -     val_seq2seq_NDCG: 0.6639691591262817
+2021-12-19 10:04:17,564 - trainer - INFO -     val_seq2seq_NDCG16: 0.7203333973884583
+2021-12-19 10:04:54,724 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 10:19:20,396 - trainer - INFO -     epoch          : 7
+2021-12-19 10:19:20,606 - trainer - INFO -     loss           : 2.2436362815939863
+2021-12-19 10:19:20,606 - trainer - INFO -     seq2seq_NDCG   : 0.6609848737716675
+2021-12-19 10:19:20,606 - trainer - INFO -     seq2seq_NDCG16 : 0.716821014881134
+2021-12-19 10:19:20,606 - trainer - INFO -     val_loss       : 2.2280573711103324
+2021-12-19 10:19:20,606 - trainer - INFO -     val_seq2seq_NDCG: 0.6649124622344971
+2021-12-19 10:19:20,606 - trainer - INFO -     val_seq2seq_NDCG16: 0.720913827419281
+2021-12-19 10:20:00,532 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 10:34:23,459 - trainer - INFO -     epoch          : 8
+2021-12-19 10:34:23,643 - trainer - INFO -     loss           : 2.2378958960628266
+2021-12-19 10:34:23,644 - trainer - INFO -     seq2seq_NDCG   : 0.6624183058738708
+2021-12-19 10:34:23,644 - trainer - INFO -     seq2seq_NDCG16 : 0.7179141640663147
+2021-12-19 10:34:23,644 - trainer - INFO -     val_loss       : 2.225207507610321
+2021-12-19 10:34:23,644 - trainer - INFO -     val_seq2seq_NDCG: 0.6659688949584961
+2021-12-19 10:34:23,644 - trainer - INFO -     val_seq2seq_NDCG16: 0.7220253944396973
+2021-12-19 10:35:01,366 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 10:49:25,873 - trainer - INFO -     epoch          : 9
+2021-12-19 10:49:25,905 - trainer - INFO -     loss           : 2.233529978396033
+2021-12-19 10:49:25,906 - trainer - INFO -     seq2seq_NDCG   : 0.6636020541191101
+2021-12-19 10:49:25,906 - trainer - INFO -     seq2seq_NDCG16 : 0.7187259793281555
+2021-12-19 10:49:25,906 - trainer - INFO -     val_loss       : 2.2200729542849014
+2021-12-19 10:49:25,906 - trainer - INFO -     val_seq2seq_NDCG: 0.6674109101295471
+2021-12-19 10:49:25,906 - trainer - INFO -     val_seq2seq_NDCG16: 0.7226880788803101
+2021-12-19 10:49:56,439 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 11:04:19,219 - trainer - INFO -     epoch          : 10
+2021-12-19 11:04:19,402 - trainer - INFO -     loss           : 2.229809296405529
+2021-12-19 11:04:19,402 - trainer - INFO -     seq2seq_NDCG   : 0.6646320819854736
+2021-12-19 11:04:19,402 - trainer - INFO -     seq2seq_NDCG16 : 0.7194193005561829
+2021-12-19 11:04:19,403 - trainer - INFO -     val_loss       : 2.219919719258133
+2021-12-19 11:04:19,403 - trainer - INFO -     val_seq2seq_NDCG: 0.6672794222831726
+2021-12-19 11:04:19,403 - trainer - INFO -     val_seq2seq_NDCG16: 0.7224129438400269
+2021-12-19 11:04:55,516 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 11:19:17,034 - trainer - INFO -     epoch          : 11
+2021-12-19 11:19:17,103 - trainer - INFO -     loss           : 2.22702615980602
+2021-12-19 11:19:17,104 - trainer - INFO -     seq2seq_NDCG   : 0.6653746962547302
+2021-12-19 11:19:17,104 - trainer - INFO -     seq2seq_NDCG16 : 0.7199750542640686
+2021-12-19 11:19:17,104 - trainer - INFO -     val_loss       : 2.2169309720701103
+2021-12-19 11:19:17,104 - trainer - INFO -     val_seq2seq_NDCG: 0.6678355932235718
+2021-12-19 11:19:17,104 - trainer - INFO -     val_seq2seq_NDCG16: 0.7226316332817078
+2021-12-19 11:19:49,960 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 11:34:11,327 - trainer - INFO -     epoch          : 12
+2021-12-19 11:34:11,385 - trainer - INFO -     loss           : 2.22430761817776
+2021-12-19 11:34:11,385 - trainer - INFO -     seq2seq_NDCG   : 0.6660580635070801
+2021-12-19 11:34:11,386 - trainer - INFO -     seq2seq_NDCG16 : 0.7204274535179138
+2021-12-19 11:34:11,386 - trainer - INFO -     val_loss       : 2.2136278663362776
+2021-12-19 11:34:11,386 - trainer - INFO -     val_seq2seq_NDCG: 0.6690222024917603
+2021-12-19 11:34:11,386 - trainer - INFO -     val_seq2seq_NDCG16: 0.7238380312919617
+2021-12-19 11:34:37,795 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 11:49:04,890 - trainer - INFO -     epoch          : 13
+2021-12-19 11:49:04,942 - trainer - INFO -     loss           : 2.222215887530685
+2021-12-19 11:49:04,942 - trainer - INFO -     seq2seq_NDCG   : 0.6666967868804932
+2021-12-19 11:49:04,942 - trainer - INFO -     seq2seq_NDCG16 : 0.7207905054092407
+2021-12-19 11:49:04,942 - trainer - INFO -     val_loss       : 2.21256617137364
+2021-12-19 11:49:04,943 - trainer - INFO -     val_seq2seq_NDCG: 0.6692919731140137
+2021-12-19 11:49:04,943 - trainer - INFO -     val_seq2seq_NDCG16: 0.723596453666687
+2021-12-19 11:49:31,311 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 12:03:56,581 - trainer - INFO -     epoch          : 14
+2021-12-19 12:03:56,618 - trainer - INFO -     loss           : 2.2201946726845354
+2021-12-19 12:03:56,618 - trainer - INFO -     seq2seq_NDCG   : 0.6671317219734192
+2021-12-19 12:03:56,619 - trainer - INFO -     seq2seq_NDCG16 : 0.7211087942123413
+2021-12-19 12:03:56,619 - trainer - INFO -     val_loss       : 2.212099482818526
+2021-12-19 12:03:56,619 - trainer - INFO -     val_seq2seq_NDCG: 0.6696212887763977
+2021-12-19 12:03:56,619 - trainer - INFO -     val_seq2seq_NDCG16: 0.7237702012062073
+2021-12-19 12:04:23,031 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 12:18:49,713 - trainer - INFO -     epoch          : 15
+2021-12-19 12:18:49,794 - trainer - INFO -     loss           : 2.2183264399428504
+2021-12-19 12:18:49,794 - trainer - INFO -     seq2seq_NDCG   : 0.6676473617553711
+2021-12-19 12:18:49,795 - trainer - INFO -     seq2seq_NDCG16 : 0.7213921546936035
+2021-12-19 12:18:49,795 - trainer - INFO -     val_loss       : 2.209857539254792
+2021-12-19 12:18:49,795 - trainer - INFO -     val_seq2seq_NDCG: 0.6702357530593872
+2021-12-19 12:18:49,795 - trainer - INFO -     val_seq2seq_NDCG16: 0.7242886424064636
+2021-12-19 12:19:20,230 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 12:33:46,040 - trainer - INFO -     epoch          : 16
+2021-12-19 12:33:46,076 - trainer - INFO -     loss           : 2.2165168660985843
+2021-12-19 12:33:46,076 - trainer - INFO -     seq2seq_NDCG   : 0.6681146025657654
+2021-12-19 12:33:46,076 - trainer - INFO -     seq2seq_NDCG16 : 0.7216811776161194
+2021-12-19 12:33:46,076 - trainer - INFO -     val_loss       : 2.210463213677309
+2021-12-19 12:33:46,076 - trainer - INFO -     val_seq2seq_NDCG: 0.6696052551269531
+2021-12-19 12:33:46,077 - trainer - INFO -     val_seq2seq_NDCG16: 0.7233940362930298
+2021-12-19 12:33:46,078 - trainer - INFO - Performance is lower than epoch: 15
+2021-12-19 12:48:04,979 - trainer - INFO -     epoch          : 17
+2021-12-19 12:48:05,036 - trainer - INFO -     loss           : 2.2151195024285477
+2021-12-19 12:48:05,037 - trainer - INFO -     seq2seq_NDCG   : 0.6684665679931641
+2021-12-19 12:48:05,037 - trainer - INFO -     seq2seq_NDCG16 : 0.7218547463417053
+2021-12-19 12:48:05,037 - trainer - INFO -     val_loss       : 2.209083175172611
+2021-12-19 12:48:05,037 - trainer - INFO -     val_seq2seq_NDCG: 0.6700151562690735
+2021-12-19 12:48:05,037 - trainer - INFO -     val_seq2seq_NDCG16: 0.7239514589309692
+2021-12-19 12:48:32,846 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 13:02:50,751 - trainer - INFO -     epoch          : 18
+2021-12-19 13:02:50,967 - trainer - INFO -     loss           : 2.2136714677981404
+2021-12-19 13:02:50,968 - trainer - INFO -     seq2seq_NDCG   : 0.6688790321350098
+2021-12-19 13:02:50,968 - trainer - INFO -     seq2seq_NDCG16 : 0.7221468091011047
+2021-12-19 13:02:50,968 - trainer - INFO -     val_loss       : 2.2071831931873245
+2021-12-19 13:02:50,968 - trainer - INFO -     val_seq2seq_NDCG: 0.6709955334663391
+2021-12-19 13:02:50,968 - trainer - INFO -     val_seq2seq_NDCG16: 0.7246198058128357
+2021-12-19 13:03:32,006 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 13:17:50,242 - trainer - INFO -     epoch          : 19
+2021-12-19 13:17:50,353 - trainer - INFO -     loss           : 2.2124393099104354
+2021-12-19 13:17:50,354 - trainer - INFO -     seq2seq_NDCG   : 0.6691898107528687
+2021-12-19 13:17:50,354 - trainer - INFO -     seq2seq_NDCG16 : 0.7223967909812927
+2021-12-19 13:17:50,354 - trainer - INFO -     val_loss       : 2.2078705065104427
+2021-12-19 13:17:50,354 - trainer - INFO -     val_seq2seq_NDCG: 0.6702203154563904
+2021-12-19 13:17:50,354 - trainer - INFO -     val_seq2seq_NDCG16: 0.724768340587616
+2021-12-19 13:17:50,357 - trainer - INFO - Performance is lower than epoch: 18
+2021-12-19 13:32:09,077 - trainer - INFO -     epoch          : 20
+2021-12-19 13:32:09,122 - trainer - INFO -     loss           : 2.2113080936319687
+2021-12-19 13:32:09,122 - trainer - INFO -     seq2seq_NDCG   : 0.6694743037223816
+2021-12-19 13:32:09,123 - trainer - INFO -     seq2seq_NDCG16 : 0.7225699424743652
+2021-12-19 13:32:09,123 - trainer - INFO -     val_loss       : 2.2077574851561566
+2021-12-19 13:32:09,123 - trainer - INFO -     val_seq2seq_NDCG: 0.6707204580307007
+2021-12-19 13:32:09,123 - trainer - INFO -     val_seq2seq_NDCG16: 0.7244675755500793
+2021-12-19 13:32:09,125 - trainer - INFO - Performance is lower than epoch: 18
+2021-12-19 13:46:36,843 - trainer - INFO -     epoch          : 21
+2021-12-19 13:46:36,902 - trainer - INFO -     loss           : 2.210289879528153
+2021-12-19 13:46:36,902 - trainer - INFO -     seq2seq_NDCG   : 0.6698036789894104
+2021-12-19 13:46:36,903 - trainer - INFO -     seq2seq_NDCG16 : 0.7227087616920471
+2021-12-19 13:46:36,903 - trainer - INFO -     val_loss       : 2.205273365487858
+2021-12-19 13:46:36,903 - trainer - INFO -     val_seq2seq_NDCG: 0.6715632677078247
+2021-12-19 13:46:36,903 - trainer - INFO -     val_seq2seq_NDCG16: 0.7249694466590881
+2021-12-19 13:47:03,030 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 14:01:36,363 - trainer - INFO -     epoch          : 22
+2021-12-19 14:01:36,440 - trainer - INFO -     loss           : 2.2090309202823493
+2021-12-19 14:01:36,440 - trainer - INFO -     seq2seq_NDCG   : 0.670098602771759
+2021-12-19 14:01:36,440 - trainer - INFO -     seq2seq_NDCG16 : 0.7229138016700745
+2021-12-19 14:01:36,440 - trainer - INFO -     val_loss       : 2.2059654556975072
+2021-12-19 14:01:36,440 - trainer - INFO -     val_seq2seq_NDCG: 0.6712014079093933
+2021-12-19 14:01:36,441 - trainer - INFO -     val_seq2seq_NDCG16: 0.724566638469696
+2021-12-19 14:01:36,443 - trainer - INFO - Performance is lower than epoch: 21
+2021-12-19 14:16:13,318 - trainer - INFO -     epoch          : 23
+2021-12-19 14:16:13,377 - trainer - INFO -     loss           : 2.2082633283132176
+2021-12-19 14:16:13,377 - trainer - INFO -     seq2seq_NDCG   : 0.6702711582183838
+2021-12-19 14:16:13,378 - trainer - INFO -     seq2seq_NDCG16 : 0.7230157256126404
+2021-12-19 14:16:13,378 - trainer - INFO -     val_loss       : 2.2058219556905785
+2021-12-19 14:16:13,378 - trainer - INFO -     val_seq2seq_NDCG: 0.6711810231208801
+2021-12-19 14:16:13,378 - trainer - INFO -     val_seq2seq_NDCG16: 0.7245872020721436
+2021-12-19 14:16:13,380 - trainer - INFO - Performance is lower than epoch: 21
+2021-12-19 14:30:48,658 - trainer - INFO -     epoch          : 24
+2021-12-19 14:30:48,710 - trainer - INFO -     loss           : 2.207339139545665
+2021-12-19 14:30:48,710 - trainer - INFO -     seq2seq_NDCG   : 0.6705252528190613
+2021-12-19 14:30:48,711 - trainer - INFO -     seq2seq_NDCG16 : 0.7232010960578918
+2021-12-19 14:30:48,711 - trainer - INFO -     val_loss       : 2.2044950954768123
+2021-12-19 14:30:48,711 - trainer - INFO -     val_seq2seq_NDCG: 0.6716867685317993
+2021-12-19 14:30:48,711 - trainer - INFO -     val_seq2seq_NDCG16: 0.7249575853347778
+2021-12-19 14:31:14,579 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 14:45:47,528 - trainer - INFO -     epoch          : 25
+2021-12-19 14:45:47,601 - trainer - INFO -     loss           : 2.2063040608335336
+2021-12-19 14:45:47,602 - trainer - INFO -     seq2seq_NDCG   : 0.6707801222801208
+2021-12-19 14:45:47,602 - trainer - INFO -     seq2seq_NDCG16 : 0.7233877778053284
+2021-12-19 14:45:47,602 - trainer - INFO -     val_loss       : 2.2048703042828306
+2021-12-19 14:45:47,602 - trainer - INFO -     val_seq2seq_NDCG: 0.6713666319847107
+2021-12-19 14:45:47,602 - trainer - INFO -     val_seq2seq_NDCG16: 0.7245367169380188
+2021-12-19 14:45:47,604 - trainer - INFO - Performance is lower than epoch: 24
+2021-12-19 15:00:21,969 - trainer - INFO -     epoch          : 26
+2021-12-19 15:00:22,021 - trainer - INFO -     loss           : 2.2056003430920184
+2021-12-19 15:00:22,021 - trainer - INFO -     seq2seq_NDCG   : 0.6709696054458618
+2021-12-19 15:00:22,022 - trainer - INFO -     seq2seq_NDCG16 : 0.7235268950462341
+2021-12-19 15:00:22,022 - trainer - INFO -     val_loss       : 2.204451801825543
+2021-12-19 15:00:22,022 - trainer - INFO -     val_seq2seq_NDCG: 0.6715390086174011
+2021-12-19 15:00:22,022 - trainer - INFO -     val_seq2seq_NDCG16: 0.7248212695121765
+2021-12-19 15:00:48,075 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 15:15:22,142 - trainer - INFO -     epoch          : 27
+2021-12-19 15:15:22,196 - trainer - INFO -     loss           : 2.204711411920045
+2021-12-19 15:15:22,197 - trainer - INFO -     seq2seq_NDCG   : 0.6712064743041992
+2021-12-19 15:15:22,197 - trainer - INFO -     seq2seq_NDCG16 : 0.723649263381958
+2021-12-19 15:15:22,197 - trainer - INFO -     val_loss       : 2.202729091352346
+2021-12-19 15:15:22,197 - trainer - INFO -     val_seq2seq_NDCG: 0.6722506880760193
+2021-12-19 15:15:22,197 - trainer - INFO -     val_seq2seq_NDCG16: 0.7252485752105713
+2021-12-19 15:15:49,855 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 15:30:24,898 - trainer - INFO -     epoch          : 28
+2021-12-19 15:30:24,961 - trainer - INFO -     loss           : 2.2040719851813355
+2021-12-19 15:30:24,961 - trainer - INFO -     seq2seq_NDCG   : 0.6712826490402222
+2021-12-19 15:30:24,962 - trainer - INFO -     seq2seq_NDCG16 : 0.7236916422843933
+2021-12-19 15:30:24,962 - trainer - INFO -     val_loss       : 2.2037337969760507
+2021-12-19 15:30:24,962 - trainer - INFO -     val_seq2seq_NDCG: 0.6717063784599304
+2021-12-19 15:30:24,962 - trainer - INFO -     val_seq2seq_NDCG16: 0.7248064875602722
+2021-12-19 15:30:24,964 - trainer - INFO - Performance is lower than epoch: 27
+2021-12-19 15:45:00,569 - trainer - INFO -     epoch          : 29
+2021-12-19 15:45:00,613 - trainer - INFO -     loss           : 2.2032603464468057
+2021-12-19 15:45:00,613 - trainer - INFO -     seq2seq_NDCG   : 0.6715555191040039
+2021-12-19 15:45:00,613 - trainer - INFO -     seq2seq_NDCG16 : 0.7238622903823853
+2021-12-19 15:45:00,614 - trainer - INFO -     val_loss       : 2.2035667373209584
+2021-12-19 15:45:00,614 - trainer - INFO -     val_seq2seq_NDCG: 0.6720077395439148
+2021-12-19 15:45:00,614 - trainer - INFO -     val_seq2seq_NDCG16: 0.7250955104827881
+2021-12-19 15:45:00,615 - trainer - INFO - Performance is lower than epoch: 27
+2021-12-19 15:59:33,773 - trainer - INFO -     epoch          : 30
+2021-12-19 15:59:33,823 - trainer - INFO -     loss           : 2.20283112074713
+2021-12-19 15:59:33,823 - trainer - INFO -     seq2seq_NDCG   : 0.6716697216033936
+2021-12-19 15:59:33,823 - trainer - INFO -     seq2seq_NDCG16 : 0.7238997220993042
+2021-12-19 15:59:33,823 - trainer - INFO -     val_loss       : 2.2024304124773764
+2021-12-19 15:59:33,823 - trainer - INFO -     val_seq2seq_NDCG: 0.6721550226211548
+2021-12-19 15:59:33,823 - trainer - INFO -     val_seq2seq_NDCG16: 0.7253177762031555
+2021-12-19 15:59:58,511 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 16:14:32,851 - trainer - INFO -     epoch          : 31
+2021-12-19 16:14:32,894 - trainer - INFO -     loss           : 2.202078493049992
+2021-12-19 16:14:32,895 - trainer - INFO -     seq2seq_NDCG   : 0.671787679195404
+2021-12-19 16:14:32,895 - trainer - INFO -     seq2seq_NDCG16 : 0.7239838242530823
+2021-12-19 16:14:32,895 - trainer - INFO -     val_loss       : 2.20281899583583
+2021-12-19 16:14:32,895 - trainer - INFO -     val_seq2seq_NDCG: 0.6718851327896118
+2021-12-19 16:14:32,895 - trainer - INFO -     val_seq2seq_NDCG16: 0.7250402569770813
+2021-12-19 16:14:32,896 - trainer - INFO - Performance is lower than epoch: 30
+2021-12-19 16:29:05,353 - trainer - INFO -     epoch          : 32
+2021-12-19 16:29:05,419 - trainer - INFO -     loss           : 2.2015295720771144
+2021-12-19 16:29:05,419 - trainer - INFO -     seq2seq_NDCG   : 0.6719678044319153
+2021-12-19 16:29:05,419 - trainer - INFO -     seq2seq_NDCG16 : 0.7240908145904541
+2021-12-19 16:29:05,419 - trainer - INFO -     val_loss       : 2.2040998388309867
+2021-12-19 16:29:05,419 - trainer - INFO -     val_seq2seq_NDCG: 0.6714849472045898
+2021-12-19 16:29:05,420 - trainer - INFO -     val_seq2seq_NDCG16: 0.7247859239578247
+2021-12-19 16:29:05,422 - trainer - INFO - Performance is lower than epoch: 30
+2021-12-19 16:43:39,747 - trainer - INFO -     epoch          : 33
+2021-12-19 16:43:39,809 - trainer - INFO -     loss           : 2.2009275993117896
+2021-12-19 16:43:39,810 - trainer - INFO -     seq2seq_NDCG   : 0.6721845269203186
+2021-12-19 16:43:39,810 - trainer - INFO -     seq2seq_NDCG16 : 0.7241945266723633
+2021-12-19 16:43:39,810 - trainer - INFO -     val_loss       : 2.2023251360776475
+2021-12-19 16:43:39,810 - trainer - INFO -     val_seq2seq_NDCG: 0.6722845435142517
+2021-12-19 16:43:39,810 - trainer - INFO -     val_seq2seq_NDCG16: 0.7253615856170654
+2021-12-19 16:43:49,420 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 16:58:22,518 - trainer - INFO -     epoch          : 34
+2021-12-19 16:58:22,552 - trainer - INFO -     loss           : 2.200381465275269
+2021-12-19 16:58:22,552 - trainer - INFO -     seq2seq_NDCG   : 0.6722288131713867
+2021-12-19 16:58:22,552 - trainer - INFO -     seq2seq_NDCG16 : 0.7242457270622253
+2021-12-19 16:58:22,552 - trainer - INFO -     val_loss       : 2.2027834130793202
+2021-12-19 16:58:22,553 - trainer - INFO -     val_seq2seq_NDCG: 0.6722036600112915
+2021-12-19 16:58:22,553 - trainer - INFO -     val_seq2seq_NDCG16: 0.7252390384674072
+2021-12-19 16:58:22,554 - trainer - INFO - Performance is lower than epoch: 33
+2021-12-19 17:12:56,233 - trainer - INFO -     epoch          : 35
+2021-12-19 17:12:56,280 - trainer - INFO -     loss           : 2.199375851379941
+2021-12-19 17:12:56,280 - trainer - INFO -     seq2seq_NDCG   : 0.6725492477416992
+2021-12-19 17:12:56,281 - trainer - INFO -     seq2seq_NDCG16 : 0.7244465351104736
+2021-12-19 17:12:56,281 - trainer - INFO -     val_loss       : 2.2029865213802884
+2021-12-19 17:12:56,281 - trainer - INFO -     val_seq2seq_NDCG: 0.6721746921539307
+2021-12-19 17:12:56,281 - trainer - INFO -     val_seq2seq_NDCG16: 0.7249957323074341
+2021-12-19 17:12:56,283 - trainer - INFO - Performance is lower than epoch: 33
+2021-12-19 17:27:29,870 - trainer - INFO -     epoch          : 36
+2021-12-19 17:27:29,916 - trainer - INFO -     loss           : 2.1988961065516754
+2021-12-19 17:27:29,916 - trainer - INFO -     seq2seq_NDCG   : 0.6726434826850891
+2021-12-19 17:27:29,916 - trainer - INFO -     seq2seq_NDCG16 : 0.7245155572891235
+2021-12-19 17:27:29,917 - trainer - INFO -     val_loss       : 2.202130686263649
+2021-12-19 17:27:29,917 - trainer - INFO -     val_seq2seq_NDCG: 0.6723437309265137
+2021-12-19 17:27:29,917 - trainer - INFO -     val_seq2seq_NDCG16: 0.7252894639968872
+2021-12-19 17:27:54,508 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 17:42:28,547 - trainer - INFO -     epoch          : 37
+2021-12-19 17:42:28,607 - trainer - INFO -     loss           : 2.1983589955303064
+2021-12-19 17:42:28,607 - trainer - INFO -     seq2seq_NDCG   : 0.6728137135505676
+2021-12-19 17:42:28,607 - trainer - INFO -     seq2seq_NDCG16 : 0.7246209979057312
+2021-12-19 17:42:28,607 - trainer - INFO -     val_loss       : 2.202527577779731
+2021-12-19 17:42:28,607 - trainer - INFO -     val_seq2seq_NDCG: 0.6721680760383606
+2021-12-19 17:42:28,607 - trainer - INFO -     val_seq2seq_NDCG16: 0.7253061532974243
+2021-12-19 17:42:28,611 - trainer - INFO - Performance is lower than epoch: 36
+2021-12-19 17:57:01,223 - trainer - INFO -     epoch          : 38
+2021-12-19 17:57:01,288 - trainer - INFO -     loss           : 2.197825570545538
+2021-12-19 17:57:01,289 - trainer - INFO -     seq2seq_NDCG   : 0.6728752851486206
+2021-12-19 17:57:01,289 - trainer - INFO -     seq2seq_NDCG16 : 0.7246899008750916
+2021-12-19 17:57:01,289 - trainer - INFO -     val_loss       : 2.203361690044403
+2021-12-19 17:57:01,289 - trainer - INFO -     val_seq2seq_NDCG: 0.6718201637268066
+2021-12-19 17:57:01,289 - trainer - INFO -     val_seq2seq_NDCG16: 0.7248377203941345
+2021-12-19 17:57:01,290 - trainer - INFO - Performance is lower than epoch: 36
+2021-12-19 18:11:34,728 - trainer - INFO -     epoch          : 39
+2021-12-19 18:11:34,806 - trainer - INFO -     loss           : 2.1973484422239804
+2021-12-19 18:11:34,807 - trainer - INFO -     seq2seq_NDCG   : 0.6730472445487976
+2021-12-19 18:11:34,807 - trainer - INFO -     seq2seq_NDCG16 : 0.7247461080551147
+2021-12-19 18:11:34,807 - trainer - INFO -     val_loss       : 2.202053887503488
+2021-12-19 18:11:34,807 - trainer - INFO -     val_seq2seq_NDCG: 0.6723507046699524
+2021-12-19 18:11:34,807 - trainer - INFO -     val_seq2seq_NDCG16: 0.7253599762916565
+2021-12-19 18:11:59,320 - trainer - INFO - Improved! Saving current best: model_best.pth ...
+2021-12-19 18:26:32,947 - trainer - INFO -     epoch          : 40
+2021-12-19 18:26:33,012 - trainer - INFO -     loss           : 2.1966869251807326
+2021-12-19 18:26:33,012 - trainer - INFO -     seq2seq_NDCG   : 0.6731134653091431
+2021-12-19 18:26:33,012 - trainer - INFO -     seq2seq_NDCG16 : 0.7247806191444397
+2021-12-19 18:26:33,012 - trainer - INFO -     val_loss       : 2.2028698142693965
+2021-12-19 18:26:33,012 - trainer - INFO -     val_seq2seq_NDCG: 0.6721774935722351
+2021-12-19 18:26:33,013 - trainer - INFO -     val_seq2seq_NDCG16: 0.7248454093933105
+2021-12-19 18:26:33,014 - trainer - INFO - Performance is lower than epoch: 39
+2021-12-19 18:41:07,930 - trainer - INFO -     epoch          : 41
+2021-12-19 18:41:07,987 - trainer - INFO -     loss           : 2.1962511094329913
+2021-12-19 18:41:07,987 - trainer - INFO -     seq2seq_NDCG   : 0.6732465624809265
+2021-12-19 18:41:07,987 - trainer - INFO -     seq2seq_NDCG16 : 0.7249565124511719
+2021-12-19 18:41:07,987 - trainer - INFO -     val_loss       : 2.203237217299792
+2021-12-19 18:41:07,988 - trainer - INFO -     val_seq2seq_NDCG: 0.6717816591262817
+2021-12-19 18:41:07,988 - trainer - INFO -     val_seq2seq_NDCG16: 0.7246626615524292
+2021-12-19 18:41:07,989 - trainer - INFO - Performance is lower than epoch: 39
+2021-12-19 18:55:43,794 - trainer - INFO -     epoch          : 42
+2021-12-19 18:55:43,876 - trainer - INFO -     loss           : 2.1958600776579678
+2021-12-19 18:55:43,876 - trainer - INFO -     seq2seq_NDCG   : 0.6733255386352539
+2021-12-19 18:55:43,876 - trainer - INFO -     seq2seq_NDCG16 : 0.7249592542648315
+2021-12-19 18:55:43,876 - trainer - INFO -     val_loss       : 2.2021941834566543
+2021-12-19 18:55:43,877 - trainer - INFO -     val_seq2seq_NDCG: 0.6723341345787048
+2021-12-19 18:55:43,877 - trainer - INFO -     val_seq2seq_NDCG16: 0.7253428101539612
+2021-12-19 18:55:43,879 - trainer - INFO - Performance is lower than epoch: 39
+2021-12-19 19:10:19,815 - trainer - INFO -     epoch          : 43
+2021-12-19 19:10:20,049 - trainer - INFO -     loss           : 2.1952516849693433
+2021-12-19 19:10:20,049 - trainer - INFO -     seq2seq_NDCG   : 0.6734310984611511
+2021-12-19 19:10:20,049 - trainer - INFO -     seq2seq_NDCG16 : 0.7250525951385498
+2021-12-19 19:10:20,050 - trainer - INFO -     val_loss       : 2.203587471222391
+2021-12-19 19:10:20,050 - trainer - INFO -     val_seq2seq_NDCG: 0.6718244552612305
+2021-12-19 19:10:20,050 - trainer - INFO -     val_seq2seq_NDCG16: 0.7248985767364502
+2021-12-19 19:10:20,052 - trainer - INFO - Performance is lower than epoch: 39
+2021-12-19 19:24:55,999 - trainer - INFO -     epoch          : 44
+2021-12-19 19:24:56,065 - trainer - INFO -     loss           : 2.1952876922724496
+2021-12-19 19:24:56,065 - trainer - INFO -     seq2seq_NDCG   : 0.6733887791633606
+2021-12-19 19:24:56,065 - trainer - INFO -     seq2seq_NDCG16 : 0.7249885201454163
+2021-12-19 19:24:56,065 - trainer - INFO -     val_loss       : 2.2029498487102743
+2021-12-19 19:24:56,065 - trainer - INFO -     val_seq2seq_NDCG: 0.6718333959579468
+2021-12-19 19:24:56,065 - trainer - INFO -     val_seq2seq_NDCG16: 0.724891185760498
+2021-12-19 19:24:56,066 - trainer - INFO - Validation performance didn't improve for 4 epochs. Training stops.

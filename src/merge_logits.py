@@ -68,23 +68,23 @@ def merge_logits(df_paths, weights=None, normalize_fn=divide_by_softmax):
 if __name__ == "__main__":
     ensemble_dir = '../save_dir/ensemble_result'
     ## for kfold ensemble
-    # dir_name = 'mm_CnnAggBn_hidden256_5fold'
-    # kfold_dir = f'../save_dir/{dir_name}/fine'
-    # df_paths = [f"{kfold_dir}/fold{i}/outputs_logits.csv" for i in range(5)]
-    # weights = None
-    # save_dir = f'{ensemble_dir}/{dir_name}'
+    dir_name = 'mm_nnbn_h192'
+    kfold_dir = f'../save_dir/{dir_name}/fine'
+    df_paths = [f"{kfold_dir}/fold{i}/outputs_logits.csv" for i in range(5)]
+    weights = None
+    save_dir = f'{ensemble_dir}/{dir_name}'
 
     ## for different model ensembles 
-    df_paths = [
-        f'{ensemble_dir}/mm_cnn_hidden256_5fold/logits.csv',
-        f'{ensemble_dir}/mm_hidden256_5fold_test/logits.csv',
-        f'{ensemble_dir}/nn3_attn_5fold/logits.csv',
-        f'{ensemble_dir}/mm_CnnAggBn_hidden256_5fold/logits.csv'
-    ]
-    weights = [0.8, 0.1, 0.06, 0.04]
-    # weights = get_weights_by_normal_distribution([0.72700, 0.72782, 0.72652, 0.72669])
-    dir_name = 'cnn0.8_nn0.1_nn0.06.attn_CnnAggBn0.04'
-    save_dir = f'../save_dir/ensemble_result/{dir_name}'
+    # df_paths = [
+    #     f'{ensemble_dir}/mm_cnn_hidden256_5fold/logits.csv',
+    #     f'{ensemble_dir}/mm_hidden256_5fold_test/logits.csv',
+    #     f'{ensemble_dir}/nn3_attn_5fold/logits.csv',
+    #     f'{ensemble_dir}/mm_CnnAggBn_hidden256_5fold/logits.csv'
+    # ]
+    # weights = [0.8, 0.1, 0.06, 0.04]
+    # # weights = get_weights_by_normal_distribution([0.72700, 0.72782, 0.72652, 0.72669])
+    # dir_name = 'cnn0.8_nn0.1_nn0.06.attn_CnnAggBn0.04'
+    # save_dir = f'../save_dir/ensemble_result/{dir_name}'
 
     for path in df_paths:
         if not os.path.exists(path):

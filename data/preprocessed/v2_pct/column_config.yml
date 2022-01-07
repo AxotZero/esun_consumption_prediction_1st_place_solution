@@ -1,0 +1,476 @@
+shop_tag:
+    type: categorical
+    ori_index:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 25
+    - 26
+    - 27
+    - 28
+    - 29
+    - 30
+    - 31
+    - 32
+    - 33
+    - 34
+    - 35
+    - 36
+    - 37
+    - 38
+    - 39
+    - 40
+    - 41
+    - 42
+    - 43
+    - 44
+    - 45
+    - 46
+    - 47
+    - 48
+    - 49
+    new_index:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 25
+    - 26
+    - 27
+    - 28
+    - 29
+    - 30
+    - 31
+    - 32
+    - 33
+    - 34
+    - 35
+    - 36
+    - 37
+    - 38
+    - 39
+    - 40
+    - 41
+    - 42
+    - 43
+    - 44
+    - 45
+    - 46
+    - 47
+    - 48
+txn_cnt:
+    type: numerical
+    normalize: true
+txn_amt:
+    type: numerical
+    normalize: true
+domestic_offline_cnt:
+    type: numerical
+    normalize: true
+domestic_online_cnt:
+    type: numerical
+    normalize: true
+overseas_offline_cnt:
+    type: numerical
+    normalize: true
+overseas_online_cnt:
+    type: numerical
+    normalize: true
+domestic_offline_amt_pct:
+    type: numerical
+    normalize: false
+domestic_online_amt_pct:
+    type: numerical
+    normalize: false
+overseas_offline_amt_pct:
+    type: numerical
+    normalize: false
+overseas_online_amt_pct:
+    type: numerical
+    normalize: false
+card_1_txn_cnt:
+    type: numerical
+    normalize: true
+card_2_txn_cnt:
+    type: numerical
+    normalize: true
+card_3_txn_cnt:
+    type: numerical
+    normalize: true
+card_4_txn_cnt:
+    type: numerical
+    normalize: true
+card_5_txn_cnt:
+    type: numerical
+    normalize: true
+card_6_txn_cnt:
+    type: numerical
+    normalize: true
+card_7_txn_cnt:
+    type: numerical
+    normalize: true
+card_8_txn_cnt:
+    type: numerical
+    normalize: true
+card_9_txn_cnt:
+    type: numerical
+    normalize: true
+card_10_txn_cnt:
+    type: numerical
+    normalize: true
+card_11_txn_cnt:
+    type: numerical
+    normalize: true
+card_12_txn_cnt:
+    type: numerical
+    normalize: true
+card_13_txn_cnt:
+    type: numerical
+    normalize: true
+card_14_txn_cnt:
+    type: numerical
+    normalize: true
+card_other_txn_cnt:
+    type: numerical
+    normalize: true
+card_1_txn_amt_pct:
+    type: numerical
+    normalize: false
+card_2_txn_amt_pct:
+    type: numerical
+    normalize: false
+card_3_txn_amt_pct:
+    type: numerical
+    normalize: false
+card_4_txn_amt_pct:
+    type: numerical
+    normalize: false
+card_5_txn_amt_pct:
+    type: numerical
+    normalize: false
+card_6_txn_amt_pct:
+    type: numerical
+    normalize: false
+card_7_txn_amt_pct:
+    type: numerical
+    normalize: false
+card_8_txn_amt_pct:
+    type: numerical
+    normalize: false
+card_9_txn_amt_pct:
+    type: numerical
+    normalize: false
+card_10_txn_amt_pct:
+    type: numerical
+    normalize: false
+card_11_txn_amt_pct:
+    type: numerical
+    normalize: false
+card_12_txn_amt_pct:
+    type: numerical
+    normalize: false
+card_13_txn_amt_pct:
+    type: numerical
+    normalize: false
+card_14_txn_amt_pct:
+    type: numerical
+    normalize: false
+card_other_txn_amt_pct:
+    type: numerical
+    normalize: false
+masts:
+    type: categorical
+    ori_index:
+    - 0
+    - 1
+    - 2
+    - 3
+    new_index:
+    - 0
+    - 1
+    - 2
+    - 3
+educd:
+    type: categorical
+    ori_index:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    new_index:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+trdtp:
+    type: categorical
+    ori_index:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 25
+    - 26
+    - 27
+    - 28
+    - 29
+    new_index:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 25
+    - 26
+    - 27
+    - 28
+    - 29
+naty:
+    type: categorical
+    ori_index:
+    - 0
+    - 1
+    - 2
+    new_index:
+    - 0
+    - 1
+    - 2
+poscd:
+    type: categorical
+    ori_index:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 99
+    new_index:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+cuorg:
+    type: categorical
+    ori_index:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 25
+    - 26
+    - 27
+    - 28
+    - 29
+    - 30
+    - 31
+    - 32
+    - 35
+    - 38
+    - 40
+    new_index:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 25
+    - 26
+    - 27
+    - 28
+    - 29
+    - 30
+    - 31
+    - 32
+    - 33
+    - 34
+slam:
+    type: numerical
+    normalize: true
+gender_code:
+    type: categorical
+    ori_index:
+    - -1
+    - 0
+    - 1
+    new_index:
+    - 0
+    - 1
+    - 2
+age:
+    type: categorical
+    ori_index:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    new_index:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+primary_card:
+    type: categorical
+    ori_index:
+    - 0
+    - 1
+    new_index:
+    - 0
+    - 1
+txn_amt_pct:
+    type: numerical
+    normalize: true

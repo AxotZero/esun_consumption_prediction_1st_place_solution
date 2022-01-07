@@ -4,6 +4,38 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
+
+def TimeCnn(input_size=128, output_size=128, time_window=3):
+    return nn.Conv1d(input_size, output_size, time_window, padding=(time_window-1, 0))
+
+
+class Seq2SeqCnnAggregator(nn.Module):
+    def __init__(self, input_size=128, hidden_size=128, dropout=0.3):
+        super().__init__()
+        self.agg = nn.Sequential(
+            TimeCnn(input_size, hidden_size, 1),
+            nn.SiLU(),
+            nn.Dropout(dropout),
+
+            TimeCnn(hidden_size, hidden_size, 5),
+            nn.SiLU(),
+            nn.Dropout(dropout),
+
+            TimeCnn(hidden_size, hidden_size, 3),
+            nn.SiLU(),
+            nn.Dropout(dropout),
+
+            TimeCnn(hidden_size, hidden_size, 2),
+            nn.SiLU(),
+        )
+
+    def forward(self, x, mask=None):
+        x = x.permute(0, 2, 1) # to (b, emb_dim, 24)
+        x = self.agg(x)
+        x = x.permute(0, 2, 1)
+        return x
+
+
 class Seq2SeqGruAggregator(nn.Module):
     def __init__(self, input_size=128, hidden_size=128, num_layers=2, dropout=0.3, add_time=False):
         super().__init__()

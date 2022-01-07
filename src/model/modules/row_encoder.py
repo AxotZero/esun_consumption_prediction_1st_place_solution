@@ -320,6 +320,7 @@ class EmbedderNN(nn.Module):
 class FixedEmbedder(torch.nn.Module):
     """
     Classical embeddings generator
+    src: tabnet
     """
 
     def __init__(self, input_dim, emb_dim=32, num_idxs=[], cat_idxs=[], cat_dims=[], mask_feat_ratio=0):

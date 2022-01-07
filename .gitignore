@@ -1,5 +1,6 @@
-saint
-save_dir
-data
 md01_data
 *.pyc
+*.pth
+*.csv
+*.pkl
+.ipynb_checkpoints

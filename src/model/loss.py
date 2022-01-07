@@ -70,6 +70,8 @@ def seq2seq_soft_ce(output, target):
     output, target = seq2seq_drop_zero(output, target)
     return soft_cross_entropy_loss(output, target)
 
+    [0.01, 0.2, 0.09, 0.4, 0.3]
+
 
 def seq2seq_soft_ce16(output, target):
     output = output[:, :, target_indices]
@@ -90,3 +92,19 @@ def seq2seq_label_smooth_ce16(output, target):
     output, target = seq2seq_drop_zero(output, target)
     target = target / torch.sum(target, dim=1, keepdim=True)
     return label_smoothing_ce(output, target)
+
+
+def seq2seq_soft_ce16_top3(output, target):
+    device = target.get_device()
+    output = output[:, :, target_indices]
+    target = target[:, :, target_indices]
+    output, target = seq2seq_drop_zero(output, target)
+
+    n_rows, n_classes = target.size()
+    _, target_top3_indices = torch.topk(target, 3, dim=1)
+    flatten_indices = target_top3_indices + (torch.arange(n_rows).view(-1, 1) * n_classes).to(device)
+    new_target = torch.zeros(n_rows * n_classes).to(device)
+    new_target[flatten_indices] = target.view(-1)[flatten_indices]
+    target = new_target.view(n_rows, n_classes)
+    target = target / torch.sum(target, dim=1, keepdim=True)
+    return soft_cross_entropy_loss(output, target)

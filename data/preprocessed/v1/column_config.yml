@@ -1,0 +1,199 @@
+dt:
+    type: "numerical"
+    normalize: false
+    
+shop_tag:
+     type: "categorical"
+    
+txn_cnt:
+     type: "numerical"
+     normalize: true
+    
+txn_amt:
+     type: "numerical"
+     normalize: true
+    
+domestic_offline_cnt:
+     type: "numerical"
+     normalize: true
+
+domestic_online_cnt:
+     type: "numerical"
+     normalize: true
+    
+overseas_offline_cnt:
+     type: "numerical"
+     normalize: true
+
+overseas_online_cnt:
+     type: "numerical"
+     normalize: true
+    
+domestic_offline_amt_pct:
+     type: "numerical"
+     normalize: false
+    
+domestic_online_amt_pct:
+     type: "numerical"
+     normalize: false
+    
+overseas_offline_amt_pct:
+     type: "numerical"
+     normalize: false
+
+overseas_online_amt_pct:
+     type: "numerical"
+     normalize: false
+
+card_1_txn_cnt:
+     type: "numerical"
+     normalize: true
+
+card_2_txn_cnt:
+     type: "numerical"
+     normalize: true
+
+card_3_txn_cnt:
+     type: "numerical"
+     normalize: true
+
+card_4_txn_cnt:
+     type: "numerical"
+     normalize: true
+
+card_5_txn_cnt:
+     type: "numerical"
+     normalize: true
+
+card_6_txn_cnt:
+     type: "numerical"
+     normalize: true
+
+card_7_txn_cnt:
+     type: "numerical"
+     normalize: true
+
+card_8_txn_cnt:
+     type: "numerical"
+     normalize: true
+
+card_9_txn_cnt:
+     type: "numerical"
+     normalize: true
+
+card_10_txn_cnt:
+     type: "numerical"
+     normalize: true
+
+card_11_txn_cnt:
+     type: "numerical"
+     normalize: true
+
+card_12_txn_cnt:
+     type: "numerical"
+     normalize: true
+
+card_13_txn_cnt:
+     type: "numerical"
+     normalize: true
+
+card_14_txn_cnt:
+     type: "numerical"
+     normalize: true
+
+card_other_txn_cnt:
+     type: "numerical"
+     normalize: true
+    
+card_1_txn_amt_pct:
+     type: "numerical"
+     normalize: false
+    
+card_2_txn_amt_pct:
+     type: "numerical"
+     normalize: false
+    
+card_3_txn_amt_pct:
+     type: "numerical"
+     normalize: false
+    
+card_4_txn_amt_pct:
+     type: "numerical"
+     normalize: false
+    
+card_5_txn_amt_pct:
+     type: "numerical"
+     normalize: false
+    
+card_6_txn_amt_pct:
+     type: "numerical"
+     normalize: false
+    
+card_7_txn_amt_pct:
+     type: "numerical"
+     normalize: false
+    
+card_8_txn_amt_pct:
+     type: "numerical"
+     normalize: false
+    
+card_9_txn_amt_pct:
+     type: "numerical"
+     normalize: false
+    
+card_10_txn_amt_pct:
+     type: "numerical"
+     normalize: false
+    
+card_11_txn_amt_pct:
+     type: "numerical"
+     normalize: false
+    
+card_12_txn_amt_pct:
+     type: "numerical"
+     normalize: false
+    
+card_13_txn_amt_pct:
+     type: "numerical"
+     normalize: false
+    
+card_14_txn_amt_pct:
+     type: "numerical"
+     normalize: false
+    
+card_other_txn_amt_pct:
+     type: "numerical"
+     normalize: false
+    
+masts:
+     type: "categorical"
+
+educd:
+     type: "categorical"
+
+trdtp:
+     type: "categorical"
+    
+naty:
+     type: "categorical"
+    
+poscd:
+     type: "categorical"
+    
+cuorg:
+     type: "categorical"
+    
+slam:
+     type: "numerical"
+     normalize: true
+    
+gender_code:
+     type: "categorical"
+    
+age:
+     type: "categorical"
+    
+primary_card:
+     type: "categorical"
+
+

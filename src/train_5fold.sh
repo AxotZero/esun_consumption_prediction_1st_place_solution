@@ -1,6 +1,6 @@
-device=2
+device=3
 base_config=config.json
-save_dir='../save_dir/mm_CnnAggBn_hidden256_5fold/'
+save_dir='../save_dir/mm_nnbn_h192/'
 
 # train 5fold
 for fold_idx in {0..4}
