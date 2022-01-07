@@ -51,3 +51,4 @@
 ### ensemble
 我忘記存所有的 ensemble 權重，總共試了20幾組，不過最好的參數如下: 
 - mm_cnn_h256 * 0.5 + mm_nnbn_h192 * 0.35 + nn3_attn_h128 * 0.15
+- public lb: 0.728289
