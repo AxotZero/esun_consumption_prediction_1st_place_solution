@@ -3,12 +3,8 @@ from pdb import set_trace
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from pytorch_tabnet.tab_network import EmbeddingGenerator
 
 from .utils import parse_cols_config
-
-
-
 
 
 class TransformerRowEncoder(nn.Module):
