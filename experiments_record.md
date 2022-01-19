@@ -1,5 +1,6 @@
 # 實驗記錄
 ## Train with one fold
+> 以下的 valid 皆是錯的，我一開始metric有寫錯 
 ### train 23 predict 24
 | model_name | valid | public lb |
 | -------- | -------- | -------- |
@@ -27,7 +28,7 @@
 | 1dcnn_preserve_mask | 0.7371 | 0.719 |
 | 1dcnn_smaller_hidden | 0.7371| 0.72234 |
 
-## 上面的 valid 都是錯的，我的 NDCG 寫錯了
+> 這裡開始 valid metric 是對的了
 
 ### right ndcg
 | model_name | valid | public lb |

@@ -4,3 +4,4 @@ md01_data
 *.csv
 *.pkl
 .ipynb_checkpoints
+dockerrun.sh
