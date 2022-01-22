@@ -92,11 +92,11 @@ month_aggregator 將同 dt 的 49 類的 embeddings  aggregate, 得到  (24, emb
 最後再把24個月的 embedding，丟到 GRU 和 MLP, 來去預測每個下個月的消費比例
 
 ## Result + Ensemble
-以下為各個結果 model_name 的 h 後面接的數字代表前面模型所說的 emb_dim
-Training Record 點進去會有 `base` 和 `fine` 資料夾
-- `base`: train 49 類
-- `fine`: 拿 base 當 pretrained 再 fine-tuned 在 16 類上
-他們都會有 5 個 fold，其中包含 config 和 log。
+- 以下為各個結果 model_name 的 h 後面接的數字代表前面模型所說的 emb_dim
+- Training Record 點進去會有 `base` 和 `fine` 資料夾 
+  -  `base`: train 49 類
+  - `fine`: 拿 base 當 pretrained 再 fine-tuned 在 16 類上
+  - 他們都會有 5 個 fold，其中包含 config 和 log。
 
 | Model_Name | 5 fold valid mean | Public LB | Private LB| Note|
 | -------- | -------- | -------- | -------- | -------- | 
